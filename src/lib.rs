@@ -1,5 +1,9 @@
+#![allow(dead_code)] // TODO implement app
+
 use seed::prelude::*;
 use seed::*;
+
+pub mod osrsbox;
 
 // ------ ------
 //     Init
