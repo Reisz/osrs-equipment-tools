@@ -25,8 +25,8 @@ impl WeaponData {
 pub struct WeaponStance {
     #[serde(rename = "combat_style", deserialize_with = "deserialize_stance")]
     name: String,
-    attack_type: AttackType,
-    attack_style: AttackStyle,
+    attack_type: Option<AttackType>,
+    attack_style: Option<AttackStyle>,
 }
 
 impl WeaponStance {
@@ -36,12 +36,12 @@ impl WeaponStance {
     }
 
     /// Damage type of the stance.
-    pub fn attack_type(&self) -> AttackType {
+    pub fn attack_type(&self) -> Option<AttackType> {
         self.attack_type
     }
 
     /// Stance attack style as displayed in the popup.
-    pub fn attack_style(&self) -> AttackStyle {
+    pub fn attack_style(&self) -> Option<AttackStyle> {
         self.attack_style
     }
 }
@@ -57,6 +57,7 @@ pub enum AttackType {
     /// Crush damage
     Crush,
     /// Magic damage
+    #[serde(alias = "spellcasting", alias = "defensive casting")]
     Magic,
     /// Ranged damage
     Ranged,

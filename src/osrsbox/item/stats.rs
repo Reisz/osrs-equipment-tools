@@ -18,7 +18,7 @@ pub struct Stats {
     magic_damage: i16,
     prayer: i16,
     slot: Slot,
-    requirements: HashMap<String, u8>,
+    requirements: Option<HashMap<String, u8>>,
 }
 
 impl Stats {
@@ -30,6 +30,10 @@ impl Stats {
     /// Get a reference to the defence stats.
     pub fn defence(&self) -> &BaseStats {
         &self.defence
+    }
+
+    pub(super) fn slot(&self) -> Slot {
+        self.slot
     }
 }
 
@@ -109,6 +113,7 @@ impl Index<AttackType> for BaseStats {
 }
 
 /// Available [equipment slots](https://oldschool.runescape.wiki/w/Worn_Equipment). Weapon and TwoHanded are separate.
+#[repr(u8)]
 #[serde(rename_all = "lowercase")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, IntoEnumIterator)]
 pub enum Slot {
