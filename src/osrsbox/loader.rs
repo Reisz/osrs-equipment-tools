@@ -113,9 +113,9 @@ impl DataLoader {
         Ok(self.count == self.total)
     }
 
-    /// Retrieve the completed [`EquipmentStorage`](struct.EquipmentStorage.html).
+    /// Retrieve the completed [`EquipmentStorage`].
     ///
-    /// Can only be called after [`load_next`](#method.load_next) returned `true`.
+    /// Can only be called after [`Self::load_next()`] returned `true`.
     pub fn storage(self) -> EquipmentStorage {
         assert!(self.count == self.total);
         self.storage

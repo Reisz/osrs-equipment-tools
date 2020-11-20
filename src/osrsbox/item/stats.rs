@@ -145,7 +145,7 @@ pub enum Slot {
     TwoHanded,
 }
 
-/// Enum of all equipment stats for querying [Stats](struct.Stats.html).
+/// Enum of all equipment stats for querying [`Stats`].
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Stat {
     /// Attack stats based on damage type

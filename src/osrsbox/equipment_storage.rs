@@ -9,7 +9,7 @@ use super::{Item, Slot};
 
 /// Stores equipment seperated by eqip slots.
 ///
-/// Use [`Index`](#impl-Index<Slot>) and [`IndexMut`](#impl-IndexMut<Slot>) implementations to
+/// Use [`Index<Slot>`](#impl-Index<Slot>) and [`IndexMut<Slot>`](#impl-IndexMut<Slot>) implementations to
 /// access individual slots.
 #[derive(Debug, Clone, Default)]
 pub struct EquipmentStorage([Vec<Item>; Slot::VARIANT_COUNT]);

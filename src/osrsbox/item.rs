@@ -61,7 +61,7 @@ impl Item {
         self.stats.slot()
     }
 
-    /// Weapon-specific data. Returns [`None`](https://doc.rust-lang.org/std/option/enum.Option.html#variant.None) for non-weapons.
+    /// Weapon-specific data. Returns [`None`] for non-weapons.
     pub fn weapon_data(&self) -> Option<&WeaponData> {
         self.weapon_data.as_ref()
     }
