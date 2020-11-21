@@ -99,6 +99,11 @@ impl DataLoader {
         (self.count, self.total)
     }
 
+    /// Returns true after all items have been loaded.
+    pub fn is_done(&self) -> bool {
+        self.count == self.total
+    }
+
     /// Load the next page of items, returns true if all items are loaded.
     ///
     /// Should not be called again after it returned `true`.
@@ -110,7 +115,7 @@ impl DataLoader {
 
         self.add_items(page.items);
 
-        Ok(self.count == self.total)
+        Ok(self.is_done())
     }
 
     /// Retrieve the completed [`EquipmentStorage`].
