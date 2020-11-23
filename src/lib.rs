@@ -4,7 +4,6 @@
 
 pub mod event;
 pub mod model;
-pub mod osrsbox;
 pub mod ui;
 
 use seed::prelude::*;
