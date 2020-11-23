@@ -12,6 +12,8 @@
 
 #![deny(missing_docs)]
 
+pub mod filter;
+pub mod map;
 pub mod osrsbox;
 
 use std::{collections::HashMap, fs::File};
@@ -33,8 +35,8 @@ fn main() {
         .into_iter()
         .filter_map(|i| {
             let id = i.1.id;
-            if !i.1.duplicate && i.1.equipment.is_some() {
-                i.1.project().map_err(|e| println!("{}: {}", id, e)).ok()
+            if filter::keep(&i.1) {
+                map::map(i.1).map_err(|e| println!("{}: {}", id, e)).ok()
             } else {
                 None
             }
