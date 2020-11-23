@@ -3,8 +3,8 @@ name: Integration
 on: [push, pull_request]
 
 jobs:
-  check:
-    name: Check
+  clippy:
+    name: Run Clippy Lints
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -16,14 +16,16 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+          components: clippy
 
-      - name: Run cargo check
+      - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         with:
-          command: check
+          command: clippy
+          args: --workspace -- -D warnings
 
   test:
-    name: Test Suite
+    name: Run Test Suite
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -40,9 +42,10 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
+          args: --workspace
 
-  lints:
-    name: Lints
+  fmt:
+    name: Check Formatting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -54,16 +57,10 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          components: rustfmt, clippy
+          components: rustfmt
 
       - name: Run cargo fmt
         uses: actions-rs/cargo@v1
         with:
           command: fmt
           args: --all -- --check
-
-      - name: Run cargo clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: -- -D warnings

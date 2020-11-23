@@ -1,0 +1,9 @@
+[package]
+name = "data"
+version = "0.1.0"
+authors = ["Daniel <Reisz@users.noreply.github.com>"]
+edition = "2018"
+
+[dependencies]
+enum-iterator = "0.6"
+serde = { version = "1.0", features = ["derive"] }
