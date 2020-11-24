@@ -16,7 +16,12 @@ pub mod filter;
 pub mod map;
 pub mod osrsbox;
 
-use std::{collections::HashMap, fs::File, io::{self, Read, Write}, time::Instant};
+use std::{
+    collections::HashMap,
+    fs::File,
+    io::{self, Read, Write},
+    time::Instant,
+};
 
 use data::ItemDatabase;
 use xz2::write::XzEncoder;
@@ -33,7 +38,11 @@ pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
     let start = Instant::now();
     let result = f();
     let elapsed = start.elapsed();
-    println!("{:5}.{:.2} ms", elapsed.as_millis(), format!("{:03}", elapsed.subsec_micros() % 1000));
+    println!(
+        "{:5}.{:.2} ms",
+        elapsed.as_millis(),
+        format!("{:03}", elapsed.subsec_micros() % 1000)
+    );
 
     result
 }
@@ -55,7 +64,6 @@ pub fn get_data() -> HashMap<String, ItemProperties> {
             response.json().unwrap()
         })
     }
-
 }
 
 #[doc(hidden)]
@@ -63,8 +71,7 @@ fn main() {
     let data = get_data();
 
     let items: ItemDatabase = measure("Converting", || {
-            data
-            .into_iter()
+        data.into_iter()
             .filter_map(|i| {
                 let id = i.1.id;
                 if filter::keep(&i.1) {
