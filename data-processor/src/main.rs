@@ -16,34 +16,68 @@ pub mod filter;
 pub mod map;
 pub mod osrsbox;
 
-use std::{collections::HashMap, fs::File};
+use std::{collections::HashMap, fs::File, io::{self, Read, Write}, time::Instant};
 
 use data::ItemDatabase;
 use xz2::write::XzEncoder;
 
 use osrsbox::ItemProperties;
 
+const DATA_URL: &str = "https://www.osrsbox.com/osrsbox-db/items-complete.json";
+
+/// Print command name, time command execution and print timing.
+pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
+    print!("{:30}", format!("{}...", name));
+    io::stdout().flush().unwrap();
+
+    let start = Instant::now();
+    let result = f();
+    let elapsed = start.elapsed();
+    println!("{:5}.{:.2} ms", elapsed.as_millis(), format!("{:03}", elapsed.subsec_micros() % 1000));
+
+    result
+}
+
+/// Get the data from `items-complete.json`. Will look for `data/items-complete.json`, before
+/// downloading from [OSRSBox](https://www.osrsbox.com/).
+pub fn get_data() -> HashMap<String, ItemProperties> {
+    if let Ok(mut input_file) = File::open("data/items-complete.json") {
+        measure("Parsing file", || {
+            // Using serde_json::from_reader is slower than this
+            // (see https://github.com/serde-rs/json/issues/160)
+            let mut s = String::new();
+            input_file.read_to_string(&mut s).unwrap();
+            serde_json::from_str(&s).unwrap()
+        })
+    } else {
+        measure("Downloading & parsing", || {
+            let response = reqwest::blocking::get(DATA_URL).unwrap();
+            response.json().unwrap()
+        })
+    }
+
+}
+
 #[doc(hidden)]
 fn main() {
-    println!("Downloading...");
-    let response =
-        reqwest::blocking::get("https://www.osrsbox.com/osrsbox-db/items-complete.json").unwrap();
-    let data: HashMap<String, ItemProperties> = response.json().unwrap();
+    let data = get_data();
 
-    println!("Converting...");
-    let items: ItemDatabase = data
-        .into_iter()
-        .filter_map(|i| {
-            let id = i.1.id;
-            if filter::keep(&i.1) {
-                map::map(i.1).map_err(|e| println!("{}: {}", id, e)).ok()
-            } else {
-                None
-            }
-        })
-        .collect();
+    let items: ItemDatabase = measure("Converting", || {
+            data
+            .into_iter()
+            .filter_map(|i| {
+                let id = i.1.id;
+                if filter::keep(&i.1) {
+                    map::map(i.1).map_err(|e| println!("{}: {}", id, e)).ok()
+                } else {
+                    None
+                }
+            })
+            .collect()
+    });
 
-    println!("Saving...");
-    let output_file = File::create("data/items.bin.xz").unwrap();
-    bincode::serialize_into(XzEncoder::new(output_file, 9), &items).unwrap();
+    measure("Saving", || {
+        let output_file = File::create("data/items.bin.xz").unwrap();
+        bincode::serialize_into(XzEncoder::new(output_file, 9), &items).unwrap();
+    });
 }
