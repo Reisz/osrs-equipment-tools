@@ -31,4 +31,4 @@ codegen-units = 1
 wasm-opt = ['-Os']
 
 [workspace]
-members = ["data", "data-processor"]
+members = ["data", "data-processor", "trailblazer"]
