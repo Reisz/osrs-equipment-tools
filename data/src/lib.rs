@@ -6,6 +6,7 @@ mod database;
 
 use enum_iterator::IntoEnumIterator;
 use serde::{Deserialize, Serialize};
+use trailblazer::{bool_expr::BoolExpr, vars::Region};
 
 pub use database::*;
 
@@ -28,6 +29,8 @@ pub struct Item {
     pub requirements: Vec<Requirement>,
     /// For weapons.
     pub weapon: Option<WeaponData>,
+    /// Trailblazer requirements
+    pub trailblazer: Option<BoolExpr<Region>>,
 }
 
 /// Equipment slot.

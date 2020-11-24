@@ -101,6 +101,7 @@ impl ItemProperties {
             slot,
             requirements,
             weapon: self.weapon.map(|w| w.project()),
+            trailblazer: None,
         })
     }
 }
