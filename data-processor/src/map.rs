@@ -14,8 +14,9 @@ lazy_static! {
 
 /// Apply all transformation methods.
 pub fn map(item: ItemProperties) -> Result<Item, String> {
-    item.project().map(|mut i| {
-        i.trailblazer = TRAILBLAZER_MAP.lock().unwrap().remove(&i.name);
-        i
-    })
+    let mut item = item.project()?;
+
+    item.trailblazer = TRAILBLAZER_MAP.lock().unwrap().remove(&item.name);
+
+    Ok(item)
 }
