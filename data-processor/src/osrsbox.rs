@@ -172,6 +172,24 @@ impl ItemEquipment {
             prayer: self.prayer,
         })
     }
+
+    /// Returns true if at least one stat value is greater than zero.
+    pub fn has_positive(&self) -> bool {
+        self.attack_stab > 0
+            || self.attack_slash > 0
+            || self.attack_crush > 0
+            || self.attack_magic > 0
+            || self.attack_ranged > 0
+            || self.defence_stab > 0
+            || self.defence_slash > 0
+            || self.defence_crush > 0
+            || self.defence_magic > 0
+            || self.defence_ranged > 0
+            || self.melee_strength > 0
+            || self.ranged_strength > 0
+            || self.magic_damage > 0
+            || self.prayer > 0
+    }
 }
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemWeapon`](https://www.osrsbox.com/projects/osrsbox-db/#item-weapon).

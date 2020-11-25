@@ -70,7 +70,9 @@ pub fn get_data() -> HashMap<String, ItemProperties> {
 fn main() {
     let data = get_data();
 
-    let items: ItemDatabase = measure("Converting", || {
+    println!("{:10} Items", data.len());
+
+    let items: ItemDatabase = measure("Filtering & converting", || {
         data.into_iter()
             .filter_map(|i| {
                 let id = i.1.id;
@@ -82,6 +84,8 @@ fn main() {
             })
             .collect()
     });
+
+    println!("{:10} Items", items.len());
 
     measure("Saving", || {
         let output_file = File::create("data/items.bin.xz").unwrap();

@@ -23,6 +23,11 @@ impl ItemDatabase {
             slot.sort_unstable_by(compare);
         }
     }
+
+    /// Get the total amount of items in the database.
+    pub fn len(&self) -> usize {
+        self.0.iter().fold(0, |acc, e| acc + e.len())
+    }
 }
 
 impl FromIterator<Item> for ItemDatabase {
