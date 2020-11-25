@@ -53,7 +53,7 @@ impl<T, I: Index<T, Output = bool>> BoolLookup<T> for I {
 //     }
 // }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 enum BoolExprElement<T> {
     Not,
     And,
@@ -67,8 +67,8 @@ impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExprEleme
 
     fn try_from(value: &'a str) -> Result<Self, Self::Error> {
         match value {
-            "1" => Ok(Self::Const(true)),
             "0" => Ok(Self::Const(false)),
+            "1" => Ok(Self::Const(true)),
             "!" => Ok(Self::Not),
             "&" => Ok(Self::And),
             "|" => Ok(Self::Or),
@@ -79,10 +79,25 @@ impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExprEleme
 
 /// Boolean expression.
 ///
+/// To create new instances of [`BoolExpr`] either parse an [`input string`](#text-format) using
+/// the [`TryFrom<&str>`](TryFrom) impl or use [`BoolExprBuilder`].
+///
 /// Values of type parameter `T` should uniquely identify a variable via implementations of
 /// [`BoolLookup`]. Enums or [newtypes](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)
 /// of unsinged integers recommended.
-#[derive(Debug, Default, Serialize, Deserialize)]
+///
+/// # Text Format
+/// Input is given in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation)
+/// with individual elements separated by [whitespace](char::is_whitespace) characters. Predefined
+/// elements are:
+/// - `0` => `false`
+/// - `1` => `true`
+/// - `!` => not
+/// - `&` => and
+/// - `|` => or
+///
+/// Every other element is delegated to the [`TryFrom<&str>`](TryFrom) impl of `T`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BoolExpr<T>(Vec<BoolExprElement<T>>);
 
 impl<T> BoolExpr<T> {
@@ -156,6 +171,13 @@ impl<T> BoolExpr<T> {
     }
 }
 
+// Manual impl to remove `T: Default` restriction.
+impl<T> Default for BoolExpr<T> {
+    fn default() -> Self {
+        Self(Vec::new())
+    }
+}
+
 impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExpr<T> {
     type Error = String;
 
@@ -166,5 +188,53 @@ impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExpr<T> {
             .map(BoolExprElement::try_from)
             .collect();
         elements.map(Self).and_then(Self::validate)
+    }
+}
+
+/// Builder
+#[derive(Debug)]
+pub struct BoolExprBuilder<T>(BoolExpr<T>);
+
+impl<T> BoolExprBuilder<T> {
+    /// Create a new, empty [`BoolExprBuilder`].
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    /// Add a variable reference to the stack.
+    pub fn var(&mut self, var: T) {
+        self.0 .0.push(BoolExprElement::Value(var));
+    }
+
+    /// Add a constant value to the stack.
+    pub fn constant(&mut self, c: bool) {
+        self.0 .0.push(BoolExprElement::Const(c));
+    }
+
+    /// Negate the last value of the stack.
+    pub fn not(&mut self) {
+        self.0 .0.push(BoolExprElement::Not);
+    }
+
+    /// Combine the two last values of the stack using an `and` operation.
+    pub fn and(&mut self) {
+        self.0 .0.push(BoolExprElement::And);
+    }
+
+    /// Combine the two last values of the stack using an `or` operation.
+    pub fn or(&mut self) {
+        self.0 .0.push(BoolExprElement::Or);
+    }
+
+    /// Validate the expression and return the result.
+    pub fn finalize(self) -> Result<BoolExpr<T>, String> {
+        self.0.validate()
+    }
+}
+
+// Manual impl to remove `T: Default` restriction.
+impl<T> Default for BoolExprBuilder<T> {
+    fn default() -> Self {
+        Self(BoolExpr::default())
     }
 }

@@ -63,8 +63,35 @@ impl TryFrom<&str> for Region {
 /// vars[Region::Kandarin] = true;
 /// assert_eq!(expr.eval(&vars), true);
 /// ```
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct RegionCombination([bool; Region::VARIANT_COUNT]);
+
+impl RegionCombination {
+    /// Returns true if `self` is a superset of `other`.
+    pub fn is_superset_of(&self, other: &Self) -> bool {
+        for (a, b) in self.0.iter().zip(&other.0) {
+            if !a && *b {
+                return false;
+            }
+        }
+
+        true
+    }
+}
+
+impl From<u8> for RegionCombination {
+    fn from(value: u8) -> Self {
+        Self([
+            value & 1 != 0,
+            value & 2 != 0,
+            value & 4 != 0,
+            value & 8 != 0,
+            value & 16 != 0,
+            value & 32 != 0,
+            value & 64 != 0,
+        ])
+    }
+}
 
 impl Index<&Region> for RegionCombination {
     type Output = bool;
