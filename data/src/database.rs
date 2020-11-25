@@ -28,6 +28,11 @@ impl ItemDatabase {
     pub fn len(&self) -> usize {
         self.0.iter().fold(0, |acc, e| acc + e.len())
     }
+
+    /// Return true if no item is stored in the database
+    pub fn is_empty(&self) -> bool {
+        self.0.iter().all(|e| e.is_empty())
+    }
 }
 
 impl FromIterator<Item> for ItemDatabase {
