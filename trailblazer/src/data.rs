@@ -1,5 +1,6 @@
 //! Trailbalzer region data based on item names.
 
+pub mod morytania;
 pub mod rfd;
 
 use std::collections::HashMap;
@@ -14,6 +15,7 @@ pub fn create_map() -> ExprMap {
     let mut map = HashMap::new();
 
     rfd::add_gloves(&mut map);
+    morytania::add_morytania(&mut map);
 
     map
 }

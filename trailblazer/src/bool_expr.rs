@@ -101,6 +101,11 @@ impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExprEleme
 pub struct BoolExpr<T>(Vec<BoolExprElement<T>>);
 
 impl<T> BoolExpr<T> {
+    /// Create a simple expression containing only a single variable.
+    pub fn new(var: T) -> Self {
+        Self(vec![BoolExprElement::Value(var)])
+    }
+
     fn validate(self) -> Result<Self, String> {
         let mut stack = 0;
 
