@@ -2,6 +2,7 @@
 
 pub mod barrows;
 pub mod dmm;
+pub mod suffixes;
 
 use std::{collections::HashSet, sync::Mutex};
 
@@ -40,6 +41,11 @@ pub fn keep(item: &ItemProperties) -> bool {
 
     // Remove items on list
     if FILTER_LIST.lock().unwrap().remove(&item.name) {
+        return false;
+    }
+
+    // Remove items with filtered suffix
+    if suffixes::has_filtered_suffix(&item.name) {
         return false;
     }
 

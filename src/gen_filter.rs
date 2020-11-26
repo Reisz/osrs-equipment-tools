@@ -44,31 +44,11 @@ fn main() {
         let mut is_ok = true;
 
         for suffix in &[
-            "(l)",
-            "(uncharged)",
-            "(empty)",
             "(u)",
-            "(inactive)",
-            "(full)",
-            "(basic)",
-            "(attuned)",
-            "(perfected)",
-            "(t)",
-            "(g)",
-            "(or)",
-            "(dark)",
-            "(light)",
-            "(dusk)",
-            "100",
-            "75",
-            "50",
-            "25",
-            "0",
             "(p)",
             "(p+)",
             "(p++)",
             "(kp)",
-            "(nz)",
             "heraldic helm"
         ] {
             if item.name().ends_with(suffix) {
@@ -101,12 +81,7 @@ fn main() {
                 "Amulet of glory(",
                 "Volcanic abyssal whip",
                 "Frozen abyssal whip",
-                "Deadman's",
                 "Trailblazer",
-                "Vesta's",
-                "Statius's",
-                "Morrigan's",
-                "Zuriel's"
             ] {
                 if item.name().starts_with(prefix) {
                     is_ok = false;
