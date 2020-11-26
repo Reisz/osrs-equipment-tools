@@ -1,6 +1,7 @@
 //! Trailbalzer region data based on item names.
 
 pub mod asgarnia;
+pub mod fremennik;
 pub mod morytania;
 pub mod rfd;
 
@@ -17,6 +18,7 @@ pub fn create_map() -> ExprMap {
 
     rfd::add_items(&mut map);
     asgarnia::add_items(&mut map);
+    fremennik::add_items(&mut map);
     morytania::add_items(&mut map);
 
     map
