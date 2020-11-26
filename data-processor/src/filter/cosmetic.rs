@@ -9,6 +9,8 @@ use std::collections::HashSet;
 /// - [Whip mix variants](https://oldschool.runescape.wiki/w/Whip_mix)
 /// - [Mutagen variants](https://oldschool.runescape.wiki/w/Mutagen)
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
+/// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
+/// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
 pub fn add_cosmetics(list: &mut HashSet<String>) {
     list.insert("Twisted ancestral hat".to_string());
     list.insert("Twisted ancestral robe bottom".to_string());
@@ -51,4 +53,16 @@ pub fn add_cosmetics(list: &mut HashSet<String>) {
     list.insert("Tanzanite helm".to_string());
 
     list.insert("Obsidian cape (r)".to_string());
+
+    list.insert("Black slayer helmet".to_string());
+    list.insert("Green slayer helmet".to_string());
+    list.insert("Red slayer helmet".to_string());
+    list.insert("Purple slayer helmet".to_string());
+    list.insert("Turquoise slayer helmet".to_string());
+    list.insert("Hydra slayer helmet".to_string());
+    list.insert("Twisted slayer helmet".to_string());
+
+    list.insert("Trailblazer axe".to_string());
+    list.insert("Trailblazer harpoon".to_string());
+    list.insert("Trailblazer pickaxe".to_string());
 }

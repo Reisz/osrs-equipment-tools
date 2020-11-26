@@ -58,15 +58,6 @@ fn main() {
         }
 
         if is_ok {
-            for infix in &["(h", "fire arrow", "slayer helmet"] {
-                if item.name().contains(infix) {
-                    is_ok = false;
-                    break;
-                }
-            }
-        }
-
-        if is_ok {
             for prefix in &[
                 "Uncharged",
                 "Broodoo shield (",
@@ -75,7 +66,6 @@ fn main() {
                 "Lunar staff -",
                 "Combat bracelet(",
                 "Amulet of glory(",
-                "Trailblazer",
             ] {
                 if item.name().starts_with(prefix) {
                     is_ok = false;
