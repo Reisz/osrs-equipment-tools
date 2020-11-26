@@ -1,6 +1,7 @@
 //! Filters for unnecessary items.
 
 pub mod barrows;
+pub mod charges;
 pub mod cosmetic;
 pub mod dmm;
 pub mod fire_arrow;
@@ -17,6 +18,7 @@ fn create_filter_list() -> HashSet<String> {
     let mut list = HashSet::new();
 
     barrows::add_barrows(&mut list);
+    charges::add_items(&mut list);
     cosmetic::add_cosmetics(&mut list);
     dmm::add_dmm(&mut list);
     fire_arrow::add_arrows(&mut list);

@@ -44,7 +44,6 @@ fn main() {
         let mut is_ok = true;
 
         for suffix in &[
-            "(u)",
             "heraldic helm"
         ] {
             if item.name().ends_with(suffix) {
@@ -55,13 +54,7 @@ fn main() {
 
         if is_ok {
             for prefix in &[
-                "Uncharged",
-                "Broodoo shield (",
-                "Black mask (",
-                "Pharaoh's sceptre (",
                 "Lunar staff -",
-                "Combat bracelet(",
-                "Amulet of glory(",
             ] {
                 if item.name().starts_with(prefix) {
                     is_ok = false;
