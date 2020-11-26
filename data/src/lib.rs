@@ -29,6 +29,8 @@ pub struct Item {
     pub requirements: Vec<Requirement>,
     /// For weapons.
     pub weapon: Option<WeaponData>,
+    /// True if the item is a 3rd age piece
+    pub third_age: bool,
     /// Trailblazer requirements
     pub trailblazer: Option<BoolExpr<Region>>,
 }
