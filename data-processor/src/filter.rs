@@ -1,5 +1,6 @@
 //! Filters for unnecessary items.
 
+pub mod barrows;
 pub mod dmm;
 
 use std::collections::HashSet;
@@ -12,6 +13,7 @@ fn create_filter_list() -> HashSet<String> {
     let mut list = HashSet::new();
 
     dmm::add_dmm(&mut list);
+    barrows::add_barrows(&mut list);
 
     list
 }
