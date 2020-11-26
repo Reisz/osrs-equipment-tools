@@ -1,5 +1,6 @@
 //! Trailbalzer region data based on item names.
 
+pub mod asgarnia;
 pub mod morytania;
 pub mod rfd;
 
@@ -14,8 +15,9 @@ pub type ExprMap = HashMap<String, BoolExpr<Region>>;
 pub fn create_map() -> ExprMap {
     let mut map = HashMap::new();
 
-    rfd::add_gloves(&mut map);
-    morytania::add_morytania(&mut map);
+    rfd::add_items(&mut map);
+    asgarnia::add_items(&mut map);
+    morytania::add_items(&mut map);
 
     map
 }

@@ -140,7 +140,7 @@ fn create_expressions(mut levels: RfdCompletionLevels) -> Vec<BoolExpr<Region>> 
 }
 
 /// Generate and add expressions for the RDF gloves.
-pub fn add_gloves(map: &mut ExprMap) {
+pub fn add_items(map: &mut ExprMap) {
     let mut expressions = create_expressions(filter_supersets(get_completions()));
 
     map.insert("Barrows gloves".to_string(), expressions[7].clone());
