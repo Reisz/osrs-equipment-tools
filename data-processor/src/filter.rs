@@ -14,24 +14,23 @@ use lazy_static::lazy_static;
 
 use crate::osrsbox::ItemProperties;
 
-fn create_filter_list() -> HashSet<String> {
-    let mut list = HashSet::new();
-
-    barrows::add_barrows(&mut list);
-    charges::add_items(&mut list);
-    cosmetic::add_cosmetics(&mut list);
-    dmm::add_dmm(&mut list);
-    fire_arrow::add_arrows(&mut list);
-    poison::add_poisoned(&mut list);
-
-    list
-}
-
 lazy_static! {
-    static ref FILTER_LIST: Mutex<HashSet<String>> = Mutex::new(create_filter_list());
+    /// Set of item names to be removed.
+    static ref NAME_SET: Mutex<HashSet<String>> = Mutex::new({
+        let mut set = HashSet::new();
+
+        barrows::add_names(&mut set);
+        charges::add_names(&mut set);
+        cosmetic::add_names(&mut set);
+        dmm::add_names(&mut set);
+        fire_arrow::add_names(&mut set);
+        poison::add_names(&mut set);
+
+        set
+    });
 }
 
-/// Return true if no filter applies.
+/// Return true if no filter applies for the item.
 pub fn keep(item: &ItemProperties) -> bool {
     // Remove duplicates
     if item.duplicate {
@@ -48,7 +47,7 @@ pub fn keep(item: &ItemProperties) -> bool {
     }
 
     // Remove items on list
-    if FILTER_LIST.lock().unwrap().remove(&item.name) {
+    if NAME_SET.lock().unwrap().remove(&item.name) {
         return false;
     }
 
@@ -62,7 +61,7 @@ pub fn keep(item: &ItemProperties) -> bool {
 
 /// Print leftover names in the item filter (probably typos).
 pub fn check() {
-    for name in FILTER_LIST.lock().unwrap().iter() {
-        println!("Missed filter: {}", name);
+    for name in NAME_SET.lock().unwrap().iter() {
+        println!("Missed name filter: {}", name);
     }
 }

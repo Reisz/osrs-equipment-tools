@@ -5,6 +5,7 @@ use std::collections::HashSet;
 use lazy_static::lazy_static;
 
 lazy_static! {
+    /// Suffixes to be filtered.
     static ref SUFFIXES: HashSet<String> = {
         let mut set = HashSet::new();
 

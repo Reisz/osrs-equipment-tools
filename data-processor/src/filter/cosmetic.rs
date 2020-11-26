@@ -11,58 +11,58 @@ use std::collections::HashSet;
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
 /// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
-pub fn add_cosmetics(list: &mut HashSet<String>) {
-    list.insert("Twisted ancestral hat".to_string());
-    list.insert("Twisted ancestral robe bottom".to_string());
-    list.insert("Twisted ancestral robe top".to_string());
+pub fn add_names(set: &mut HashSet<String>) {
+    set.insert("Twisted ancestral hat".to_string());
+    set.insert("Twisted ancestral robe bottom".to_string());
+    set.insert("Twisted ancestral robe top".to_string());
 
-    list.insert("Light infinity bottoms".to_string());
-    list.insert("Light infinity hat".to_string());
-    list.insert("Light infinity top".to_string());
+    set.insert("Light infinity bottoms".to_string());
+    set.insert("Light infinity hat".to_string());
+    set.insert("Light infinity top".to_string());
 
-    list.insert("Dark infinity bottoms".to_string());
-    list.insert("Dark infinity hat".to_string());
-    list.insert("Dark infinity top".to_string());
+    set.insert("Dark infinity bottoms".to_string());
+    set.insert("Dark infinity hat".to_string());
+    set.insert("Dark infinity top".to_string());
 
-    list.insert("Gilded boots".to_string());
-    list.insert("Gilded chainbody".to_string());
-    list.insert("Gilded full helm".to_string());
-    list.insert("Gilded kiteshield".to_string());
-    list.insert("Gilded med helm".to_string());
-    list.insert("Gilded platebody".to_string());
-    list.insert("Gilded platelegs".to_string());
-    list.insert("Gilded plateskirt".to_string());
-    list.insert("Gilded sq shield".to_string());
+    set.insert("Gilded boots".to_string());
+    set.insert("Gilded chainbody".to_string());
+    set.insert("Gilded full helm".to_string());
+    set.insert("Gilded kiteshield".to_string());
+    set.insert("Gilded med helm".to_string());
+    set.insert("Gilded platebody".to_string());
+    set.insert("Gilded platelegs".to_string());
+    set.insert("Gilded plateskirt".to_string());
+    set.insert("Gilded sq shield".to_string());
 
-    list.insert("Gilded coif".to_string());
-    list.insert("Gilded d'hide body".to_string());
-    list.insert("Gilded d'hide chaps".to_string());
-    list.insert("Gilded d'hide vambraces".to_string());
+    set.insert("Gilded coif".to_string());
+    set.insert("Gilded d'hide body".to_string());
+    set.insert("Gilded d'hide chaps".to_string());
+    set.insert("Gilded d'hide vambraces".to_string());
 
-    list.insert("Gilded 2h sword".to_string());
-    list.insert("Gilded axe".to_string());
-    list.insert("Gilded hasta".to_string());
-    list.insert("Gilded pickaxe".to_string());
-    list.insert("Gilded scimitar".to_string());
-    list.insert("Gilded spear".to_string());
+    set.insert("Gilded 2h sword".to_string());
+    set.insert("Gilded axe".to_string());
+    set.insert("Gilded hasta".to_string());
+    set.insert("Gilded pickaxe".to_string());
+    set.insert("Gilded scimitar".to_string());
+    set.insert("Gilded spear".to_string());
 
-    list.insert("Frozen abyssal whip".to_string());
-    list.insert("Volcanic abyssal whip".to_string());
+    set.insert("Frozen abyssal whip".to_string());
+    set.insert("Volcanic abyssal whip".to_string());
 
-    list.insert("Magma helm".to_string());
-    list.insert("Tanzanite helm".to_string());
+    set.insert("Magma helm".to_string());
+    set.insert("Tanzanite helm".to_string());
 
-    list.insert("Obsidian cape (r)".to_string());
+    set.insert("Obsidian cape (r)".to_string());
 
-    list.insert("Black slayer helmet".to_string());
-    list.insert("Green slayer helmet".to_string());
-    list.insert("Red slayer helmet".to_string());
-    list.insert("Purple slayer helmet".to_string());
-    list.insert("Turquoise slayer helmet".to_string());
-    list.insert("Hydra slayer helmet".to_string());
-    list.insert("Twisted slayer helmet".to_string());
+    set.insert("Black slayer helmet".to_string());
+    set.insert("Green slayer helmet".to_string());
+    set.insert("Red slayer helmet".to_string());
+    set.insert("Purple slayer helmet".to_string());
+    set.insert("Turquoise slayer helmet".to_string());
+    set.insert("Hydra slayer helmet".to_string());
+    set.insert("Twisted slayer helmet".to_string());
 
-    list.insert("Trailblazer axe".to_string());
-    list.insert("Trailblazer harpoon".to_string());
-    list.insert("Trailblazer pickaxe".to_string());
+    set.insert("Trailblazer axe".to_string());
+    set.insert("Trailblazer harpoon".to_string());
+    set.insert("Trailblazer pickaxe".to_string());
 }

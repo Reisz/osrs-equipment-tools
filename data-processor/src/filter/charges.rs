@@ -13,15 +13,15 @@ use std::collections::HashSet;
 /// Removes charged variants of:
 /// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
 /// - [Black mask](https://oldschool.runescape.wiki/w/Black_mask)
-pub fn add_items(set: &mut HashSet<String>) {
+pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Combat bracelet".to_string());
-    add_all((1..6).map(|i| format!("Combat bracelet({})", i)), set);
+    set.extend((1..6).map(|i| format!("Combat bracelet({})", i)));
 
     set.insert("Amulet of glory".to_string());
-    add_all((1..6).map(|i| format!("Amulet of glory({})", i)), set);
+    set.extend((1..6).map(|i| format!("Amulet of glory({})", i)));
 
     set.insert("Pharaoh's sceptre".to_string());
-    add_all((1..8).map(|i| format!("Pharaoh's sceptre ({})", i)), set);
+    set.extend((1..8).map(|i| format!("Pharaoh's sceptre ({})", i)));
 
     set.insert("Uncharged trident".to_string());
     set.insert("Uncharged trident (e)".to_string());
@@ -32,17 +32,11 @@ pub fn add_items(set: &mut HashSet<String>) {
     set.insert("Thammaron's sceptre (u)".to_string());
     set.insert("Viggora's chainmace (u)".to_string());
 
-    add_all((1..10).map(|i| format!("Rod of ivandis ({})", i)), set);
+    set.extend((1..10).map(|i| format!("Rod of ivandis ({})", i)));
 
-    add_all((1..8).map(|i| format!("Void seal({})", i)), set);
+    set.extend((1..8).map(|i| format!("Void seal({})", i)));
 
-    add_all((1..=10).map(|i| format!("Broodoo shield ({})", i)), set);
-    add_all((1..=10).map(|i| format!("Black mask ({})", i)), set);
-    add_all((1..=10).map(|i| format!("Black mask ({}) (i)", i)), set);
-}
-
-fn add_all(strings: impl Iterator<Item = String>, set: &mut HashSet<String>) {
-    for s in strings {
-        set.insert(s);
-    }
+    set.extend((1..=10).map(|i| format!("Broodoo shield ({})", i)));
+    set.extend((1..=10).map(|i| format!("Black mask ({})", i)));
+    set.extend((1..=10).map(|i| format!("Black mask ({}) (i)", i)));
 }
