@@ -6,9 +6,9 @@ use std::collections::HashSet;
 /// - [Deadman armour](https://oldschool.runescape.wiki/w/Deadman_armour)
 /// - [Ancient Warriors' equipment](https://oldschool.runescape.wiki/w/Ancient_Warriors%27_equipment)
 pub fn add_dmm(list: &mut HashSet<String>) {
-    list.insert("Deaman's chest".to_string());
-    list.insert("Deaman's legs".to_string());
-    list.insert("Deaman's cape".to_string());
+    list.insert("Deadman's chest".to_string());
+    list.insert("Deadman's legs".to_string());
+    list.insert("Deadman's cape".to_string());
 
     list.insert("Statius's full helm".to_string());
     list.insert("Statius's platebody".to_string());
@@ -26,7 +26,7 @@ pub fn add_dmm(list: &mut HashSet<String>) {
     list.insert("Zuriel's staff".to_string());
 
     list.insert("Morrigan's coif".to_string());
-    list.insert("Morrigan's leather body ".to_string());
+    list.insert("Morrigan's leather body".to_string());
     list.insert("Morrigan's leather chaps".to_string());
     list.insert("Morrigan's javelin".to_string());
     list.insert("Morrigan's throwing axe".to_string());

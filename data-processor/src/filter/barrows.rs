@@ -42,5 +42,4 @@ fn add_variants(name: &str, list: &mut HashSet<String>) {
     list.insert(format!("{} 75", name));
     list.insert(format!("{} 50", name));
     list.insert(format!("{} 25", name));
-    list.insert(format!("{} 0", name));
 }
