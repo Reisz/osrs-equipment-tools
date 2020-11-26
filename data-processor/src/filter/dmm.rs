@@ -5,6 +5,7 @@ use std::collections::HashSet;
 /// Removes the following DMM-only item sets
 /// - [Deadman armour](https://oldschool.runescape.wiki/w/Deadman_armour)
 /// - [Ancient Warriors' equipment](https://oldschool.runescape.wiki/w/Ancient_Warriors%27_equipment)
+/// - [Deadman starter pack](https://oldschool.runescape.wiki/w/Deadman_starter_pack)
 pub fn add_dmm(list: &mut HashSet<String>) {
     list.insert("Deadman's chest".to_string());
     list.insert("Deadman's legs".to_string());
@@ -30,4 +31,8 @@ pub fn add_dmm(list: &mut HashSet<String>) {
     list.insert("Morrigan's leather chaps".to_string());
     list.insert("Morrigan's javelin".to_string());
     list.insert("Morrigan's throwing axe".to_string());
+
+    list.insert("Starter sword".to_string());
+    list.insert("Starter bow".to_string());
+    list.insert("Starter staff".to_string());
 }
