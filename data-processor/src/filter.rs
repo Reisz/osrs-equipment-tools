@@ -4,6 +4,7 @@ pub mod barrows;
 pub mod cosmetic;
 pub mod dmm;
 pub mod fire_arrow;
+pub mod poison;
 pub mod suffixes;
 
 use std::{collections::HashSet, sync::Mutex};
@@ -19,6 +20,7 @@ fn create_filter_list() -> HashSet<String> {
     cosmetic::add_cosmetics(&mut list);
     dmm::add_dmm(&mut list);
     fire_arrow::add_arrows(&mut list);
+    poison::add_poisoned(&mut list);
 
     list
 }

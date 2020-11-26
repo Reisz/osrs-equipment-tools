@@ -45,10 +45,6 @@ fn main() {
 
         for suffix in &[
             "(u)",
-            "(p)",
-            "(p+)",
-            "(p++)",
-            "(kp)",
             "heraldic helm"
         ] {
             if item.name().ends_with(suffix) {
