@@ -1,3 +1,5 @@
+//! Generate expressions for RFD gloves.
+
 use enum_iterator::IntoEnumIterator;
 
 use super::ExprMap;
@@ -137,7 +139,7 @@ fn create_expressions(mut levels: RfdCompletionLevels) -> Vec<BoolExpr<Region>> 
         .collect()
 }
 
-/// Add expressions for the RDF gloves.
+/// Generate and add expressions for the RDF gloves.
 pub fn add_gloves(map: &mut ExprMap) {
     let mut expressions = create_expressions(filter_supersets(get_completions()));
 

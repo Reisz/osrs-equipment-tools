@@ -1,7 +1,10 @@
 //! Performs the following tasks:
 //! 1. Download item data from the [OSRSBox](https://www.osrsbox.com/) static JSON API
 //! 2. Filter the items
-//!     - TODO
+//!     - Duplicates
+//!     - Non-equippable items
+//!     - Items with no positive stats
+//!     - Others (see submodules of [filter])
 //! 3. Aggregate similar items
 //!     - TODO
 //! 4. Project to a more concise set of data-points

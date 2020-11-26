@@ -1,6 +1,6 @@
 //! Trailbalzer region data based on item names.
 
-mod rfd;
+pub mod rfd;
 
 use std::collections::HashMap;
 
