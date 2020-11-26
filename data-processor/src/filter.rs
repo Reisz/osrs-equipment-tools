@@ -3,7 +3,7 @@
 pub mod barrows;
 pub mod dmm;
 
-use std::collections::HashSet;
+use std::{collections::HashSet, sync::Mutex};
 
 use lazy_static::lazy_static;
 
@@ -19,7 +19,7 @@ fn create_filter_list() -> HashSet<String> {
 }
 
 lazy_static! {
-    static ref FILTER_LIST: HashSet<String> = create_filter_list();
+    static ref FILTER_LIST: Mutex<HashSet<String>> = Mutex::new(create_filter_list());
 }
 
 /// Return true if no filter applies.
@@ -39,9 +39,16 @@ pub fn keep(item: &ItemProperties) -> bool {
     }
 
     // Remove items on list
-    if FILTER_LIST.contains(&item.name) {
+    if FILTER_LIST.lock().unwrap().remove(&item.name) {
         return false;
     }
 
     true
+}
+
+/// Print leftover names in the item filter (probably typos).
+pub fn check() {
+    for name in FILTER_LIST.lock().unwrap().iter() {
+        println!("Missed filter: {}", name);
+    }
 }

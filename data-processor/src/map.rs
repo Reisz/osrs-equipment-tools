@@ -20,3 +20,10 @@ pub fn map(item: ItemProperties) -> Result<Item, String> {
 
     Ok(item)
 }
+
+/// Print leftover names in the Trailblazer item map (probably typos).
+pub fn check() {
+    for (name, _) in TRAILBLAZER_MAP.lock().unwrap().iter() {
+        println!("Missed Trailblazer map: {}", name);
+    }
+}

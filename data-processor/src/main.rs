@@ -87,6 +87,9 @@ fn main() {
 
     println!("{:10} Items", items.len());
 
+    filter::check();
+    map::check();
+
     measure("Saving", || {
         let output_file = File::create("data/items.bin.xz").unwrap();
         bincode::serialize_into(XzEncoder::new(output_file, 9), &items).unwrap();
