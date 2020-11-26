@@ -53,17 +53,6 @@ fn main() {
         }
 
         if is_ok {
-            for prefix in &[
-                "Lunar staff -",
-            ] {
-                if item.name().starts_with(prefix) {
-                    is_ok = false;
-                    break;
-                }
-            }
-        }
-
-        if is_ok {
             if item.wiki_url().contains("kiteshield_(") {
                     is_ok = false;
             }

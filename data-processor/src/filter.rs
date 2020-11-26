@@ -5,6 +5,7 @@ pub mod charges;
 pub mod cosmetic;
 pub mod dmm;
 pub mod fire_arrow;
+pub mod misc;
 pub mod poison;
 pub mod suffixes;
 
@@ -24,6 +25,7 @@ lazy_static! {
         cosmetic::add_names(&mut set);
         dmm::add_names(&mut set);
         fire_arrow::add_names(&mut set);
+        misc::add_names(&mut set);
         poison::add_names(&mut set);
 
         set
