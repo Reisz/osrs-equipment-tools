@@ -5,6 +5,7 @@ pub mod charges;
 pub mod cosmetic;
 pub mod dmm;
 pub mod fire_arrow;
+pub mod heraldic;
 pub mod misc;
 pub mod poison;
 pub mod suffixes;
@@ -30,6 +31,15 @@ lazy_static! {
 
         set
     });
+
+    /// Set of wiki item names to be removed.
+    static ref WIKI_NAME_SET: Mutex<HashSet<String>> = Mutex::new({
+        let mut set = HashSet::new();
+
+        heraldic::add_wiki_names(&mut set);
+
+        set
+    });
 }
 
 /// Return true if no filter applies for the item.
@@ -48,9 +58,16 @@ pub fn keep(item: &ItemProperties) -> bool {
         return false;
     }
 
-    // Remove items on list
+    // Remove items on name set
     if NAME_SET.lock().unwrap().remove(&item.name) {
         return false;
+    }
+
+    // Remove items on wiki name set
+    if let Some(wiki_name) = item.wiki_name.as_ref() {
+        if WIKI_NAME_SET.lock().unwrap().remove(wiki_name) {
+            return false;
+        }
     }
 
     // Remove items with filtered suffix
@@ -65,5 +82,9 @@ pub fn keep(item: &ItemProperties) -> bool {
 pub fn check() {
     for name in NAME_SET.lock().unwrap().iter() {
         println!("Missed name filter: {}", name);
+    }
+
+    for name in WIKI_NAME_SET.lock().unwrap().iter() {
+        println!("Missed wiki name filter: {}", name);
     }
 }
