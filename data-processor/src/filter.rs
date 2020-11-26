@@ -1,6 +1,7 @@
 //! Filters for unnecessary items.
 
 pub mod barrows;
+pub mod cosmetic;
 pub mod dmm;
 pub mod suffixes;
 
@@ -13,8 +14,9 @@ use crate::osrsbox::ItemProperties;
 fn create_filter_list() -> HashSet<String> {
     let mut list = HashSet::new();
 
-    dmm::add_dmm(&mut list);
     barrows::add_barrows(&mut list);
+    cosmetic::add_cosmetics(&mut list);
+    dmm::add_dmm(&mut list);
 
     list
 }

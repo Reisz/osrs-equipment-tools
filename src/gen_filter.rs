@@ -69,18 +69,12 @@ fn main() {
         if is_ok {
             for prefix in &[
                 "Uncharged",
-                "Twisted",
-                "Light infinity",
-                "Dark infinity",
-                "Gilded",
                 "Broodoo shield (",
                 "Black mask (",
                 "Pharaoh's sceptre (",
                 "Lunar staff -",
                 "Combat bracelet(",
                 "Amulet of glory(",
-                "Volcanic abyssal whip",
-                "Frozen abyssal whip",
                 "Trailblazer",
             ] {
                 if item.name().starts_with(prefix) {
