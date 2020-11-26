@@ -37,7 +37,7 @@ pub fn add_barrows(list: &mut HashSet<String>) {
     add_variants("Verac's plateskirt", list);
 }
 
-pub fn add_variants(name: &str, list: &mut HashSet<String>) {
+fn add_variants(name: &str, list: &mut HashSet<String>) {
     list.insert(format!("{} 100", name));
     list.insert(format!("{} 75", name));
     list.insert(format!("{} 50", name));
