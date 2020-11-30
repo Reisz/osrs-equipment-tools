@@ -1,7 +1,10 @@
-//! Items with drop sources in multiple regions.
+//! Items with drop sources in multiple regions or items which can only be obtained in Zeah.
 
 use super::ExprMap;
-use crate::{bool_expr::BoolExprBuilder, vars::Region};
+use crate::{
+    bool_expr::{BoolExpr, BoolExprBuilder},
+    vars::Region,
+};
 
 macro_rules! or {
     ($r1:expr, $($r:expr),*) => {
@@ -21,6 +24,11 @@ macro_rules! or {
 /// - [Dragon chainbody](https://oldschool.runescape.wiki/w/Dragon_chainbody)
 /// - [Dragon 2h](https://oldschool.runescape.wiki/w/Dragon_2h_sword)
 /// - [Ancient staff](https://oldschool.runescape.wiki/w/Ancient_staff)
+/// - [Leaf-bladed sword](https://oldschool.runescape.wiki/w/Leaf-bladed_sword)
+/// - [Leaf-bladed battleaxe](https://oldschool.runescape.wiki/w/Leaf-bladed_battleaxe)
+///
+/// Sets the following items to be unobtainable under trailblazer rules:
+/// - [Dragon harpoon](https://oldschool.runescape.wiki/w/Dragon_harpoon)
 pub fn add_items(map: &mut ExprMap) {
     map.insert(
         "Dragon chainbody".to_string(),
@@ -34,4 +42,15 @@ pub fn add_items(map: &mut ExprMap) {
         "Ancient staff".to_string(),
         or!(Region::Desert, Region::Wilderness, Region::Kandarin),
     );
+
+    map.insert(
+        "Leaf-bladed sword".to_string(),
+        or!(Region::Fremennik, Region::Tirannwn),
+    );
+    map.insert(
+        "Leaf-bladed battleaxe".to_string(),
+        or!(Region::Fremennik, Region::Tirannwn),
+    );
+
+    map.insert("Dragon harpoon".to_string(), BoolExpr::new_false());
 }

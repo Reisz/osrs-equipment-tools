@@ -106,6 +106,11 @@ impl<T> BoolExpr<T> {
         Self(vec![BoolExprElement::Value(var)])
     }
 
+    /// Create a new expression evaluating to false.
+    pub fn new_false() -> Self {
+        Self(vec![BoolExprElement::Const(false)])
+    }
+
     fn validate(self) -> Result<Self, String> {
         let mut stack = 0;
 

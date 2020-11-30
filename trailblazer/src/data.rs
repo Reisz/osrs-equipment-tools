@@ -7,6 +7,7 @@ pub mod kandarin;
 pub mod misc;
 pub mod morytania;
 pub mod rfd;
+pub mod tirannwn;
 
 use std::collections::HashMap;
 
@@ -26,6 +27,7 @@ pub fn create_map() -> ExprMap {
     kandarin::add_items(&mut map);
     misc::add_items(&mut map);
     morytania::add_items(&mut map);
+    tirannwn::add_items(&mut map);
 
     map
 }

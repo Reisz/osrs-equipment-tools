@@ -1,4 +1,4 @@
-//! Items mainly locked by Asgarnia.
+//! Items mainly locked by the desert.
 
 use super::ExprMap;
 use crate::{bool_expr::BoolExpr, vars::Region};

@@ -10,6 +10,8 @@ use std::collections::HashSet;
 /// - [Mutagen variants](https://oldschool.runescape.wiki/w/Mutagen)
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
+/// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
+///     - Except gauntlets which offer unique stats and different requirements
 /// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Twisted ancestral hat".to_string());
@@ -61,6 +63,11 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Turquoise slayer helmet".to_string());
     set.insert("Hydra slayer helmet".to_string());
     set.insert("Twisted slayer helmet".to_string());
+
+    set.insert("Dragonstone boots".to_string());
+    set.insert("Dragonstone full helm".to_string());
+    set.insert("Dragonstone platebody".to_string());
+    set.insert("Dragonstone platelegs".to_string());
 
     set.insert("Trailblazer axe".to_string());
     set.insert("Trailblazer harpoon".to_string());
