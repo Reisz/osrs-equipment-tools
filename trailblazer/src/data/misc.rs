@@ -29,6 +29,8 @@ macro_rules! or {
 ///
 /// Sets the following items to be unobtainable under trailblazer rules:
 /// - [Dragon harpoon](https://oldschool.runescape.wiki/w/Dragon_harpoon)
+/// - [Proselyte armour](https://oldschool.runescape.wiki/w/Proselyte_armour)
+/// - [CoX Rewards](https://oldschool.runescape.wiki/w/Chambers_of_Xeric#Unique_drop_table)
 pub fn add_items(map: &mut ExprMap) {
     map.insert(
         "Dragon chainbody".to_string(),
@@ -53,4 +55,24 @@ pub fn add_items(map: &mut ExprMap) {
     );
 
     map.insert("Dragon harpoon".to_string(), BoolExpr::new_false());
+
+    map.insert("Proselyte sallet".to_string(), BoolExpr::new_false());
+    map.insert("Proselyte hauberk".to_string(), BoolExpr::new_false());
+    map.insert("Proselyte tasset".to_string(), BoolExpr::new_false());
+    map.insert("Proselyte cuisse".to_string(), BoolExpr::new_false());
+
+    add_cox(map);
+}
+
+fn add_cox(map: &mut ExprMap) {
+    map.insert("Twisted buckler".to_string(), BoolExpr::new_false());
+    map.insert("Dragon hunter crossbow".to_string(), BoolExpr::new_false());
+    map.insert("Dinh's bulwark".to_string(), BoolExpr::new_false());
+    map.insert("Ancestral hat".to_string(), BoolExpr::new_false());
+    map.insert("Ancestral robe top".to_string(), BoolExpr::new_false());
+    map.insert("Ancestral robe bottom".to_string(), BoolExpr::new_false());
+    map.insert("Dragon claws".to_string(), BoolExpr::new_false());
+    map.insert("Elder maul".to_string(), BoolExpr::new_false());
+    map.insert("Kodai wand".to_string(), BoolExpr::new_false());
+    map.insert("Twisted bow".to_string(), BoolExpr::new_false());
 }
