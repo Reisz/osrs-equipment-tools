@@ -1,6 +1,7 @@
 //! Datastructures for representing the applicaton state in [`Model`].
 
-mod region_filter;
+pub mod region_filter;
+pub mod sorting;
 
 use data::ItemDatabase;
 use lzma_rs::xz_decompress;
@@ -8,6 +9,7 @@ use seed::prelude::*;
 
 use crate::event::Msg;
 use region_filter::RegionFilter;
+use sorting::Sorting;
 
 /// The application state.
 #[derive(Default)]
@@ -16,6 +18,8 @@ pub struct Model {
     pub data: Option<ItemDatabase>,
     /// Item filtering based on trailblazer regions
     pub trailblazer: RegionFilter,
+    /// Settings for sorting items
+    pub sorting: Sorting,
 }
 
 /// Initialize the model and start item data loading process.
@@ -32,5 +36,6 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
     Model {
         data: None,
         trailblazer: RegionFilter::new(),
+        sorting: Sorting::new(),
     }
 }
