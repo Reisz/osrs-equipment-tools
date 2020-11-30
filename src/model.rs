@@ -1,16 +1,21 @@
 //! Datastructures for representing the applicaton state in [`Model`].
 
+mod region_filter;
+
 use data::ItemDatabase;
 use lzma_rs::xz_decompress;
 use seed::prelude::*;
 
 use crate::event::Msg;
+use region_filter::RegionFilter;
 
 /// The application state.
 #[derive(Default)]
 pub struct Model {
     /// Item database
     pub data: Option<ItemDatabase>,
+    /// Item filtering based on trailblazer regions
+    pub trailblazer: RegionFilter,
 }
 
 /// Initialize the model and start item data loading process.
@@ -24,5 +29,8 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
         Msg::DataLoaded(bincode::deserialize(&decompressed).unwrap())
     });
 
-    Model::default()
+    Model {
+        data: None,
+        trailblazer: RegionFilter::new(),
+    }
 }

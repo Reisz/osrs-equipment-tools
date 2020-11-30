@@ -63,7 +63,7 @@ impl TryFrom<&str> for Region {
 /// vars[Region::Kandarin] = true;
 /// assert_eq!(expr.eval(&vars), true);
 /// ```
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct RegionCombination([bool; Region::VARIANT_COUNT]);
 
 impl RegionCombination {
