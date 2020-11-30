@@ -3,6 +3,7 @@
 pub mod asgarnia;
 pub mod fremennik;
 pub mod kandarin;
+pub mod misc;
 pub mod morytania;
 pub mod rfd;
 
@@ -21,6 +22,7 @@ pub fn create_map() -> ExprMap {
     asgarnia::add_items(&mut map);
     fremennik::add_items(&mut map);
     kandarin::add_items(&mut map);
+    misc::add_items(&mut map);
     morytania::add_items(&mut map);
 
     map
