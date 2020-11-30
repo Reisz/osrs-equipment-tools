@@ -8,6 +8,7 @@ pub mod misc;
 pub mod morytania;
 pub mod rfd;
 pub mod tirannwn;
+pub mod wilderness;
 
 use std::collections::HashMap;
 
@@ -28,6 +29,7 @@ pub fn create_map() -> ExprMap {
     misc::add_items(&mut map);
     morytania::add_items(&mut map);
     tirannwn::add_items(&mut map);
+    wilderness::add_items(&mut map);
 
     map
 }

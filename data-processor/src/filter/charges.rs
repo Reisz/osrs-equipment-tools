@@ -13,6 +13,9 @@ use std::collections::HashSet;
 /// Removes charged variants of:
 /// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
 /// - [Black mask](https://oldschool.runescape.wiki/w/Black_mask)
+///
+/// Additionally removes:
+/// - [Eternal glory](https://oldschool.runescape.wiki/w/Amulet_of_eternal_glory)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Combat bracelet".to_string());
     set.extend((1..6).map(|i| format!("Combat bracelet({})", i)));
@@ -39,4 +42,6 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.extend((1..=10).map(|i| format!("Broodoo shield ({})", i)));
     set.extend((1..=10).map(|i| format!("Black mask ({})", i)));
     set.extend((1..=10).map(|i| format!("Black mask ({}) (i)", i)));
+
+    set.insert("Amulet of eternal glory".to_string());
 }
