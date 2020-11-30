@@ -35,6 +35,13 @@ fn add_ds2(map: &mut ExprMap) {
     expr.and();
     let expr = expr.finalize().unwrap();
     map.insert("Dragon platebody".to_string(), expr);
+
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Kandarin);
+    expr.var(Region::Fremennik);
+    expr.and();
+    let expr = expr.finalize().unwrap();
+    map.insert("Mythical cape".to_string(), expr);
 }
 
 fn add_dks(map: &mut ExprMap) {
