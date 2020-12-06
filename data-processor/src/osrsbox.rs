@@ -3,6 +3,10 @@
 use std::{collections::HashMap, convert::TryInto};
 
 use data::{BaseStats, Item, Requirement, Slot, Stats, WeaponData};
+use image::{
+    codecs::png::{CompressionType, FilterType, PngEncoder},
+    DynamicImage, GenericImageView, ImageFormat,
+};
 use serde::Deserialize;
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemProperties`](https://www.osrsbox.com/projects/osrsbox-db/#item-properties).
@@ -97,6 +101,7 @@ impl ItemProperties {
             members: self.members,
             weight: self.weight.ok_or("Missing weight.")?,
             wiki_url: self.wiki_url.ok_or("Missing wiki URL.")?,
+            icon_data: trim_icon(&self.icon)?,
             stats: equipment.project()?,
             slot,
             requirements,
@@ -105,6 +110,46 @@ impl ItemProperties {
             trailblazer: None,
         })
     }
+}
+
+fn find_dimensions(image: &DynamicImage) -> (u32, u32, u32, u32) {
+    let (w, h) = image.dimensions();
+
+    let (mut x0, mut y0) = (u32::MAX, u32::MAX);
+    let (mut x1, mut y1) = (0, 0);
+    for x in 0..w {
+        for y in 0..h {
+            let pixel = image.get_pixel(x, y);
+            if pixel[3] != 0 {
+                x0 = x0.min(x);
+                x1 = x1.max(x);
+                y0 = y0.min(y);
+                y1 = y1.max(y);
+            }
+        }
+    }
+
+    (x0, y0, x1 - x0, y1 - y0)
+}
+
+fn trim_icon(data: &str) -> Result<String, String> {
+    let bytes = base64::decode(data).map_err(|e| format!("Failed to decode base64: {}", e))?;
+
+    let image = image::load_from_memory_with_format(&bytes, ImageFormat::Png)
+        .map_err(|e| format!("Failed to decode PNG: {}", e))?;
+
+    let (x, y, w, h) = find_dimensions(&image);
+    let image = image.crop_imm(x, y, w, h);
+
+    let mut output = Vec::new();
+    // Changing any of the two quality parameters individually will significantly increase database size.
+    let encoder =
+        PngEncoder::new_with_quality(&mut output, CompressionType::Best, FilterType::NoFilter);
+    encoder
+        .encode(image.as_bytes(), w, h, image.color())
+        .map_err(|e| format!("Failed to encode PNG: {}", e))?;
+
+    Ok(base64::encode(output))
 }
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemEquipment`](https://www.osrsbox.com/projects/osrsbox-db/#item-equipment).

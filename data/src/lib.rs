@@ -21,6 +21,8 @@ pub struct Item {
     pub weight: f32,
     /// The item's wiki URL.
     pub wiki_url: String,
+    /// The item's icon in PNG format and base64 encoding.
+    pub icon_data: String,
     /// The item's eqipment stats.
     pub stats: Stats,
     /// Equipment slot used by the item.
