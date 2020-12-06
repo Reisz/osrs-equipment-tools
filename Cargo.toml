@@ -23,6 +23,7 @@ lzma-rs = "0.1"
 seed = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 trailblazer = { path = "trailblazer" }
+web-sys = "0.3"
 
 [profile.release]
 lto = true

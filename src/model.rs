@@ -6,6 +6,7 @@ pub mod sorting;
 use data::ItemDatabase;
 use lzma_rs::xz_decompress;
 use seed::prelude::*;
+use web_sys::RequestCache;
 
 use crate::event::Msg;
 use region_filter::RegionFilter;
@@ -60,7 +61,11 @@ impl Model {
 /// Initialize the model and start item data loading process.
 pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
     orders.perform_cmd(async {
-        let response = fetch("data/items.bin.xz").await.unwrap();
+        let response = Request::new("data/items.bin.xz")
+            .cache(RequestCache::NoCache)
+            .fetch()
+            .await
+            .unwrap();
         let bytes = response.bytes().await.unwrap();
 
         let mut decompressed = Vec::new();
