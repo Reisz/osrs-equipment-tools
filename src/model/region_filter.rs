@@ -3,7 +3,7 @@
 use data::Item;
 use seed::prelude::{LocalStorage, WebStorage};
 use serde::{Deserialize, Serialize};
-use trailblazer::vars::{Region, RegionCombination};
+use trailblazer::vars::RegionCombination;
 
 const STORAGE_KEY: &str = "region-filter";
 
@@ -40,9 +40,11 @@ impl RegionFilter {
         &self.filter
     }
 
-    /// Toggle the filter state of `region`.
-    pub fn toggle_region(&mut self, region: Region) {
-        self.filter[region] = !self.filter[region];
+    /// Mutate the filter using a closure.
+    ///
+    /// Automatically stores new state after mutation.
+    pub fn map_filter<F: FnOnce(&mut RegionCombination)>(&mut self, f: F) {
+        f(&mut self.filter);
         self.updated();
     }
 

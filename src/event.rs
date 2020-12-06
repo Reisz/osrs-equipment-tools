@@ -19,8 +19,8 @@ pub enum Msg {
 /// Reacts to events.
 pub fn update(msg: Msg, model: &mut Model, _orders: &mut impl Orders<Msg>) {
     match msg {
-        Msg::DataLoaded(db) => model.data = Some(db),
+        Msg::DataLoaded(db) => model.set_data(db),
         Msg::ToggleTrailblazer => model.trailblazer.set_enabled(!model.trailblazer.enabled()),
-        Msg::ToggleRegion(r) => model.trailblazer.toggle_region(r),
+        Msg::ToggleRegion(r) => model.trailblazer.map_filter(|f| f[r] = !f[r]),
     }
 }

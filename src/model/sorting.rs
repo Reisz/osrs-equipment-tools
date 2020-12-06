@@ -50,20 +50,12 @@ impl Sorting {
         LocalStorage::get(STORAGE_KEY).unwrap_or_default()
     }
 
-    fn updated(&self) {
+    /// Mutate the sorting order using a closure.
+    ///
+    /// Automatically stores new state after mutation.
+    pub fn map<F: FnOnce(&mut Vec<SortingFragment>)>(&mut self, f: F) {
+        f(&mut self.0);
         LocalStorage::insert(STORAGE_KEY, self).unwrap();
-    }
-
-    /// Inserts `fragment` at `index`.
-    pub fn insert(&mut self, index: usize, frag: SortingFragment) {
-        self.0.insert(index, frag);
-        self.updated();
-    }
-
-    /// Removes fragment at `index`.
-    pub fn remove(&mut self, index: usize) {
-        self.0.remove(index);
-        self.updated();
     }
 
     /// Get an ordering between items `a` and `b` based on current settings.
