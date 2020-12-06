@@ -1,5 +1,7 @@
 //! User interface code.
 
+mod equipment_view;
+
 use seed::{div, prelude::*};
 
 use crate::{event::Msg, model::Model};
@@ -9,6 +11,6 @@ pub fn view(model: &Model) -> Node<Msg> {
     if model.is_loading() {
         div!["Loading..."]
     } else {
-        div!["Done."]
+        equipment_view::view(model)
     }
 }
