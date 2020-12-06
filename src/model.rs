@@ -39,6 +39,7 @@ impl Model {
     pub(crate) fn set_data(&mut self, data: ItemDatabase) {
         debug_assert!(self.data.is_none());
         self.data = Some(data);
+        self.sort();
     }
 
     /// Mutate the sorting order using a closure.
@@ -46,7 +47,10 @@ impl Model {
     /// The new ordering will automatically be applied to the database.
     pub fn map_sorting<F: FnOnce(&mut Vec<SortingFragment>)>(&mut self, f: F) {
         self.sorting.map(f);
+        self.sort();
+    }
 
+    fn sort(&mut self) {
         let mut data = self.data.take().unwrap();
         data.sort(|a, b| self.sorting.ordering(a, b));
         self.data = Some(data);
