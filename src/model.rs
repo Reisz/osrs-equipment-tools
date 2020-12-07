@@ -1,5 +1,6 @@
 //! Datastructures for representing the applicaton state in [`Model`].
 
+pub mod filter;
 pub mod region_filter;
 pub mod sorting;
 
@@ -9,6 +10,7 @@ use seed::prelude::*;
 use web_sys::RequestCache;
 
 use crate::event::Msg;
+use filter::Filter;
 use region_filter::RegionFilter;
 use sorting::{Sorting, SortingFragment};
 
@@ -17,6 +19,8 @@ use sorting::{Sorting, SortingFragment};
 pub struct Model {
     data: Option<ItemDatabase>,
     sorting: Sorting,
+    /// Miscellanious filtering
+    pub filter: Filter,
     /// Item filtering based on trailblazer regions
     pub trailblazer: RegionFilter,
 }
@@ -27,10 +31,14 @@ impl Model {
         self.data.is_none()
     }
 
+    fn filter(&self, item: &Item) -> bool {
+        self.filter.evaluate(item) && self.trailblazer.evaluate(item)
+    }
+
     fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
         self.data.as_ref().unwrap()[slot]
             .iter()
-            .filter(move |i| self.trailblazer.evaluate(i))
+            .filter(move |i| self.filter(i))
     }
 
     /// Get item at `index` in `slot`. Filters and sorting will be applied.
@@ -88,7 +96,8 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
 
     Model {
         data: None,
-        trailblazer: RegionFilter::new(),
         sorting: Sorting::new(),
+        filter: Filter::new(),
+        trailblazer: RegionFilter::new(),
     }
 }
