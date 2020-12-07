@@ -139,9 +139,7 @@ fn trim_icon(data: &str) -> Result<Vec<u8>, String> {
     let image = image.crop_imm(x, y, w, h);
 
     let mut output = Vec::new();
-    // Changing any of the two quality parameters individually will significantly increase database size.
     let mut encoder = BmpEncoder::new(&mut output);
-    //PngEncoder::new_with_quality(&mut output, CompressionType::Best, FilterType::NoFilter);
     encoder
         .encode(image.as_bytes(), w, h, image.color())
         .map_err(|e| format!("Failed to encode PNG: {}", e))?;
