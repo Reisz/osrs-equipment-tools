@@ -16,6 +16,7 @@ lazy_static! {
         set.insert("3rd age kiteshield".to_string());
         set.insert("3rd age platebody".to_string());
         set.insert("3rd age plateskirt".to_string());
+        set.insert("3rd age platelegs".to_string());
         set.insert("3rd age longsword".to_string());
 
         set.insert("3rd age mage hat".to_string());
