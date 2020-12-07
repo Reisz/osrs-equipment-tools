@@ -3,10 +3,7 @@
 use std::{collections::HashMap, convert::TryInto};
 
 use data::{BaseStats, Item, Requirement, Slot, Stats, WeaponData};
-use image::{
-    codecs::png::{CompressionType, FilterType, PngEncoder},
-    DynamicImage, GenericImageView, ImageFormat,
-};
+use image::{codecs::bmp::BmpEncoder, DynamicImage, GenericImageView, ImageFormat};
 use serde::Deserialize;
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemProperties`](https://www.osrsbox.com/projects/osrsbox-db/#item-properties).
@@ -132,7 +129,7 @@ fn find_dimensions(image: &DynamicImage) -> (u32, u32, u32, u32) {
     (x0, y0, x1 - x0, y1 - y0)
 }
 
-fn trim_icon(data: &str) -> Result<String, String> {
+fn trim_icon(data: &str) -> Result<Vec<u8>, String> {
     let bytes = base64::decode(data).map_err(|e| format!("Failed to decode base64: {}", e))?;
 
     let image = image::load_from_memory_with_format(&bytes, ImageFormat::Png)
@@ -143,13 +140,13 @@ fn trim_icon(data: &str) -> Result<String, String> {
 
     let mut output = Vec::new();
     // Changing any of the two quality parameters individually will significantly increase database size.
-    let encoder =
-        PngEncoder::new_with_quality(&mut output, CompressionType::Best, FilterType::NoFilter);
+    let mut encoder = BmpEncoder::new(&mut output);
+    //PngEncoder::new_with_quality(&mut output, CompressionType::Best, FilterType::NoFilter);
     encoder
         .encode(image.as_bytes(), w, h, image.color())
         .map_err(|e| format!("Failed to encode PNG: {}", e))?;
 
-    Ok(base64::encode(output))
+    Ok(output)
 }
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemEquipment`](https://www.osrsbox.com/projects/osrsbox-db/#item-equipment).

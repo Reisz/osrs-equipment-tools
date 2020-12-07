@@ -22,7 +22,7 @@ fn view_slot(model: &Model, slot: Slot) -> Node<Msg> {
     let top = format!("{}px", top);
 
     if let Some(item) = model.get_item(slot, 0) {
-        let icon = format!("data:image/png;base64,{}", item.icon_data);
+        let icon = format!("data:image/bmp;base64,{}", base64::encode(&item.icon_data));
 
         div![
             C!["equipment equipment-blank"],
