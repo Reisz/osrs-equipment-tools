@@ -3,7 +3,7 @@
 pub mod region_filter;
 pub mod sorting;
 
-use data::ItemDatabase;
+use data::{Item, ItemDatabase, Slot};
 use lzma_rs::xz_decompress;
 use seed::prelude::*;
 use web_sys::RequestCache;
@@ -27,11 +27,24 @@ impl Model {
         self.data.is_none()
     }
 
-    /// Get a reference to the database.
+    fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
+        self.data.as_ref().unwrap()[slot]
+            .iter()
+            .filter(move |i| self.trailblazer.evaluate(i))
+    }
+
+    /// Get item at `index` in `slot`. Filters and sorting will be applied.
     ///
     /// Panics if [`is_loading()`] returns `true`.
-    pub fn data(&self) -> &ItemDatabase {
-        self.data.as_ref().unwrap()
+    pub fn get_item(&self, slot: Slot, idx: usize) -> Option<&Item> {
+        self.iter(slot).nth(idx)
+    }
+
+    /// Get the amount of items in `slot`.
+    ///
+    /// Can be slow, as the filters will be applied every time.
+    pub fn slot_len(&self, slot: Slot) -> usize {
+        self.iter(slot).count()
     }
 
     /// Insert the data after it has been loaded.

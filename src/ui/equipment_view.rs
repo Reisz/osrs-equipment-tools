@@ -21,7 +21,7 @@ fn view_slot(model: &Model, slot: Slot) -> Node<Msg> {
     let left = format!("{}px", left);
     let top = format!("{}px", top);
 
-    if let Some(item) = model.data()[slot].get(0) {
+    if let Some(item) = model.get_item(slot, 0) {
         let icon = format!("data:image/png;base64,{}", item.icon_data);
 
         div![
