@@ -11,7 +11,7 @@ use crate::model::{
 
 /// Create the DOM according to the [`Model`].
 pub fn view() -> Node<Msg> {
-    div![SortingPreset::into_enum_iter().map(|r| view_button(r))]
+    div![SortingPreset::into_enum_iter().map(view_button)]
 }
 
 fn view_button(preset: SortingPreset) -> Node<Msg> {
