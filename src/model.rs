@@ -63,18 +63,7 @@ impl Model {
 
 /// Initialize the model and start item data loading process.
 pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
-    orders.perform_cmd(async {
-        let response = Request::new("data/items.bin.xz")
-            .cache(RequestCache::NoCache)
-            .fetch()
-            .await
-            .unwrap();
-        let bytes = response.bytes().await.unwrap();
-
-        let mut decompressed = Vec::new();
-        xz_decompress(&mut bytes.as_slice(), &mut decompressed).unwrap();
-        Msg::DataLoaded(bincode::deserialize(&decompressed).unwrap())
-    });
+    orders.perform_cmd(async { Msg::DataLoaded(load_data().await) });
 
     Model {
         data: None,
@@ -82,6 +71,16 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
         filter: Filter::new(),
         trailblazer: RegionFilter::new(),
     }
+}
+
+async fn load_data() -> ItemDatabase {
+    let request = Request::new("data/items.bin.xz").cache(RequestCache::NoCache);
+    let response = request.fetch().await.unwrap();
+    let bytes = response.bytes().await.unwrap();
+
+    let mut decompressed = Vec::new();
+    xz_decompress(&mut bytes.as_slice(), &mut decompressed).unwrap();
+    bincode::deserialize(&decompressed).unwrap()
 }
 
 /// Possible events.
