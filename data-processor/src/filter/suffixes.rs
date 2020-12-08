@@ -24,7 +24,10 @@ lazy_static! {
         set.insert("(h4)".to_string());
         set.insert("(h5)".to_string());
 
+        // Do not filter mystic variants for trailblazer as they have different obtainability
+        #[cfg(not(feature = "trailblazer"))]
         set.insert("(dark)".to_string());
+        #[cfg(not(feature = "trailblazer"))]
         set.insert("(light)".to_string());
         set.insert("(dusk)".to_string());
 

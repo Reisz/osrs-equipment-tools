@@ -8,6 +8,8 @@ use std::collections::HashSet;
 /// - [Gilded](https://oldschool.runescape.wiki/w/Gilded_equipment)
 /// - [Whip mix variants](https://oldschool.runescape.wiki/w/Whip_mix)
 /// - [Mutagen variants](https://oldschool.runescape.wiki/w/Mutagen)
+/// - [Enchanted robes](https://oldschool.runescape.wiki/w/Enchanted_robes)
+/// - [Robes of darkness](https://oldschool.runescape.wiki/w/Robes_of_darkness)
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
 /// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
@@ -53,6 +55,20 @@ pub fn add_names(set: &mut HashSet<String>) {
 
     set.insert("Magma helm".to_string());
     set.insert("Tanzanite helm".to_string());
+
+    // Some region combinations do not have access to mystic hat or top
+    #[cfg(not(feature = "trailblazer"))]
+    {
+        set.insert("Enchanted hat".to_string());
+        set.insert("Enchanted top".to_string());
+    }
+    set.insert("Enchanted robe".to_string());
+
+    set.insert("Hood of darkness".to_string());
+    set.insert("Robe top of darkness".to_string());
+    set.insert("Robe bottom of darkness".to_string());
+    set.insert("Gloves of darkness".to_string());
+    set.insert("Boots of darkness".to_string());
 
     set.insert("Obsidian cape (r)".to_string());
 
