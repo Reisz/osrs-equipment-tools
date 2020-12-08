@@ -13,7 +13,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Mage training arena](https://oldschool.runescape.wiki/w/Mage_Training_Arena#Main)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Pharaoh's sceptre (8)".to_string(), expr());
-    map.insert("Keris(p++)".to_string(), expr());
+    map.insert("Keris (Poison++)".to_string(), expr());
 
     add_mta(map);
 }

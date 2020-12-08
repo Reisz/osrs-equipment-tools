@@ -59,7 +59,7 @@ fn add_god_capes(map: &mut ExprMap) {
     map.insert("Zamorak cape".to_string(), expr());
     map.insert("Guthix cape".to_string(), expr());
 
-    map.insert("Imbued saradomin cape".to_string(), expr());
-    map.insert("Imbued zamorak cape".to_string(), expr());
-    map.insert("Imbued guthix cape".to_string(), expr());
+    map.insert("Imbued saradomin cape (Normal)".to_string(), expr());
+    map.insert("Imbued zamorak cape (Normal)".to_string(), expr());
+    map.insert("Imbued guthix cape (Normal)".to_string(), expr());
 }

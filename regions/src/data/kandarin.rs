@@ -41,11 +41,14 @@ pub fn add_items(map: &mut ExprMap) {
 }
 
 fn add_imbues(map: &mut ExprMap) {
-    map.insert("Black mask (i)".to_string(), expr_and(Region::Morytania));
+    map.insert(
+        "Black mask (i) (Uncharged)".to_string(),
+        expr_and(Region::Morytania),
+    );
     map.insert("Slayer helmet (i)".to_string(), expr_and(Region::Morytania));
     map.insert("Salve amulet(i)".to_string(), expr_and(Region::Morytania));
     map.insert("Salve amulet(ei)".to_string(), expr_and(Region::Morytania));
-    map.insert("Ring of suffering (i)".to_string(), expr());
+    map.insert("Ring of suffering (i) (Uncharged)".to_string(), expr());
     map.insert(
         "Berserker ring (i)".to_string(),
         expr_and(Region::Fremennik),
@@ -75,7 +78,7 @@ fn add_imbues(map: &mut ExprMap) {
 }
 
 fn add_gorillas(map: &mut ExprMap) {
-    map.insert("Ring of suffering".to_string(), expr());
+    map.insert("Ring of suffering (Uncharged)".to_string(), expr());
     map.insert("Necklace of anguish".to_string(), expr());
     map.insert("Tormented bracelet".to_string(), expr());
     map.insert("Amulet of torture".to_string(), expr());
@@ -85,7 +88,10 @@ fn add_gorillas(map: &mut ExprMap) {
 }
 
 fn add_slayer(map: &mut ExprMap) {
-    map.insert("Trident of the seas".to_string(), expr());
+    map.insert(
+        "Trident of the seas (Partially charged)".to_string(),
+        expr(),
+    );
     map.insert("Abyssal tentacle".to_string(), expr());
 
     map.insert("Occult necklace".to_string(), expr());
@@ -95,13 +101,13 @@ fn add_slayer(map: &mut ExprMap) {
 }
 
 fn add_ba(map: &mut ExprMap) {
-    map.insert("Fighter hat".to_string(), expr());
-    map.insert("Ranger hat".to_string(), expr());
-    map.insert("Healer hat".to_string(), expr());
-    map.insert("Runner hat".to_string(), expr());
+    map.insert("Fighter hat (Normal)".to_string(), expr());
+    map.insert("Ranger hat (Normal)".to_string(), expr());
+    map.insert("Healer hat (Normal)".to_string(), expr());
+    map.insert("Runner hat (Normal)".to_string(), expr());
 
-    map.insert("Fighter torso".to_string(), expr());
-    map.insert("Penance skirt".to_string(), expr());
+    map.insert("Fighter torso (Normal)".to_string(), expr());
+    map.insert("Penance skirt (Normal)".to_string(), expr());
     map.insert("Runner boots".to_string(), expr());
     map.insert("Penance gloves".to_string(), expr());
     map.insert("Granite body".to_string(), expr());

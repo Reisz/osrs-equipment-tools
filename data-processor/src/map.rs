@@ -18,13 +18,19 @@ lazy_static! {
 
 /// Apply all transformation methods.
 pub fn map(item: ItemProperties) -> Result<Item, String> {
+    #[cfg(feature = "trailblazer")]
+    let trailblazer = TRAILBLAZER_MAP
+        .lock()
+        .unwrap()
+        .remove(item.wiki_name.as_ref().unwrap());
+
     let mut item = item.project()?;
 
     third_age::apply_value(&mut item);
 
     #[cfg(feature = "trailblazer")]
     {
-        item.trailblazer = TRAILBLAZER_MAP.lock().unwrap().remove(&item.name);
+        item.trailblazer = trailblazer;
     }
 
     Ok(item)

@@ -27,9 +27,9 @@ pub fn add_items(map: &mut ExprMap) {
 }
 
 fn add_ds2(map: &mut ExprMap) {
-    map.insert("Dragonfire ward".to_string(), expr());
+    map.insert("Dragonfire ward (Charged)".to_string(), expr());
     map.insert("Dragonbone necklace".to_string(), expr());
-    map.insert("Ava's assembler".to_string(), expr());
+    map.insert("Ava's assembler (Normal)".to_string(), expr());
     map.insert("Dragon crossbow".to_string(), expr());
     map.insert("Dragon kiteshield".to_string(), expr());
 
@@ -136,6 +136,6 @@ fn add_quests(map: &mut ExprMap) {
     // TODO Yak-hide (name-collision)
 
     // https://oldschool.runescape.wiki/w/The_Fremennik_Exiles#Rewards
-    map.insert("V's shield".to_string(), expr());
+    map.insert("V's shield (Equippable)".to_string(), expr());
     map.insert("Neitiznot faceguard".to_string(), expr());
 }

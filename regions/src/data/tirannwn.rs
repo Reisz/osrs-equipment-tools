@@ -29,37 +29,46 @@ pub fn add_items(map: &mut ExprMap) {
     add_zalcano(map);
     add_zulrah(map);
 
-    map.insert("Dark bow".to_string(), expr());
+    map.insert("Dark bow (Regular)".to_string(), expr());
     map.insert("Dragonstone gauntlets".to_string(), expr());
 }
 
 fn add_gauntlet(map: &mut ExprMap) {
-    map.insert("Crystal helm".to_string(), expr());
-    map.insert("Crystal legs".to_string(), expr());
-    map.insert("Crystal body".to_string(), expr());
+    map.insert("Crystal helm (Active)".to_string(), expr());
+    map.insert("Crystal legs (Active)".to_string(), expr());
+    map.insert("Crystal body (Active)".to_string(), expr());
 
     map.insert("Crystal bow".to_string(), expr());
     map.insert("Crystal halberd".to_string(), expr());
     map.insert("Crystal shield".to_string(), expr());
 
-    map.insert("Blade of saeldor".to_string(), expr());
+    map.insert("Blade of saeldor (Charged)".to_string(), expr());
 }
 
 fn add_zalcano(map: &mut ExprMap) {
-    map.insert("Crystal axe".to_string(), expr_and(Region::Fremennik));
-    map.insert("Crystal harpoon".to_string(), BoolExpr::new_false());
-    map.insert("Crystal pickaxe".to_string(), expr_and(Region::Wilderness));
+    map.insert(
+        "Crystal axe (Active)".to_string(),
+        expr_and(Region::Fremennik),
+    );
+    map.insert(
+        "Crystal harpoon (Active)".to_string(),
+        BoolExpr::new_false(),
+    );
+    map.insert(
+        "Crystal pickaxe (Active)".to_string(),
+        expr_and(Region::Wilderness),
+    );
 }
 
 fn add_zulrah(map: &mut ExprMap) {
-    map.insert("Toxic blowpipe".to_string(), expr());
+    map.insert("Toxic blowpipe (Charged)".to_string(), expr());
     map.insert(
-        "Toxic staff of the dead".to_string(),
+        "Toxic staff of the dead (Charged)".to_string(),
         expr_and(Region::Asgarnia),
     );
     map.insert(
-        "Trident of the swamp".to_string(),
+        "Trident of the swamp (Charged)".to_string(),
         expr_and(Region::Kandarin),
     );
-    map.insert("Serpentine helm".to_string(), expr());
+    map.insert("Serpentine helm (Charged)".to_string(), expr());
 }

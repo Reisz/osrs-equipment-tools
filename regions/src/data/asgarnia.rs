@@ -74,14 +74,14 @@ fn add_gwd(map: &mut ExprMap) {
 }
 
 fn add_defenders(map: &mut ExprMap) {
-    map.insert("Bronze defender".to_string(), expr());
-    map.insert("Iron defender".to_string(), expr());
-    map.insert("Steel defender".to_string(), expr());
-    map.insert("Black defender".to_string(), expr());
-    map.insert("Mithril defender".to_string(), expr());
-    map.insert("Adamant defender".to_string(), expr());
-    map.insert("Rune defender".to_string(), expr());
-    map.insert("Dragon defender".to_string(), expr());
+    map.insert("Bronze defender (Normal)".to_string(), expr());
+    map.insert("Iron defender (Normal)".to_string(), expr());
+    map.insert("Steel defender (Normal)".to_string(), expr());
+    map.insert("Black defender (Normal)".to_string(), expr());
+    map.insert("Mithril defender (Normal)".to_string(), expr());
+    map.insert("Adamant defender (Normal)".to_string(), expr());
+    map.insert("Rune defender (Normal)".to_string(), expr());
+    map.insert("Dragon defender (Normal)".to_string(), expr());
 }
 
 fn add_initiate(map: &mut ExprMap) {
@@ -92,12 +92,12 @@ fn add_initiate(map: &mut ExprMap) {
 
 fn add_max(map: &mut ExprMap) {
     map.insert("Max cape".to_string(), expr());
-    map.insert("Fire max cape".to_string(), expr());
-    map.insert("Infernal max cape".to_string(), expr());
+    map.insert("Fire max cape (Normal)".to_string(), expr());
+    map.insert("Infernal max cape (Normal)".to_string(), expr());
 
     map.insert("Ardougne max cape".to_string(), expr_and(Region::Kandarin));
     map.insert(
-        "Assembler max cape".to_string(),
+        "Assembler max cape (Normal)".to_string(),
         expr_and(Region::Fremennik),
     );
 
@@ -109,15 +109,15 @@ fn add_max(map: &mut ExprMap) {
     map.insert("Guthix max cape".to_string(), expr_and(Region::Wilderness));
 
     map.insert(
-        "Imbued saradomin max cape".to_string(),
+        "Imbued saradomin max cape (Normal)".to_string(),
         expr_and(Region::Wilderness),
     );
     map.insert(
-        "Imbued zamorak max cape".to_string(),
+        "Imbued zamorak max cape (Normal)".to_string(),
         expr_and(Region::Wilderness),
     );
     map.insert(
-        "Imbued guthix max cape".to_string(),
+        "Imbued guthix max cape (Normal)".to_string(),
         expr_and(Region::Wilderness),
     );
 
