@@ -48,7 +48,7 @@ impl SortingFragment {
                 stats[2]
             }
             Self::MeleeStrength => i.stats.melee_strength,
-            Self::RangedStrength => i.stats.melee_strength,
+            Self::RangedStrength => i.stats.ranged_strength,
             Self::MagicDamage => i.stats.magic_damage.into(),
             Self::Prayer => i.stats.prayer,
         }
@@ -70,7 +70,7 @@ impl SortingFragment {
 }
 
 /// Presets for sorting
-#[derive(Debug, IntoEnumIterator)]
+#[derive(Debug, Clone, Copy, IntoEnumIterator)]
 pub enum SortingPreset {
     /// Prioritize strength bonus -> attack avg -> prayer -> defence median
     Melee,
@@ -130,11 +130,7 @@ impl Sorting {
         LocalStorage::get(STORAGE_KEY).unwrap_or_default()
     }
 
-    /// Mutate the sorting order using a closure.
-    ///
-    /// Automatically stores new state after mutation.
-    pub fn map<F: FnOnce(&mut Vec<SortingFragment>)>(&mut self, f: F) {
-        f(&mut self.0);
+    fn updated(&self) {
         LocalStorage::insert(STORAGE_KEY, self).unwrap();
     }
 
@@ -163,4 +159,5 @@ pub fn update(msg: SortingMsg, sorting: &mut Sorting, _orders: &mut impl Orders<
     match msg {
         SortingMsg::ApplyPreset(preset) => preset.apply_to(sorting),
     }
+    sorting.updated();
 }

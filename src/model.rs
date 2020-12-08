@@ -37,6 +37,11 @@ impl Model {
         self.iter(slot).nth(idx)
     }
 
+    /// Returns a reference to the sorting settings.
+    pub fn sorting(&self) -> &Sorting {
+        &self.sorting
+    }
+
     /// Get the amount of items in `slot`.
     ///
     /// Can be slow, as the filters will be applied every time.

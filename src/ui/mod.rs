@@ -2,6 +2,7 @@
 
 mod equipment_view;
 mod region_buttons;
+mod sorting_preset_buttons;
 
 use seed::{div, prelude::*};
 
@@ -14,6 +15,7 @@ pub fn view(model: &Model) -> Node<Msg> {
     } else {
         div![
             region_buttons::view(&model.trailblazer),
+            sorting_preset_buttons::view(),
             equipment_view::view(model)
         ]
     }
