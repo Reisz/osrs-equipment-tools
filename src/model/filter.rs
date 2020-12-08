@@ -50,7 +50,7 @@ impl Filter {
 
     /// Returns false if the item is excluded by the current filter settings.
     pub fn evaluate(&self, item: &Item) -> bool {
-        !(self.third_age && item.third_age) && !(self.members && item.members)
+        !(self.third_age && item.third_age || self.members && item.members)
     }
 }
 
