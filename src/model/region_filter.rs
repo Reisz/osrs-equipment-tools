@@ -26,7 +26,7 @@ impl RegionFilter {
         LocalStorage::insert(STORAGE_KEY, self).unwrap();
     }
 
-    /// Returns true if filtering is enabled.
+    /// Returns `true` if filtering is enabled.
     pub fn enabled(&self) -> bool {
         self.enabled
     }
@@ -36,8 +36,8 @@ impl RegionFilter {
         &self.filter
     }
 
-    /// Returns false if the item is excluded by the current filter settings.
-    pub fn evaluate(&self, item: &Item) -> bool {
+    /// Returns `false` if the item is excluded by the current filter settings.
+    pub fn keep(&self, item: &Item) -> bool {
         !self.enabled
             || item
                 .trailblazer

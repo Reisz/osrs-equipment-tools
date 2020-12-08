@@ -51,7 +51,7 @@ impl Model {
     }
 
     fn filter(&self, item: &Item) -> bool {
-        self.filter.evaluate(item) && self.trailblazer.evaluate(item)
+        self.filter.keep(item) && self.trailblazer.keep(item)
     }
 
     fn sort(&mut self) {
