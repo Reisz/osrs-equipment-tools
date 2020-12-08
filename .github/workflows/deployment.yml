@@ -44,7 +44,8 @@ jobs:
       run: |
         mkdir -p html/data
         rm pkg/.gitignore
-        mv css pkg index.html html
+        touch .nojekyll
+        mv css pkg .nojekyll index.html html
         mv data/items.bin.xz html/data
 
     - name: Publish
