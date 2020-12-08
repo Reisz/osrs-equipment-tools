@@ -4,7 +4,7 @@ mod equipment_view;
 
 use seed::{div, prelude::*};
 
-use crate::{event::Msg, model::Model};
+use crate::model::{Model, Msg};
 
 /// Create the DOM according to the [`Model`].
 pub fn view(model: &Model) -> Node<Msg> {

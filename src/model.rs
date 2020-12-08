@@ -9,10 +9,9 @@ use lzma_rs::xz_decompress;
 use seed::prelude::*;
 use web_sys::RequestCache;
 
-use crate::event::Msg;
 use filter::Filter;
-use region_filter::RegionFilter;
-use sorting::{Sorting, SortingFragment};
+use region_filter::{RegionFilter, TrailblazerMsg};
+use sorting::{Sorting, SortingMsg};
 
 /// The application state.
 #[derive(Default)]
@@ -31,16 +30,6 @@ impl Model {
         self.data.is_none()
     }
 
-    fn filter(&self, item: &Item) -> bool {
-        self.filter.evaluate(item) && self.trailblazer.evaluate(item)
-    }
-
-    fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
-        self.data.as_ref().unwrap()[slot]
-            .iter()
-            .filter(move |i| self.filter(i))
-    }
-
     /// Get item at `index` in `slot`. Filters and sorting will be applied.
     ///
     /// Panics if [`is_loading()`] returns `true`.
@@ -55,21 +44,14 @@ impl Model {
         self.iter(slot).count()
     }
 
-    /// Insert the data after it has been loaded.
-    ///
-    /// Panics if there is already data present.
-    pub(crate) fn set_data(&mut self, data: ItemDatabase) {
-        debug_assert!(self.data.is_none());
-        self.data = Some(data);
-        self.sort();
+    fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
+        self.data.as_ref().unwrap()[slot]
+            .iter()
+            .filter(move |i| self.filter(i))
     }
 
-    /// Mutate the sorting order using a closure.
-    ///
-    /// The new ordering will automatically be applied to the database.
-    pub fn map_sorting<F: FnOnce(&mut Vec<SortingFragment>)>(&mut self, f: F) {
-        self.sorting.map(f);
-        self.sort();
+    fn filter(&self, item: &Item) -> bool {
+        self.filter.evaluate(item) && self.trailblazer.evaluate(item)
     }
 
     fn sort(&mut self) {
@@ -99,5 +81,33 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
         sorting: Sorting::new(),
         filter: Filter::new(),
         trailblazer: RegionFilter::new(),
+    }
+}
+
+/// Possible events.
+pub enum Msg {
+    /// Item database has finished downloading.
+    DataLoaded(ItemDatabase),
+    /// Message to change region-based filtering.
+    Trailblazer(TrailblazerMsg),
+    /// Message to change sorting behaviour.
+    ///
+    /// Will trigger a sort afterwards.
+    Sorting(SortingMsg),
+}
+
+/// Reacts to events.
+pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
+    match msg {
+        Msg::DataLoaded(data) => {
+            debug_assert!(model.data.is_none());
+            model.data = Some(data);
+            model.sort();
+        }
+        Msg::Trailblazer(msg) => region_filter::update(msg, &mut model.trailblazer, orders),
+        Msg::Sorting(msg) => {
+            sorting::update(msg, &mut model.sorting, orders);
+            model.sort();
+        }
     }
 }

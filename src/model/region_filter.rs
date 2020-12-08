@@ -1,9 +1,11 @@
 //! Settings for region filtering.
 
 use data::Item;
-use seed::prelude::{LocalStorage, WebStorage};
+use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
-use trailblazer::vars::RegionCombination;
+use trailblazer::vars::{Region, RegionCombination};
+
+use super::Msg;
 
 const STORAGE_KEY: &str = "region-filter";
 
@@ -29,23 +31,9 @@ impl RegionFilter {
         self.enabled
     }
 
-    /// Enable or disable the filtering.
-    pub fn set_enabled(&mut self, enabled: bool) {
-        self.enabled = enabled;
-        self.updated();
-    }
-
     /// Returns a reference to the region settings.
     pub fn filter(&self) -> &RegionCombination {
         &self.filter
-    }
-
-    /// Mutate the filter using a closure.
-    ///
-    /// Automatically stores new state after mutation.
-    pub fn map_filter<F: FnOnce(&mut RegionCombination)>(&mut self, f: F) {
-        f(&mut self.filter);
-        self.updated();
     }
 
     /// Returns false if the item is excluded by the current filter settings.
@@ -56,4 +44,22 @@ impl RegionFilter {
                 .as_ref()
                 .map_or(true, |expr| expr.eval(&self.filter))
     }
+}
+
+/// Messages to maipulate region-based filters.
+pub enum TrailblazerMsg {
+    /// Enable / disable region filtering.
+    ToggleEnabled,
+    /// Enable / disable filtering of a region.
+    ToggleRegion(Region),
+}
+
+/// Change region filters based on [`TrailblazerMsg`].
+pub fn update(msg: TrailblazerMsg, filter: &mut RegionFilter, _orders: &mut impl Orders<Msg>) {
+    match msg {
+        TrailblazerMsg::ToggleEnabled => filter.enabled = !filter.enabled,
+        TrailblazerMsg::ToggleRegion(r) => filter.filter[r] = !filter.filter[r],
+    }
+
+    filter.updated();
 }

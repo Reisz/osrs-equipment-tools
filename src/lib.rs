@@ -2,7 +2,6 @@
 
 //! Static web app for everything concerning equipment in Old School RuneScape.
 
-pub mod event;
 pub mod model;
 pub mod ui;
 
@@ -12,5 +11,5 @@ use seed::prelude::*;
 #[wasm_bindgen(start)]
 pub fn start() {
     // Mount the `app` to the element with the `id` "app".
-    App::start("app", model::init, event::update, ui::view);
+    App::start("app", model::init, model::update, ui::view);
 }

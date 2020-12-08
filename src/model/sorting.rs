@@ -3,8 +3,10 @@
 use std::cmp::Ordering;
 
 use data::Item;
-use seed::prelude::{LocalStorage, WebStorage};
+use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
+
+use super::Msg;
 
 const STORAGE_KEY: &str = "sorting";
 
@@ -70,4 +72,12 @@ impl Sorting {
 
         ordering.then_with(|| a.name.cmp(&b.name))
     }
+}
+
+/// Messages to manipulate sorting order
+pub enum SortingMsg {}
+
+/// Change sorting based on [`SortingMsg`].
+pub fn update(msg: SortingMsg, _sorting: &mut Sorting, _orders: &mut impl Orders<Msg>) {
+    match msg {}
 }
