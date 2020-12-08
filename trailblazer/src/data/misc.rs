@@ -31,6 +31,7 @@ macro_rules! or {
 /// - [Dragon harpoon](https://oldschool.runescape.wiki/w/Dragon_harpoon)
 /// - [Proselyte armour](https://oldschool.runescape.wiki/w/Proselyte_armour)
 /// - [CoX Rewards](https://oldschool.runescape.wiki/w/Chambers_of_Xeric#Unique_drop_table)
+/// - [Karuulm Slayer Dungeon Drops](https://oldschool.runescape.wiki/w/Karuulm_Slayer_Dungeon)
 /// - [Rada's blessing](https://oldschool.runescape.wiki/w/Rada's_blessing)
 pub fn add_items(map: &mut ExprMap) {
     map.insert(
@@ -68,6 +69,22 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Rada's blessing 4".to_string(), BoolExpr::new_false());
 
     add_cox(map);
+    add_karuulm(map);
+}
+
+fn add_karuulm(map: &mut ExprMap) {
+    map.insert("Dragon sword".to_string(), BoolExpr::new_false());
+    map.insert("Dragon harpoon".to_string(), BoolExpr::new_false());
+    map.insert("Dragon knife".to_string(), BoolExpr::new_false());
+    map.insert("Dragon thrownaxe".to_string(), BoolExpr::new_false());
+
+    map.insert("Devout boots".to_string(), BoolExpr::new_false());
+    map.insert("Boots of brimstone".to_string(), BoolExpr::new_false());
+
+    map.insert("Brimstone ring".to_string(), BoolExpr::new_false());
+    map.insert("Bonecrusher necklace".to_string(), BoolExpr::new_false());
+    map.insert("Ferocious gloves".to_string(), BoolExpr::new_false());
+    map.insert("Dragon hunter lance".to_string(), BoolExpr::new_false());
 }
 
 fn add_cox(map: &mut ExprMap) {
