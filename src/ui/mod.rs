@@ -1,6 +1,7 @@
 //! User interface code.
 
 mod equipment_view;
+mod region_buttons;
 
 use seed::{div, prelude::*};
 
@@ -11,6 +12,9 @@ pub fn view(model: &Model) -> Node<Msg> {
     if model.is_loading() {
         div!["Loading..."]
     } else {
-        equipment_view::view(model)
+        div![
+            region_buttons::view(&model.trailblazer),
+            equipment_view::view(model)
+        ]
     }
 }
