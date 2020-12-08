@@ -45,3 +45,9 @@ pub fn add_names(set: &mut HashSet<String>) {
 
     set.insert("Amulet of eternal glory".to_string());
 }
+
+/// Removes variants with low charges of:
+/// - [Dragonfire ward](https://oldschool.runescape.wiki/w/Dragonfire_ward#Uncharged)
+pub fn add_wiki_names(set: &mut HashSet<String>) {
+    set.insert("Dragonfire ward (Uncharged)".to_string());
+}

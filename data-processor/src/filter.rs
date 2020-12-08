@@ -36,6 +36,7 @@ lazy_static! {
     static ref WIKI_NAME_SET: Mutex<HashSet<String>> = Mutex::new({
         let mut set = HashSet::new();
 
+        charges::add_wiki_names(&mut set);
         heraldic::add_wiki_names(&mut set);
 
         set
