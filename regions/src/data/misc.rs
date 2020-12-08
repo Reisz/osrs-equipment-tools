@@ -27,6 +27,7 @@ macro_rules! or {
 /// - [Slayer drops](https://oldschool.runescape.wiki/w/Slayer_monsters)
 /// - [Mystic robes](https://oldschool.runescape.wiki/w/Mystic_robes)
 /// - [Ava's devices](https://oldschool.runescape.wiki/w/Ava%27s_device)
+/// - [Ghostly robes](https://oldschool.runescape.wiki/w/Ghostly_robes)
 ///
 /// Sets the following items to be unobtainable under trailblazer rules:
 /// - [Dragon harpoon](https://oldschool.runescape.wiki/w/Dragon_harpoon)
@@ -65,12 +66,16 @@ pub fn add_items(map: &mut ExprMap) {
     add_avas(map);
     add_mystic(map);
     add_slayer(map);
+    add_ghostly(map);
 }
 
 fn add_karuulm(map: &mut ExprMap) {
     map.insert("Dragon sword".to_string(), BoolExpr::new_false());
     map.insert("Dragon harpoon".to_string(), BoolExpr::new_false());
-    map.insert("Dragon knife".to_string(), BoolExpr::new_false());
+    map.insert(
+        "Dragon knife (Unpoisoned)".to_string(),
+        BoolExpr::new_false(),
+    );
     map.insert("Dragon thrownaxe".to_string(), BoolExpr::new_false());
 
     map.insert("Devout boots".to_string(), BoolExpr::new_false());
@@ -109,10 +114,7 @@ fn add_avas(map: &mut ExprMap) {
 }
 
 fn add_mystic(map: &mut ExprMap) {
-    map.insert(
-        "Mystic hat".to_string(),
-        BoolExpr::new(Region::Kandarin),
-    );
+    map.insert("Mystic hat".to_string(), BoolExpr::new(Region::Kandarin));
     map.insert(
         "Mystic robe top".to_string(),
         or!(Region::Kandarin, Region::Wilderness),
@@ -168,7 +170,10 @@ fn add_slayer(map: &mut ExprMap) {
     );
 
     // Jelly
-    map.insert("Mithril boots".to_string(), BoolExpr::new(Region::Fremennik));
+    map.insert(
+        "Mithril boots".to_string(),
+        BoolExpr::new(Region::Fremennik),
+    );
 
     // Turoth
     map.insert(
@@ -197,10 +202,7 @@ fn add_slayer(map: &mut ExprMap) {
     );
 
     // Skeletal wyvern
-    map.insert(
-        "Granite legs".to_string(),
-        BoolExpr::new(Region::Asgarnia),
-    );
+    map.insert("Granite legs".to_string(), BoolExpr::new(Region::Asgarnia));
 
     // Gargoyle
     map.insert(
@@ -217,4 +219,23 @@ fn add_slayer(map: &mut ExprMap) {
         "Rune boots".to_string(),
         or!(Region::Morytania, Region::Tirannwn),
     );
+}
+
+fn add_ghostly(map: &mut ExprMap) {
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Desert);
+    expr.var(Region::Asgarnia);
+    expr.var(Region::Kandarin);
+    expr.var(Region::Wilderness);
+    expr.and();
+    expr.and();
+    expr.and();
+    let expr = expr.finalize().unwrap();
+
+    map.insert("Ghostly boots".to_string(), expr.clone());
+    map.insert("Ghostly cloak".to_string(), expr.clone());
+    map.insert("Ghostly gloves".to_string(), expr.clone());
+    map.insert("Ghostly hood".to_string(), expr.clone());
+    map.insert("Ghostly robe (bottom)".to_string(), expr.clone());
+    map.insert("Ghostly robe (top)".to_string(), expr);
 }
