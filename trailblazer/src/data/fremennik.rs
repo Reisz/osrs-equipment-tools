@@ -14,7 +14,13 @@ fn expr() -> BoolExpr<Region> {
 /// - [Dragon Slayer II](https://oldschool.runescape.wiki/w/Dragon_Slayer_II#Rewards)
 /// - [Dagannoth Kings](https://oldschool.runescape.wiki/w/Dagannoth_Kings)
 /// - [Fremennik Quests](https://oldschool.runescape.wiki/w/Quests/Series#Fremennik_series)
+/// - [Fremennik sea boots](https://oldschool.runescape.wiki/w/Fremennik_sea_boots)
 pub fn add_items(map: &mut ExprMap) {
+    map.insert("Fremennik sea boots 1".to_string(), expr());
+    map.insert("Fremennik sea boots 2".to_string(), expr());
+    map.insert("Fremennik sea boots 3".to_string(), expr());
+    map.insert("Fremennik sea boots 4".to_string(), expr());
+
     add_ds2(map);
     add_dks(map);
     add_quests(map);

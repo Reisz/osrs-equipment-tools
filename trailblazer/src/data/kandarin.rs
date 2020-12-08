@@ -28,11 +28,16 @@ fn expr_and(region: Region) -> BoolExpr<Region> {
 ///     - [Thermy drops](https://oldschool.runescape.wiki/w/Thermonuclear_smoke_devil)
 ///     - [Dragon full helm](https://oldschool.runescape.wiki/w/Dragon_full_helm)
 /// - [BA Rewards](https://oldschool.runescape.wiki/w/Barbarian_Assault/Rewards#Armour)
+/// - Achievement diaries
+///     - [Ardougne cloak](https://oldschool.runescape.wiki/w/Ardougne_cloak)
+///     - [Kandarin headgear](https://oldschool.runescape.wiki/w/Kandarin_headgear)
+///     - [Western banner](https://oldschool.runescape.wiki/w/Western_banner)
 pub fn add_items(map: &mut ExprMap) {
     add_imbues(map);
     add_gorillas(map);
     add_slayer(map);
     add_ba(map);
+    add_diaries(map);
 }
 
 fn add_imbues(map: &mut ExprMap) {
@@ -100,4 +105,21 @@ fn add_ba(map: &mut ExprMap) {
     map.insert("Runner boots".to_string(), expr());
     map.insert("Penance gloves".to_string(), expr());
     map.insert("Granite body".to_string(), expr());
+}
+
+fn add_diaries(map: &mut ExprMap) {
+    map.insert("Ardougne cloak 1".to_string(), expr());
+    map.insert("Ardougne cloak 2".to_string(), expr());
+    map.insert("Ardougne cloak 3".to_string(), expr());
+    map.insert("Ardougne cloak 4".to_string(), expr());
+
+    map.insert("Kandarin headgear 1".to_string(), expr());
+    map.insert("Kandarin headgear 2".to_string(), expr());
+    map.insert("Kandarin headgear 3".to_string(), expr());
+    map.insert("Kandarin headgear 4".to_string(), expr());
+
+    map.insert("Western banner 1".to_string(), expr());
+    map.insert("Western banner 2".to_string(), expr());
+    map.insert("Western banner 3".to_string(), expr_and(Region::Tirannwn));
+    map.insert("Western banner 4".to_string(), expr_and(Region::Tirannwn));
 }

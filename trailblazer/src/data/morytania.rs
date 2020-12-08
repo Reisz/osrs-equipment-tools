@@ -20,7 +20,13 @@ fn expr() -> BoolExpr<Region> {
 /// - Other
 ///     - [Amulet of blood fury](https://oldschool.runescape.wiki/w/Amulet_of_blood_fury)
 ///     - [Black mask](https://oldschool.runescape.wiki/w/Black_mask)
+/// - [Morytania legs](https://oldschool.runescape.wiki/w/Morytania_legs)
 pub fn add_items(map: &mut ExprMap) {
+    map.insert("Morytania legs 1".to_string(), expr());
+    map.insert("Morytania legs 2".to_string(), expr());
+    map.insert("Morytania legs 3".to_string(), expr());
+    map.insert("Morytania legs 4".to_string(), expr());
+
     add_barrows(map);
     add_guardians(map);
     add_tob(map);

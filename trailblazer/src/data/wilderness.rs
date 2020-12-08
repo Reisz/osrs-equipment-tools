@@ -15,6 +15,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Elder chaos robes](https://oldschool.runescape.wiki/w/Elder_chaos_druid_robes)
 /// - [Corp drops](https://oldschool.runescape.wiki/w/Corporeal_Beast)
 /// - [Beacon ring](https://oldschool.runescape.wiki/w/Beacon_ring)
+/// - [Wildeness sword](https://oldschool.runescape.wiki/w/Wilderness_sword)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Dragon pickaxe".to_string(), expr());
 
@@ -38,4 +39,9 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Spectral spirit shield".to_string(), expr());
     map.insert("Arcane spirit shield".to_string(), expr());
     map.insert("Elysian spirit shield".to_string(), expr());
+
+    map.insert("Wilderness sword 1".to_string(), expr());
+    map.insert("Wilderness sword 2".to_string(), expr());
+    map.insert("Wilderness sword 3".to_string(), expr());
+    map.insert("Wilderness sword 4".to_string(), expr());
 }

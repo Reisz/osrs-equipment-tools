@@ -14,7 +14,13 @@ fn expr() -> BoolExpr<Region> {
 /// - [Boot upgrades](https://oldschool.runescape.wiki/w/Cerberus)
 /// - [God Wars Dungeon](https://oldschool.runescape.wiki/w/God_Wars_Dungeon)
 /// - [Defenders](https://oldschool.runescape.wiki/w/Defender)
+/// - [Falador shield](https://oldschool.runescape.wiki/w/Falador_shield)
 pub fn add_items(map: &mut ExprMap) {
+    map.insert("Falador shield 1".to_string(), expr());
+    map.insert("Falador shield 2".to_string(), expr());
+    map.insert("Falador shield 3".to_string(), expr());
+    map.insert("Falador shield 4".to_string(), expr());
+
     add_cerb(map);
     add_gwd(map);
     add_defenders(map);
