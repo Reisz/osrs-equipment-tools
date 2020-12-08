@@ -37,11 +37,15 @@ jobs:
     - name: Build
       run: cargo make build_release
 
+    - name: Process data
+      run: cargo run -p data-processor
+
     - name: Prepare publishing
       run: |
-        mkdir html
+        mkdir -p html/data
         rm pkg/.gitignore
         mv css pkg index.html html
+        mv data/items.bin.xz html/data
 
     - name: Publish
       if: success()
