@@ -32,12 +32,20 @@ fn expr_and(region: Region) -> BoolExpr<Region> {
 ///     - [Ardougne cloak](https://oldschool.runescape.wiki/w/Ardougne_cloak)
 ///     - [Kandarin headgear](https://oldschool.runescape.wiki/w/Kandarin_headgear)
 ///     - [Western banner](https://oldschool.runescape.wiki/w/Western_banner)
+/// - Skill capes
+///     - [Firemaking Cape](https://oldschool.runescape.wiki/w/Firemaking_cape)
+///     - [Fishing Cape](https://oldschool.runescape.wiki/w/Fishing_cape)
+///     - [Fletching Cape](https://oldschool.runescape.wiki/w/Fletching_cape)
+///     - [Hunter Cape](https://oldschool.runescape.wiki/w/Hunter_cape)
+///     - [Magic Cape](https://oldschool.runescape.wiki/w/Magic_cape)
+///     - [Ranging Cape](https://oldschool.runescape.wiki/w/Rangingr_cape)
 pub fn add_items(map: &mut ExprMap) {
     add_imbues(map);
     add_gorillas(map);
     add_slayer(map);
     add_ba(map);
     add_diaries(map);
+    add_capes(map);
 }
 
 fn add_imbues(map: &mut ExprMap) {
@@ -128,4 +136,24 @@ fn add_diaries(map: &mut ExprMap) {
     map.insert("Western banner 2".to_string(), expr());
     map.insert("Western banner 3".to_string(), expr_and(Region::Tirannwn));
     map.insert("Western banner 4".to_string(), expr_and(Region::Tirannwn));
+}
+
+fn add_capes(map: &mut ExprMap) {
+    map.insert("Firemaking cape (Untrimmed)".to_string(), expr());
+    map.insert("Firemaking cape (Trimmed)".to_string(), expr());
+
+    map.insert("Fishing cape (Untrimmed)".to_string(), expr());
+    map.insert("Fishing cape (Trimmed)".to_string(), expr());
+
+    map.insert("Fletching cape (Untrimmed)".to_string(), expr());
+    map.insert("Fletching cape (Trimmed)".to_string(), expr());
+
+    map.insert("Hunter cape (Untrimmed)".to_string(), expr());
+    map.insert("Hunter cape (Trimmed)".to_string(), expr());
+
+    map.insert("Magic cape (Untrimmed)".to_string(), expr());
+    map.insert("Magic cape (Trimmed)".to_string(), expr());
+
+    map.insert("Ranging cape (Untrimmed)".to_string(), expr());
+    map.insert("Ranging cape (Trimmed)".to_string(), expr());
 }
