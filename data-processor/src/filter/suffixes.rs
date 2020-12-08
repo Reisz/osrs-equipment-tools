@@ -35,6 +35,8 @@ lazy_static! {
         set.insert("(empty)".to_string());
         set.insert("(inactive)".to_string());
         set.insert("(full)".to_string());
+        set.insert("(r)".to_string());
+        set.insert("(ri)".to_string());
 
         set.insert("(nz)".to_string());
 
