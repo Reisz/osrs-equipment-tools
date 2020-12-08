@@ -4,6 +4,8 @@
 
 mod database;
 
+use std::ops::AddAssign;
+
 use enum_iterator::IntoEnumIterator;
 #[cfg(feature = "trailblazer")]
 use regions::{bool_expr::BoolExpr, vars::Region};
@@ -76,7 +78,7 @@ pub enum Slot {
 /// Equipment stats of an [`Item`].
 ///
 /// Most values are of type [`i16`] to allow representing aggregate values for full equipment sets.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Stats {
     /// Offensive stats.
     pub attack: BaseStats,
@@ -94,8 +96,19 @@ pub struct Stats {
     pub prayer: i16,
 }
 
+impl AddAssign<&Self> for Stats {
+    fn add_assign(&mut self, other: &Self) {
+        self.attack += &other.attack;
+        self.defence += &other.defence;
+        self.melee_strength += other.melee_strength;
+        self.ranged_strength += other.ranged_strength;
+        self.magic_damage += other.magic_damage;
+        self.prayer += other.prayer;
+    }
+}
+
 /// Base bonuses for attack or defence, part of [`Stats`].
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct BaseStats {
     /// Bonus for stab damage.
     pub stab: i16,
@@ -107,6 +120,16 @@ pub struct BaseStats {
     pub magic: i16,
     /// Bonus for ranged damage.
     pub ranged: i16,
+}
+
+impl AddAssign<&Self> for BaseStats {
+    fn add_assign(&mut self, other: &Self) {
+        self.stab += other.stab;
+        self.slash += other.slash;
+        self.crush += other.crush;
+        self.ranged += other.ranged;
+        self.magic += other.magic;
+    }
 }
 
 /// Requirement to equip an [`Item`].
