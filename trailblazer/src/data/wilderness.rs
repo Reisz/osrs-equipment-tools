@@ -14,6 +14,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Dagon'hai robes](https://oldschool.runescape.wiki/w/Dagon%27hai_robes)
 /// - [Elder chaos robes](https://oldschool.runescape.wiki/w/Elder_chaos_druid_robes)
 /// - [Corp drops](https://oldschool.runescape.wiki/w/Corporeal_Beast)
+/// - [Beacon ring](https://oldschool.runescape.wiki/w/Beacon_ring)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Dragon pickaxe".to_string(), expr());
 
