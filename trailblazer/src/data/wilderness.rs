@@ -35,6 +35,8 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Elder chaos robe".to_string(), expr());
     map.insert("Elder chaos top".to_string(), expr());
 
+    map.insert("Beacon ring".to_string(), expr());
+
     map.insert("Wilderness sword 1".to_string(), expr());
     map.insert("Wilderness sword 2".to_string(), expr());
     map.insert("Wilderness sword 3".to_string(), expr());

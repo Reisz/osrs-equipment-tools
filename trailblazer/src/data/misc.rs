@@ -26,6 +26,7 @@ macro_rules! or {
 /// - [Ancient staff](https://oldschool.runescape.wiki/w/Ancient_staff)
 /// - [Leaf-bladed sword](https://oldschool.runescape.wiki/w/Leaf-bladed_sword)
 /// - [Leaf-bladed battleaxe](https://oldschool.runescape.wiki/w/Leaf-bladed_battleaxe)
+/// - [Ava's devices](https://oldschool.runescape.wiki/w/Ava%27s_device)
 ///
 /// Sets the following items to be unobtainable under trailblazer rules:
 /// - [Dragon harpoon](https://oldschool.runescape.wiki/w/Dragon_harpoon)
@@ -70,6 +71,7 @@ pub fn add_items(map: &mut ExprMap) {
 
     add_cox(map);
     add_karuulm(map);
+    add_avas(map);
 }
 
 fn add_karuulm(map: &mut ExprMap) {
@@ -98,4 +100,17 @@ fn add_cox(map: &mut ExprMap) {
     map.insert("Elder maul".to_string(), BoolExpr::new_false());
     map.insert("Kodai wand".to_string(), BoolExpr::new_false());
     map.insert("Twisted bow".to_string(), BoolExpr::new_false());
+}
+
+fn add_avas(map: &mut ExprMap) {
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Asgarnia);
+    expr.var(Region::Morytania);
+    expr.and();
+    expr.var(Region::Fremennik);
+    expr.or();
+    let expr = expr.finalize().unwrap();
+
+    map.insert("Ava's attractor".to_string(), expr.clone());
+    map.insert("Ava's accumulator".to_string(), expr);
 }

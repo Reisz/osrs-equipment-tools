@@ -10,12 +10,21 @@ fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Asgarnia)
 }
 
+fn expr_and(region: Region) -> BoolExpr<Region> {
+    let mut builder = BoolExprBuilder::new();
+    builder.var(Region::Asgarnia);
+    builder.var(region);
+    builder.and();
+    builder.finalize().unwrap()
+}
+
 /// Add requirements for the following items:
 /// - [Boot upgrades](https://oldschool.runescape.wiki/w/Cerberus)
 /// - [God Wars Dungeon](https://oldschool.runescape.wiki/w/God_Wars_Dungeon)
 /// - [Defenders](https://oldschool.runescape.wiki/w/Defender)
 /// - [Initiate armour](https://oldschool.runescape.wiki/w/Initiate_armour)
 /// - [Falador shield](https://oldschool.runescape.wiki/w/Falador_shield)
+/// - [Max capes](https://oldschool.runescape.wiki/w/Max_cape)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Falador shield 1".to_string(), expr());
     map.insert("Falador shield 2".to_string(), expr());
@@ -26,6 +35,7 @@ pub fn add_items(map: &mut ExprMap) {
     add_gwd(map);
     add_defenders(map);
     add_initiate(map);
+    add_max(map);
 }
 
 fn add_cerb(map: &mut ExprMap) {
@@ -78,4 +88,54 @@ fn add_initiate(map: &mut ExprMap) {
     map.insert("Initiate sallet".to_string(), expr());
     map.insert("Initiate hauberk".to_string(), expr());
     map.insert("Initiate cuisse".to_string(), expr());
+}
+
+fn add_max(map: &mut ExprMap) {
+    map.insert("Max cape".to_string(), expr());
+    map.insert("Fire max cape".to_string(), expr());
+    map.insert("Infernal max cape".to_string(), expr());
+
+    map.insert("Ardougne max cape".to_string(), expr_and(Region::Kandarin));
+    map.insert(
+        "Assembler max cape".to_string(),
+        expr_and(Region::Fremennik),
+    );
+
+    map.insert(
+        "Saradomin max cape".to_string(),
+        expr_and(Region::Wilderness),
+    );
+    map.insert("Zamorak max cape".to_string(), expr_and(Region::Wilderness));
+    map.insert("Guthix max cape".to_string(), expr_and(Region::Wilderness));
+
+    map.insert(
+        "Imbued saradomin max cape".to_string(),
+        expr_and(Region::Wilderness),
+    );
+    map.insert(
+        "Imbued zamorak max cape".to_string(),
+        expr_and(Region::Wilderness),
+    );
+    map.insert(
+        "Imbued guthix max cape".to_string(),
+        expr_and(Region::Wilderness),
+    );
+
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Asgarnia);
+    expr.var(Region::Fremennik);
+    expr.var(Region::Morytania);
+    expr.or();
+    expr.and();
+    let expr = expr.finalize().unwrap();
+    map.insert("Accumulator max cape".to_string(), expr);
+
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Asgarnia);
+    expr.var(Region::Fremennik);
+    expr.var(Region::Kandarin);
+    expr.and();
+    expr.and();
+    let expr = expr.finalize().unwrap();
+    map.insert("Mythical max cape".to_string(), expr);
 }
