@@ -93,7 +93,22 @@ impl ItemProperties {
             })
             .unwrap_or_default();
 
-        Ok(Item {
+        #[cfg(not(feature = "trailblazer"))]
+        let result = Ok(Item {
+            name: self.name,
+            members: self.members,
+            weight: self.weight.ok_or("Missing weight.")?,
+            wiki_url: self.wiki_url.ok_or("Missing wiki URL.")?,
+            icon_data: trim_icon(&self.icon)?,
+            stats: equipment.project()?,
+            slot,
+            requirements,
+            weapon: self.weapon.map(|w| w.project()),
+            third_age: false,
+        });
+
+        #[cfg(feature = "trailblazer")]
+        let result = Ok(Item {
             name: self.name,
             members: self.members,
             weight: self.weight.ok_or("Missing weight.")?,
@@ -105,7 +120,9 @@ impl ItemProperties {
             weapon: self.weapon.map(|w| w.project()),
             third_age: false,
             trailblazer: None,
-        })
+        });
+
+        result
     }
 }
 
