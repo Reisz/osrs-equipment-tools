@@ -1,5 +1,5 @@
 [package]
-name = "trailblazer"
+name = "regions"
 version = "0.1.0"
 authors = ["Daniel <Reisz@users.noreply.github.com>"]
 edition = "2018"

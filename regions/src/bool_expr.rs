@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 /// # Example
 /// ```
 /// use std::convert::TryFrom;
-/// # use trailblazer::bool_expr::{BoolExpr, BoolLookup};
+/// # use regions::bool_expr::{BoolExpr, BoolLookup};
 ///
 /// struct Id(u8);
 ///
@@ -139,7 +139,7 @@ impl<T> BoolExpr<T> {
     /// # Example
     /// ```
     /// use std::{collections::HashMap, convert::TryFrom};
-    /// # use trailblazer::bool_expr::{BoolExpr, BoolLookup};
+    /// # use regions::bool_expr::{BoolExpr, BoolLookup};
     ///
     /// #[derive(PartialEq, Eq, Hash)]
     /// struct Id(String);

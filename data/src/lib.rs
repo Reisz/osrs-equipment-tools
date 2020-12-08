@@ -5,8 +5,8 @@
 mod database;
 
 use enum_iterator::IntoEnumIterator;
+use regions::{bool_expr::BoolExpr, vars::Region};
 use serde::{Deserialize, Serialize};
-use trailblazer::{bool_expr::BoolExpr, vars::Region};
 
 pub use database::*;
 

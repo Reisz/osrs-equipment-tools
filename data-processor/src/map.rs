@@ -11,8 +11,8 @@ use crate::osrsbox::ItemProperties;
 
 lazy_static! {
     /// Map of item names to Trailblazer region expressions.
-    static ref TRAILBLAZER_MAP: Mutex<trailblazer::data::ExprMap> =
-        Mutex::new(trailblazer::data::create_map());
+    static ref TRAILBLAZER_MAP: Mutex<regions::data::ExprMap> =
+        Mutex::new(regions::data::create_map());
 }
 
 /// Apply all transformation methods.

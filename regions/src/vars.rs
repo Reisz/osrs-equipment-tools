@@ -49,8 +49,8 @@ impl TryFrom<&str> for Region {
 ///
 /// ```
 /// use std::convert::TryFrom;
-/// # use trailblazer::vars::{Region, RegionCombination};
-/// use trailblazer::bool_expr::BoolExpr;
+/// # use regions::vars::{Region, RegionCombination};
+/// use regions::bool_expr::BoolExpr;
 ///
 /// let mut vars = RegionCombination::default();
 ///

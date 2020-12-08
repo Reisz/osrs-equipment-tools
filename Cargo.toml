@@ -24,7 +24,7 @@ enum-iterator = "0.6"
 lzma-rs = { git = "https://github.com/qnga/lzma-rs.git", branch = "fix/lzma2" }
 seed = "0.8"
 serde = { version = "1.0", features = ["derive"] }
-trailblazer = { path = "trailblazer" }
+regions = { path = "regions" }
 web-sys = "0.3"
 
 [profile.release]
@@ -36,4 +36,4 @@ codegen-units = 1
 wasm-opt = ['-Os']
 
 [workspace]
-members = ["data", "data-processor", "trailblazer"]
+members = ["data", "data-processor", "regions"]

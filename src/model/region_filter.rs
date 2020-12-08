@@ -1,9 +1,9 @@
 //! Settings for region filtering.
 
 use data::Item;
+use regions::vars::{Region, RegionCombination};
 use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
-use trailblazer::vars::{Region, RegionCombination};
 
 use super::Msg;
 

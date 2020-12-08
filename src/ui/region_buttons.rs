@@ -1,9 +1,9 @@
 //! Displays buttons to allow switching region filters.
 
 use enum_iterator::IntoEnumIterator;
+use regions::vars::Region;
 use seed::prelude::*;
 use seed::*;
-use trailblazer::vars::Region;
 
 use crate::model::{
     region_filter::{RegionFilter, TrailblazerMsg},
