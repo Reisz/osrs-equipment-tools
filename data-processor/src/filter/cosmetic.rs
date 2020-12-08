@@ -89,3 +89,10 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Trailblazer harpoon".to_string());
     set.insert("Trailblazer pickaxe".to_string());
 }
+
+/// Filters out the following cosmetic variants:
+/// - [Ward upgrade kit upgrades](https://oldschool.runescape.wiki/w/Ward_upgrade_kit)
+pub fn add_wiki_names(set: &mut HashSet<String>) {
+    set.insert("Malediction ward (or)".to_string());
+    set.insert("Odium ward (or)".to_string());
+}

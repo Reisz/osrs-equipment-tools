@@ -37,6 +37,7 @@ lazy_static! {
         let mut set = HashSet::new();
 
         charges::add_wiki_names(&mut set);
+        cosmetic::add_wiki_names(&mut set);
         heraldic::add_wiki_names(&mut set);
 
         set
