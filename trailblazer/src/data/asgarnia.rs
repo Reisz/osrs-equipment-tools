@@ -14,6 +14,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Boot upgrades](https://oldschool.runescape.wiki/w/Cerberus)
 /// - [God Wars Dungeon](https://oldschool.runescape.wiki/w/God_Wars_Dungeon)
 /// - [Defenders](https://oldschool.runescape.wiki/w/Defender)
+/// - [Initiate armour](https://oldschool.runescape.wiki/w/Initiate_armour)
 /// - [Falador shield](https://oldschool.runescape.wiki/w/Falador_shield)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Falador shield 1".to_string(), expr());
@@ -24,6 +25,7 @@ pub fn add_items(map: &mut ExprMap) {
     add_cerb(map);
     add_gwd(map);
     add_defenders(map);
+    add_initiate(map);
 }
 
 fn add_cerb(map: &mut ExprMap) {
@@ -70,4 +72,10 @@ fn add_defenders(map: &mut ExprMap) {
     map.insert("Adamant defender".to_string(), expr());
     map.insert("Rune defender".to_string(), expr());
     map.insert("Dragon defender".to_string(), expr());
+}
+
+fn add_initiate(map: &mut ExprMap) {
+    map.insert("Initiate sallet".to_string(), expr());
+    map.insert("Initiate hauberk".to_string(), expr());
+    map.insert("Initiate cuisse".to_string(), expr());
 }
