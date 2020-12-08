@@ -1,6 +1,7 @@
 //! Datastructures for representing the applicaton state in [`Model`].
 
 pub mod filter;
+#[cfg(feature = "trailblazer")]
 pub mod region_filter;
 pub mod sorting;
 
@@ -10,6 +11,7 @@ use seed::prelude::*;
 use web_sys::RequestCache;
 
 use filter::Filter;
+#[cfg(feature = "trailblazer")]
 use region_filter::{RegionFilter, TrailblazerMsg};
 use sorting::{Sorting, SortingMsg};
 
@@ -21,10 +23,30 @@ pub struct Model {
     /// Miscellanious filtering
     pub filter: Filter,
     /// Item filtering based on trailblazer regions
+    #[cfg(feature = "trailblazer")]
     pub trailblazer: RegionFilter,
 }
 
 impl Model {
+    #[cfg(not(feature = "trailblazer"))]
+    fn new() -> Self {
+        Self {
+            data: None,
+            sorting: Sorting::new(),
+            filter: Filter::new(),
+        }
+    }
+
+    #[cfg(feature = "trailblazer")]
+    fn new() -> Self {
+        Self {
+            data: None,
+            sorting: Sorting::new(),
+            filter: Filter::new(),
+            trailblazer: RegionFilter::new(),
+        }
+    }
+
     /// Returns `true` when no data is present in the model.
     pub fn is_loading(&self) -> bool {
         self.data.is_none()
@@ -55,6 +77,12 @@ impl Model {
             .filter(move |i| self.filter(i))
     }
 
+    #[cfg(not(feature = "trailblazer"))]
+    fn filter(&self, item: &Item) -> bool {
+        self.filter.keep(item)
+    }
+
+    #[cfg(feature = "trailblazer")]
     fn filter(&self, item: &Item) -> bool {
         self.filter.keep(item) && self.trailblazer.keep(item)
     }
@@ -69,13 +97,7 @@ impl Model {
 /// Initialize the model and start item data loading process.
 pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
     orders.perform_cmd(async { Msg::DataLoaded(load_data().await) });
-
-    Model {
-        data: None,
-        sorting: Sorting::new(),
-        filter: Filter::new(),
-        trailblazer: RegionFilter::new(),
-    }
+    Model::new()
 }
 
 async fn load_data() -> ItemDatabase {
@@ -93,6 +115,7 @@ pub enum Msg {
     /// Item database has finished downloading.
     DataLoaded(ItemDatabase),
     /// Message to change region-based filtering.
+    #[cfg(feature = "trailblazer")]
     Trailblazer(TrailblazerMsg),
     /// Message to change sorting behaviour.
     ///
@@ -108,6 +131,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
             model.data = Some(data);
             model.sort();
         }
+        #[cfg(feature = "trailblazer")]
         Msg::Trailblazer(msg) => region_filter::update(msg, &mut model.trailblazer, orders),
         Msg::Sorting(msg) => {
             sorting::update(msg, &mut model.sorting, orders);

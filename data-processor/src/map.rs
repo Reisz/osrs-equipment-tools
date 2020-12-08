@@ -9,6 +9,7 @@ use lazy_static::lazy_static;
 
 use crate::osrsbox::ItemProperties;
 
+#[cfg(feature = "trailblazer")]
 lazy_static! {
     /// Map of item names to Trailblazer region expressions.
     static ref TRAILBLAZER_MAP: Mutex<regions::data::ExprMap> =
@@ -21,7 +22,10 @@ pub fn map(item: ItemProperties) -> Result<Item, String> {
 
     third_age::apply_value(&mut item);
 
-    item.trailblazer = TRAILBLAZER_MAP.lock().unwrap().remove(&item.name);
+    #[cfg(feature = "trailblazer")]
+    {
+        item.trailblazer = TRAILBLAZER_MAP.lock().unwrap().remove(&item.name);
+    }
 
     Ok(item)
 }
@@ -30,6 +34,7 @@ pub fn map(item: ItemProperties) -> Result<Item, String> {
 pub fn check() {
     third_age::check();
 
+    #[cfg(feature = "trailblazer")]
     for (name, _) in TRAILBLAZER_MAP.lock().unwrap().iter() {
         println!("Missed Trailblazer map: {}", name);
     }

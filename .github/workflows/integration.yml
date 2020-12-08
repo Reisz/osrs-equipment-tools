@@ -6,6 +6,9 @@ jobs:
   clippy:
     name: Run Clippy Lints
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        features: ["", "--no-default-features"]
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -22,7 +25,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --workspace -- -D warnings
+          args: --workspace ${{ matrix.features }} -- -D warnings
 
   test:
     name: Run Test Suite

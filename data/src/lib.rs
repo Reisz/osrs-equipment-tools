@@ -5,6 +5,7 @@
 mod database;
 
 use enum_iterator::IntoEnumIterator;
+#[cfg(feature = "trailblazer")]
 use regions::{bool_expr::BoolExpr, vars::Region};
 use serde::{Deserialize, Serialize};
 
@@ -34,6 +35,7 @@ pub struct Item {
     /// True if the item is a 3rd age piece
     pub third_age: bool,
     /// Trailblazer requirements
+    #[cfg(feature = "trailblazer")]
     pub trailblazer: Option<BoolExpr<Region>>,
 }
 
