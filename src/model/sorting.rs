@@ -121,7 +121,7 @@ impl SortingPreset {
 }
 
 /// Stores current settings for item sorting.
-#[derive(Debug, Default, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Sorting(Vec<SortingFragment>);
 
 impl Sorting {
@@ -145,6 +145,14 @@ impl Sorting {
         }
 
         ordering.then_with(|| a.name.cmp(&b.name))
+    }
+}
+
+impl Default for Sorting {
+    fn default() -> Self {
+        let mut result = Self(Vec::new());
+        SortingPreset::Melee.apply_to(&mut result);
+        result
     }
 }
 
