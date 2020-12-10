@@ -10,12 +10,14 @@ use lazy_static::lazy_static;
 use crate::osrsbox::ItemProperties;
 
 pub mod god_armour;
+pub mod god_dhide;
 pub mod team_capes;
 pub mod vestment;
 
 /// Add wiki names of items to filter.
 pub fn add_filter_names(set: &mut HashSet<String>) {
     god_armour::add_filter_names(set);
+    god_dhide::add_filter_names(set);
     team_capes::add_filter_names(set);
     vestment::add_filter_names(set);
 }
@@ -33,6 +35,7 @@ lazy_static! {
         let mut map = HashMap::new();
 
         god_armour::add_aggregators(&mut map);
+        god_dhide::add_aggregators(&mut map);
         team_capes::add_aggregators(&mut map);
         vestment::add_aggregators(&mut map);
 

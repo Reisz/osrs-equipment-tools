@@ -43,6 +43,13 @@ lazy_static! {
         map.insert("God platelegs".to_string(), Clue::Hard);
         map.insert("God plateskirt".to_string(), Clue::Hard);
 
+        map.insert("Blessed bracers".to_string(), Clue::Hard);
+        map.insert("Blessed chaps".to_string(), Clue::Hard);
+        map.insert("Blessed coif".to_string(), Clue::Hard);
+        map.insert("Blessed d'hide body".to_string(), Clue::Hard);
+        map.insert("Blessed d'hide boots".to_string(), Clue::Hard);
+        map.insert("Blessed d'hide shield".to_string(), Clue::Hard);
+
         map
     });
 }
