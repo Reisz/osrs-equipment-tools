@@ -1,6 +1,7 @@
 //! User interface code.
 
 mod equipment_view;
+mod list_view;
 #[cfg(feature = "trailblazer")]
 mod region_buttons;
 mod sorting_preset_buttons;
@@ -20,6 +21,7 @@ pub fn view(model: &Model) -> Node<Msg> {
             sorting_preset_buttons::view(),
             equipment_view::view(model),
             stats_view::view(model),
+            list_view::view(model),
         ]
     }
 }
@@ -35,6 +37,7 @@ pub fn view(model: &Model) -> Node<Msg> {
             sorting_preset_buttons::view(),
             equipment_view::view(model),
             stats_view::view(model),
+            list_view::view(model),
         ]
     }
 }

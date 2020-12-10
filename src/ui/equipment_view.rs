@@ -25,15 +25,10 @@ fn view_slot(model: &Model, slot: Slot) -> Node<Msg> {
         let icon = format!("data:image/bmp;base64,{}", base64::encode(&item.icon_data));
 
         div![
+            ev(Ev::Click, move |_| Msg::ChangeList(slot)),
             C!["equipment equipment-blank"],
             style!["left" => left, "top" => top],
-            div![
-                C!["equipment-plinkp"],
-                a![
-                    attrs![At::Href => item.wiki_url, At::Title => item.name],
-                    img![attrs![At::Src => icon]],
-                ]
-            ],
+            img![attrs![At::Src => icon, At::Title => item.name]],
         ]
     } else {
         Node::Empty

@@ -20,6 +20,8 @@ use sorting::{Sorting, SortingMsg};
 pub struct Model {
     data: Option<ItemDatabase>,
     sorting: Sorting,
+    /// Slot currently shown by list view.
+    pub list: Option<Slot>,
     /// Miscellanious filtering
     pub filter: Filter,
     /// Item filtering based on trailblazer regions
@@ -33,6 +35,7 @@ impl Model {
         Self {
             data: None,
             sorting: Sorting::new(),
+            list: None,
             filter: Filter::new(),
         }
     }
@@ -42,6 +45,7 @@ impl Model {
         Self {
             data: None,
             sorting: Sorting::new(),
+            list: None,
             filter: Filter::new(),
             trailblazer: RegionFilter::new(),
         }
@@ -71,7 +75,8 @@ impl Model {
         self.iter(slot).count()
     }
 
-    fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
+    /// Get an iterator for the items in `slot`.
+    pub fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
         self.data.as_ref().unwrap()[slot]
             .iter()
             .filter(move |i| self.filter(i))
@@ -114,6 +119,8 @@ async fn load_data() -> ItemDatabase {
 pub enum Msg {
     /// Item database has finished downloading.
     DataLoaded(ItemDatabase),
+    /// Change the current slot of the list view.
+    ChangeList(Slot),
     /// Message to change region-based filtering.
     #[cfg(feature = "trailblazer")]
     Trailblazer(TrailblazerMsg),
@@ -131,6 +138,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
             model.data = Some(data);
             model.sort();
         }
+        Msg::ChangeList(slot) => model.list = Some(slot),
         #[cfg(feature = "trailblazer")]
         Msg::Trailblazer(msg) => region_filter::update(msg, &mut model.trailblazer, orders),
         Msg::Sorting(msg) => {
