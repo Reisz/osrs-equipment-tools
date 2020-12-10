@@ -70,6 +70,18 @@ lazy_static! {
         map.insert("Holy wraps".to_string(), Clue::Elite);
         map.insert("Fremennik kilt".to_string(), Clue::Elite);
 
+        map.insert("3rd age longsword".to_string(), Clue::Elite);
+        map.insert("3rd age wand".to_string(), Clue::Elite);
+        map.insert("3rd age cloak".to_string(), Clue::Elite);
+        map.insert("3rd age bow".to_string(), Clue::Elite);
+
+        // Master
+        map.insert("3rd age druidic robe top".to_string(), Clue::Master);
+        map.insert("3rd age druidic robe bottoms".to_string(), Clue::Master);
+        map.insert("3rd age druidic cloak".to_string(), Clue::Master);
+        map.insert("3rd age druidic staff".to_string(), Clue::Master);
+        map.insert("3rd age pickaxe".to_string(), Clue::Master);
+        map.insert("3rd age axe".to_string(), Clue::Master);
 
         map
     });
