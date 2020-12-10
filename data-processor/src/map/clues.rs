@@ -8,9 +8,7 @@ use lazy_static::lazy_static;
 lazy_static! {
     /// Set of 3rd age item names.
     static ref ITEM_NAMES: Mutex<HashMap<String, Clue>> = Mutex::new({
-        let set = HashMap::new();
-
-        set
+        HashMap::new()
     });
 }
 

@@ -43,6 +43,7 @@ pub fn map(mut item: ItemProperties) -> Result<Item, String> {
 
 /// Print leftover names in the Trailblazer item map (probably typos).
 pub fn check() {
+    aggregate::check();
     clues::check();
     third_age::check();
 
