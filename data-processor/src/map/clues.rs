@@ -50,6 +50,13 @@ lazy_static! {
         map.insert("Blessed d'hide boots".to_string(), Clue::Hard);
         map.insert("Blessed d'hide shield".to_string(), Clue::Hard);
 
+        // Elite
+        map.insert("Rangers' tunic".to_string(), Clue::Elite);
+        map.insert("Ranger gloves".to_string(), Clue::Elite);
+        map.insert("Holy wraps".to_string(), Clue::Elite);
+        map.insert("Fremennik kilt".to_string(), Clue::Elite);
+
+
         map
     });
 }
