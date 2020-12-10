@@ -31,7 +31,7 @@ lazy_static! {
         map.insert("Robin hood hat".to_string(), Clue::Hard);
 
         // Some region combinations do not have access to mystic hat or top
-        #[cfg(not(feature = "trailblazer"))]
+        #[cfg(feature = "trailblazer")]
         {
             map.insert("Enchanted hat".to_string(), Clue::Hard);
             map.insert("Enchanted top".to_string(), Clue::Hard);
