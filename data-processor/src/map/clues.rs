@@ -50,6 +50,20 @@ lazy_static! {
         map.insert("Blessed d'hide boots".to_string(), Clue::Hard);
         map.insert("Blessed d'hide shield".to_string(), Clue::Hard);
 
+        map.insert("3rd age full helmet".to_string(), Clue::Hard);
+        map.insert("3rd age platebody".to_string(), Clue::Hard);
+        map.insert("3rd age platelegs".to_string(), Clue::Hard);
+        map.insert("3rd age plateskirt".to_string(), Clue::Hard);
+        map.insert("3rd age kiteshield".to_string(), Clue::Hard);
+        map.insert("3rd age range coif".to_string(), Clue::Hard);
+        map.insert("3rd age range top".to_string(), Clue::Hard);
+        map.insert("3rd age range legs".to_string(), Clue::Hard);
+        map.insert("3rd age vambraces".to_string(), Clue::Hard);
+        map.insert("3rd age mage hat".to_string(), Clue::Hard);
+        map.insert("3rd age robe top".to_string(), Clue::Hard);
+        map.insert("3rd age robe".to_string(), Clue::Hard);
+        map.insert("3rd age amulet".to_string(), Clue::Hard);
+
         // Elite
         map.insert("Rangers' tunic".to_string(), Clue::Elite);
         map.insert("Ranger gloves".to_string(), Clue::Elite);
