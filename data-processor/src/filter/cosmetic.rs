@@ -11,6 +11,7 @@ use std::collections::HashSet;
 /// - [Enchanted robes](https://oldschool.runescape.wiki/w/Enchanted_robes)
 /// - [Robes of darkness](https://oldschool.runescape.wiki/w/Robes_of_darkness)
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
+/// - [Cape of skulls](https://oldschool.runescape.wiki/w/Cape_of_skulls)
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
 /// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
 ///     - Except gauntlets which offer unique stats and different requirements
@@ -71,6 +72,7 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Boots of darkness".to_string());
 
     set.insert("Obsidian cape (r)".to_string());
+    set.insert("Cape of skulls".to_string());
 
     set.insert("Black slayer helmet".to_string());
     set.insert("Green slayer helmet".to_string());
