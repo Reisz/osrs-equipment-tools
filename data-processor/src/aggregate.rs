@@ -13,6 +13,7 @@ pub mod broodoo;
 pub mod god_armour;
 pub mod god_dhide;
 pub mod halo;
+pub mod hunter_gear;
 pub mod team_capes;
 pub mod vestment;
 
@@ -22,6 +23,7 @@ pub fn add_filter_names(set: &mut HashSet<String>) {
     god_armour::add_filter_names(set);
     god_dhide::add_filter_names(set);
     halo::add_filter_names(set);
+    hunter_gear::add_filter_names(set);
     team_capes::add_filter_names(set);
     vestment::add_filter_names(set);
 }
@@ -42,6 +44,7 @@ lazy_static! {
         god_armour::add_aggregators(&mut map);
         god_dhide::add_aggregators(&mut map);
         halo::add_aggregators(&mut map);
+        hunter_gear::add_aggregators(&mut map);
         team_capes::add_aggregators(&mut map);
         vestment::add_aggregators(&mut map);
 
