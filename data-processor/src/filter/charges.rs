@@ -11,7 +11,6 @@ use std::collections::HashSet;
 /// - [Void seal](https://oldschool.runescape.wiki/w/Void_seal#(8))
 ///
 /// Removes charged variants of:
-/// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
 /// - [Black mask](https://oldschool.runescape.wiki/w/Black_mask)
 ///
 /// Additionally removes:
@@ -38,8 +37,6 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.extend((1..10).map(|i| format!("Rod of ivandis ({})", i)));
 
     set.extend((1..8).map(|i| format!("Void seal({})", i)));
-
-    set.extend((1..=10).map(|i| format!("Broodoo shield ({})", i)));
     set.extend((1..=10).map(|i| format!("Black mask ({})", i)));
     set.extend((1..=10).map(|i| format!("Black mask ({}) (i)", i)));
 
@@ -48,6 +45,13 @@ pub fn add_names(set: &mut HashSet<String>) {
 
 /// Removes variants with low charges of:
 /// - [Dragonfire ward](https://oldschool.runescape.wiki/w/Dragonfire_ward#Uncharged)
+///
+/// Removes charged variants of:
+/// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
 pub fn add_wiki_names(set: &mut HashSet<String>) {
+    for color in &["blue", "orange", "green"] {
+        set.extend((1..=10).map(|i| format!("Broodoo shield ({}) ({})", color, i)));
+    }
+
     set.insert("Dragonfire ward (Uncharged)".to_string());
 }
