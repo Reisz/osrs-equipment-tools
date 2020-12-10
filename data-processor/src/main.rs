@@ -6,15 +6,16 @@
 //!     - Items with no positive stats
 //!     - Others (see submodules of [filter])
 //! 3. Aggregate similar items
-//!     - TODO
-//! 4. Project to a more concise set of data-points
-//! 5. Store in the compact bincode format
-//! 6. Compress using the XZ algorithm
+//! 4. Append additional data
+//! 5. Project to a more concise set of data-points
+//! 6. Store in the compact bincode format
+//! 7. Compress using the XZ algorithm
 //!
 //! The final product is stored in `data/items.bin.xz`.
 
 #![deny(missing_docs)]
 
+pub mod aggregate;
 pub mod filter;
 pub mod map;
 pub mod osrsbox;

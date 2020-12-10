@@ -14,6 +14,7 @@ use std::{collections::HashSet, sync::Mutex};
 
 use lazy_static::lazy_static;
 
+use crate::aggregate;
 use crate::osrsbox::ItemProperties;
 
 lazy_static! {
@@ -35,6 +36,8 @@ lazy_static! {
     /// Set of wiki item names to be removed.
     static ref WIKI_NAME_SET: Mutex<HashSet<String>> = Mutex::new({
         let mut set = HashSet::new();
+
+        aggregate::add_filter_names(&mut set);
 
         charges::add_wiki_names(&mut set);
         cosmetic::add_wiki_names(&mut set);
