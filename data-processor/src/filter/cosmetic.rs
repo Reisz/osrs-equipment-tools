@@ -20,6 +20,7 @@ use std::collections::HashSet;
 /// - [Ardougne knight armour](https://oldschool.runescape.wiki/w/Ardougne_knight_armour)
 /// - [Corrupted armour](https://oldschool.runescape.wiki/w/Corrupted_armour)
 /// - [Clue hunter outfit](https://oldschool.runescape.wiki/w/Clue_hunter_outfit)
+/// - [Ornate armour](https://oldschool.runescape.wiki/w/Ornate_armour)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Twisted ancestral hat".to_string());
     set.insert("Twisted ancestral robe bottom".to_string());
@@ -114,6 +115,13 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Clue hunter gloves".to_string());
     set.insert("Clue hunter boots".to_string());
     set.insert("Clue hunter cloak".to_string());
+
+    set.insert("Ornate helm".to_string());
+    set.insert("Ornate top".to_string());
+    set.insert("Ornate legs".to_string());
+    set.insert("Ornate gloves".to_string());
+    set.insert("Ornate boots".to_string());
+    set.insert("Ornate cape".to_string());
 }
 
 /// Filters out the following cosmetic variants:
