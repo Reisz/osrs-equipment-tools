@@ -8,7 +8,13 @@ use lazy_static::lazy_static;
 lazy_static! {
     /// Set of 3rd age item names.
     static ref ITEM_NAMES: Mutex<HashMap<String, Clue>> = Mutex::new({
-        HashMap::new()
+        let mut map = HashMap::new();
+
+        // Easy
+        map.insert("Vestment robe top".to_string(), Clue::Easy);
+        map.insert("Vestment robe legs".to_string(), Clue::Easy);
+
+        map
     });
 }
 
