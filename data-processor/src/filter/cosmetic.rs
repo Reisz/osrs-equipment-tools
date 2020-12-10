@@ -17,6 +17,9 @@ use std::collections::HashSet;
 /// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
 ///     - Except gauntlets which offer unique stats and different requirements
 /// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
+/// - [Ardougne knight armour](https://oldschool.runescape.wiki/w/Ardougne_knight_armour)
+/// - [Corrupted armour](https://oldschool.runescape.wiki/w/Corrupted_armour)
+/// - [Clue hunter outfit](https://oldschool.runescape.wiki/w/Clue_hunter_outfit)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Twisted ancestral hat".to_string());
     set.insert("Twisted ancestral robe bottom".to_string());
@@ -94,6 +97,23 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Trailblazer axe".to_string());
     set.insert("Trailblazer harpoon".to_string());
     set.insert("Trailblazer pickaxe".to_string());
+
+    set.insert("Ardougne knight helm".to_string());
+    set.insert("Ardougne knight platebody".to_string());
+    set.insert("Ardougne knight platelegs".to_string());
+
+    set.insert("Corrupted helm".to_string());
+    set.insert("Corrupted kiteshield".to_string());
+    set.insert("Corrupted platebody".to_string());
+    set.insert("Corrupted platelegs".to_string());
+    set.insert("Corrupted plateskirt".to_string());
+
+    set.insert("Helm of raedwald".to_string());
+    set.insert("Clue hunter garb".to_string());
+    set.insert("Clue hunter trousers".to_string());
+    set.insert("Clue hunter gloves".to_string());
+    set.insert("Clue hunter boots".to_string());
+    set.insert("Clue hunter cloak".to_string());
 }
 
 /// Filters out the following cosmetic variants:

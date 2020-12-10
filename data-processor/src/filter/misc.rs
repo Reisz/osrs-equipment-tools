@@ -6,6 +6,10 @@ use std::collections::HashSet;
 /// - [Ice arrows](https://oldschool.runescape.wiki/w/Ice_arrows)
 /// - [Lunar staff stages](https://oldschool.runescape.wiki/w/Lunar_staff_-_pt1)
 /// - [Plateskirts](https://oldschool.runescape.wiki/w/Plateskirt)
+/// - Ironman armours
+///     - [Ironman armour](https://oldschool.runescape.wiki/w/Ironman_armour)
+///     - [Hardcore ironman armour](https://oldschool.runescape.wiki/w/Hardcore_ironman_armour)
+///     - [Ultimate ironman armour](https://oldschool.runescape.wiki/w/Ultimate_ironman_armour)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Ice arrows".to_string());
 
@@ -13,6 +17,11 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Lunar staff - pt2".to_string());
     set.insert("Lunar staff - pt3".to_string());
 
+    add_plateskirts(set);
+    add_ironman(set);
+}
+
+fn add_plateskirts(set: &mut HashSet<String>) {
     set.insert("Bronze plateskirt".to_string());
     set.insert("Iron plateskirt".to_string());
     set.insert("Steel plateskirt".to_string());
@@ -31,4 +40,18 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Ancient plateskirt".to_string());
 
     set.insert("Proselyte tasset".to_string());
+}
+
+fn add_ironman(set: &mut HashSet<String>) {
+    set.insert("Ironman helm".to_string());
+    set.insert("Ironman platebody".to_string());
+    set.insert("Ironman platelegs".to_string());
+
+    set.insert("Hardcore ironman helm".to_string());
+    set.insert("Hardcore ironman platebody".to_string());
+    set.insert("Hardcore ironman platelegs".to_string());
+
+    set.insert("Ultimate ironman helm".to_string());
+    set.insert("Ultimate ironman platebody".to_string());
+    set.insert("Ultimate ironman platelegs".to_string());
 }
