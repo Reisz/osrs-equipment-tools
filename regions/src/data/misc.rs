@@ -34,6 +34,8 @@ macro_rules! or {
 /// - [Proselyte armour](https://oldschool.runescape.wiki/w/Proselyte_armour)
 /// - [CoX Rewards](https://oldschool.runescape.wiki/w/Chambers_of_Xeric#Unique_drop_table)
 /// - [Karuulm Slayer Dungeon Drops](https://oldschool.runescape.wiki/w/Karuulm_Slayer_Dungeon)
+/// - [Xerician robes](https://oldschool.runescape.wiki/w/Xerician_robes)
+/// - [Shayzien armour](https://oldschool.runescape.wiki/w/Shayzien_armour)
 /// - [Rada's blessing](https://oldschool.runescape.wiki/w/Rada's_blessing)
 /// - [Diary and Quest cape](https://oldschool.runescape.wiki/w/Trailblazer_League/Guide#Notable_unobtainable_items)
 pub fn add_items(map: &mut ExprMap) {
@@ -50,7 +52,17 @@ pub fn add_items(map: &mut ExprMap) {
         or!(Region::Desert, Region::Wilderness, Region::Kandarin),
     );
 
-    map.insert("Dragon harpoon".to_string(), BoolExpr::new_false());
+    map.insert("Xerician hat".to_string(), BoolExpr::new_false());
+    map.insert("Xerician top".to_string(), BoolExpr::new_false());
+    map.insert("Xerician robe".to_string(), BoolExpr::new_false());
+
+    for i in 1..=5 {
+        map.insert(format!("Shayzien boots ({})", i), BoolExpr::new_false());
+        map.insert(format!("Shayzien gloves ({})", i), BoolExpr::new_false());
+        map.insert(format!("Shayzien greaves ({})", i), BoolExpr::new_false());
+        map.insert(format!("Shayzien helm ({})", i), BoolExpr::new_false());
+        map.insert(format!("Shayzien platebody ({})", i), BoolExpr::new_false());
+    }
 
     map.insert("Proselyte sallet".to_string(), BoolExpr::new_false());
     map.insert("Proselyte hauberk".to_string(), BoolExpr::new_false());
