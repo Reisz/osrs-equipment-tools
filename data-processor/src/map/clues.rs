@@ -14,6 +14,19 @@ lazy_static! {
         map.insert("Vestment robe top".to_string(), Clue::Easy);
         map.insert("Vestment robe legs".to_string(), Clue::Easy);
 
+        // Medium
+        map.insert("Ranger boots".to_string(), Clue::Medium);
+        map.insert("Pegasian boots".to_string(), Clue::Medium);
+        map.insert("Wizard boots".to_string(), Clue::Medium);
+        map.insert("Holy sandals".to_string(), Clue::Medium);
+        map.insert("Devout boots".to_string(), Clue::Medium);
+        map.insert("Spiked manacles".to_string(), Clue::Medium);
+
+        map.insert("Mitre".to_string(), Clue::Medium);
+        map.insert("Vestment cloak".to_string(), Clue::Medium);
+        map.insert("Stole".to_string(), Clue::Medium);
+        map.insert("Crozier".to_string(), Clue::Medium);
+
         map
     });
 }
