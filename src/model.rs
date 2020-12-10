@@ -80,6 +80,7 @@ impl Model {
         self.data.as_ref().unwrap()[slot]
             .iter()
             .filter(move |i| self.filter(i))
+            .take_while(move |i| self.sorting.above_neutral(i))
     }
 
     #[cfg(not(feature = "trailblazer"))]

@@ -2,7 +2,7 @@
 
 use std::cmp::Ordering;
 
-use data::Item;
+use data::{Item, Stats};
 use enum_iterator::IntoEnumIterator;
 use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
@@ -33,24 +33,24 @@ pub enum SortingFragment {
 }
 
 impl SortingFragment {
-    fn get(&self, i: &Item) -> i16 {
+    fn get(&self, i: &Stats) -> i16 {
         match self {
             Self::MeleeAttackAvg => {
-                let a = &i.stats.attack;
+                let a = &i.attack;
                 (a.stab + a.slash + a.crush) / 3
             }
-            Self::MagicAttack => i.stats.attack.magic,
-            Self::RangedAttack => i.stats.attack.ranged,
+            Self::MagicAttack => i.attack.magic,
+            Self::RangedAttack => i.attack.ranged,
             Self::DefenceMedian => {
-                let d = &i.stats.defence;
+                let d = &i.defence;
                 let mut stats = [d.stab, d.slash, d.crush, d.magic, d.ranged];
                 stats.sort_unstable();
                 stats[2]
             }
-            Self::MeleeStrength => i.stats.melee_strength,
-            Self::RangedStrength => i.stats.ranged_strength,
-            Self::MagicDamage => i.stats.magic_damage.into(),
-            Self::Prayer => i.stats.prayer,
+            Self::MeleeStrength => i.melee_strength,
+            Self::RangedStrength => i.ranged_strength,
+            Self::MagicDamage => i.magic_damage.into(),
+            Self::Prayer => i.prayer,
         }
     }
 
@@ -58,7 +58,7 @@ impl SortingFragment {
         true
     }
 
-    fn ordering(&self, a: &Item, b: &Item) -> Ordering {
+    fn ordering(&self, a: &Stats, b: &Stats) -> Ordering {
         let ord = self.get(a).cmp(&self.get(b));
 
         if self.is_descending() {
@@ -141,11 +141,24 @@ impl Sorting {
         let mut ordering = Ordering::Equal;
 
         for frag in &self.0 {
-            ordering = ordering.then_with(|| frag.ordering(a, b));
+            ordering = ordering.then_with(|| frag.ordering(&a.stats, &b.stats));
         }
 
         let ordering = ordering.then_with(|| a.clue.cmp(&b.clue));
         ordering.then_with(|| a.name.cmp(&b.name))
+    }
+
+    /// Returns `true` if the item is better than an item with neutral stats under the
+    /// current sorting order.
+    pub fn above_neutral(&self, i: &Item) -> bool {
+        let mut ordering = Ordering::Equal;
+
+        let default = Stats::default();
+        for frag in &self.0 {
+            ordering = ordering.then_with(|| frag.ordering(&i.stats, &default));
+        }
+
+        ordering == Ordering::Less
     }
 }
 
