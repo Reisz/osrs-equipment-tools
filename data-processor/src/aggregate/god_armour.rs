@@ -14,7 +14,6 @@ pub fn add_filter_names(set: &mut HashSet<String>) {
         set.insert(format!("{} kiteshield", god));
         set.insert(format!("{} platebody", god));
         set.insert(format!("{} platelegs", god));
-        set.insert(format!("{} plateskirt", god));
     }
 }
 
@@ -58,13 +57,6 @@ pub fn add_aggregators(map: &mut AggregationMap) {
         "Saradomin platelegs".to_string(),
         Box::new(Agg {
             name: "God platelegs",
-            wiki_url: URL,
-        }),
-    );
-    map.insert(
-        "Saradomin plateskirt".to_string(),
-        Box::new(Agg {
-            name: "God plateskirt",
             wiki_url: URL,
         }),
     );

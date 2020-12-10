@@ -41,7 +41,6 @@ lazy_static! {
         map.insert("God kiteshield".to_string(), Clue::Hard);
         map.insert("God platebody".to_string(), Clue::Hard);
         map.insert("God platelegs".to_string(), Clue::Hard);
-        map.insert("God plateskirt".to_string(), Clue::Hard);
 
         map.insert("Blessed bracers".to_string(), Clue::Hard);
         map.insert("Blessed chaps".to_string(), Clue::Hard);

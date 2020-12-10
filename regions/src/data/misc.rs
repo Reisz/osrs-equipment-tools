@@ -66,7 +66,6 @@ pub fn add_items(map: &mut ExprMap) {
 
     map.insert("Proselyte sallet".to_string(), BoolExpr::new_false());
     map.insert("Proselyte hauberk".to_string(), BoolExpr::new_false());
-    map.insert("Proselyte tasset".to_string(), BoolExpr::new_false());
     map.insert("Proselyte cuisse".to_string(), BoolExpr::new_false());
 
     // Rada's blessing 1 has no bonuses
