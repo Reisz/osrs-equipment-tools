@@ -144,6 +144,7 @@ impl Sorting {
             ordering = ordering.then_with(|| frag.ordering(a, b));
         }
 
+        let ordering = ordering.then_with(|| a.clue.cmp(&b.clue));
         ordering.then_with(|| a.name.cmp(&b.name))
     }
 }
