@@ -66,6 +66,7 @@ lazy_static! {
 
         // Elite
         map.insert("Rangers' tunic".to_string(), Clue::Elite);
+        map.insert("Rangers' tights".to_string(), Clue::Elite);
         map.insert("Ranger gloves".to_string(), Clue::Elite);
         map.insert("Holy wraps".to_string(), Clue::Elite);
         map.insert("Fremennik kilt".to_string(), Clue::Elite);
