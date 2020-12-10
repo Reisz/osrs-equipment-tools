@@ -104,6 +104,7 @@ impl ItemProperties {
             slot,
             requirements,
             weapon: self.weapon.map(|w| w.project()),
+            clue: None,
             third_age: false,
         });
 
@@ -118,6 +119,7 @@ impl ItemProperties {
             slot,
             requirements,
             weapon: self.weapon.map(|w| w.project()),
+            clue: None,
             third_age: false,
             trailblazer: None,
         });

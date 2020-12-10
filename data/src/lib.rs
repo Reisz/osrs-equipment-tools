@@ -34,6 +34,8 @@ pub struct Item {
     pub requirements: Vec<Requirement>,
     /// For weapons.
     pub weapon: Option<WeaponData>,
+    /// The lowest clue tier required to obtain this item
+    pub clue: Option<Clue>,
     /// True if the item is a 3rd age piece
     pub third_age: bool,
     /// Trailblazer requirements
@@ -73,6 +75,23 @@ pub enum Slot {
     #[serde(rename = "2h")]
     /// Two handed item, occupies weapon and shield slot
     TwoHanded,
+}
+
+/// Denotes the available clue tiers.
+#[derive(Debug, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Deserialize, Serialize)]
+pub enum Clue {
+    /// Beginner clues
+    Beginner,
+    /// Easy clues
+    Easy,
+    /// Medium clues
+    Medium,
+    /// Hard clues
+    Hard,
+    /// Elite clues
+    Elite,
+    /// Master clues
+    Master,
 }
 
 /// Equipment stats of an [`Item`].
