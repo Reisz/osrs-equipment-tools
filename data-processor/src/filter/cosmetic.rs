@@ -12,6 +12,7 @@ use std::collections::HashSet;
 /// - [Robes of darkness](https://oldschool.runescape.wiki/w/Robes_of_darkness)
 /// - [Obsidian cape (r)](https://oldschool.runescape.wiki/w/Obsidian_cape_(r))
 /// - [Cape of skulls](https://oldschool.runescape.wiki/w/Cape_of_skulls)
+/// - [Rain bow](https://oldschool.runescape.wiki/w/Rain_bow)
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
 /// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
 ///     - Except gauntlets which offer unique stats and different requirements
@@ -72,7 +73,10 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Boots of darkness".to_string());
 
     set.insert("Obsidian cape (r)".to_string());
+
+    // Easy clue
     set.insert("Cape of skulls".to_string());
+    set.insert("Rain bow".to_string());
 
     set.insert("Black slayer helmet".to_string());
     set.insert("Green slayer helmet".to_string());
