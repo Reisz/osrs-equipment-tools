@@ -21,5 +21,8 @@ impl Aggregator for Agg {
 
 /// Add aggregation instructions to the map.
 pub fn add_aggregators(map: &mut AggregationMap) {
-    map.insert("Broodoo shield (blue) (Uncharged)".to_string(), Box::new(Agg));
+    map.insert(
+        "Broodoo shield (blue) (Uncharged)".to_string(),
+        Box::new(Agg),
+    );
 }
