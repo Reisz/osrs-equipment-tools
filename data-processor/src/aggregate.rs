@@ -12,16 +12,16 @@ use crate::osrsbox::ItemProperties;
 pub mod broodoo;
 pub mod capes;
 pub mod gods;
-pub mod halo;
 pub mod hunter_gear;
+pub mod other_gods;
 pub mod skill_capes;
 
 /// Add wiki names of items to filter.
 pub fn add_filter_names(set: &mut HashSet<String>) {
     broodoo::add_filter_names(set);
     gods::add_filter_names(set);
-    halo::add_filter_names(set);
     hunter_gear::add_filter_names(set);
+    other_gods::add_filter_names(set);
     skill_capes::add_filter_names(set);
     capes::add_filter_names(set);
 }
@@ -40,8 +40,8 @@ lazy_static! {
 
         broodoo::add_aggregators(&mut map);
         gods::add_aggregators(&mut map);
-        halo::add_aggregators(&mut map);
         hunter_gear::add_aggregators(&mut map);
+        other_gods::add_aggregators(&mut map);
         skill_capes::add_aggregators(&mut map);
         capes::add_aggregators(&mut map);
 
