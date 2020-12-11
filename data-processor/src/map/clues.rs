@@ -76,6 +76,12 @@ lazy_static! {
         map.insert("3rd age bow".to_string(), Clue::Elite);
 
         // Master
+        map.insert("Samurai boots".to_string(), Clue::Master);
+        map.insert("Samurai gloves".to_string(), Clue::Master);
+        map.insert("Samurai greaves".to_string(), Clue::Master);
+        map.insert("Samurai kasa".to_string(), Clue::Master);
+        map.insert("Samurai shirt".to_string(), Clue::Master);
+
         map.insert("3rd age druidic robe top".to_string(), Clue::Master);
         map.insert("3rd age druidic robe bottoms".to_string(), Clue::Master);
         map.insert("3rd age druidic cloak".to_string(), Clue::Master);
