@@ -45,6 +45,8 @@ pub fn add_names(set: &mut HashSet<String>) {
 
 /// Removes variants with low charges of:
 /// - [Dragonfire ward](https://oldschool.runescape.wiki/w/Dragonfire_ward#Uncharged)
+/// - [Dragonfire shield](https://oldschool.runescape.wiki/w/Dragonfire_shield#Uncharged)
+/// - [Ancient wyvern shield](https://oldschool.runescape.wiki/w/Ancient_wyvern_shield#Uncharged)
 ///
 /// Removes charged variants of:
 /// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
@@ -54,4 +56,6 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
     }
 
     set.insert("Dragonfire ward (Uncharged)".to_string());
+    set.insert("Dragonfire shield (Uncharged)".to_string());
+    set.insert("Ancient wyvern shield (Uncharged)".to_string());
 }
