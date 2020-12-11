@@ -10,12 +10,17 @@ use std::collections::HashSet;
 ///     - [Ironman armour](https://oldschool.runescape.wiki/w/Ironman_armour)
 ///     - [Hardcore ironman armour](https://oldschool.runescape.wiki/w/Hardcore_ironman_armour)
 ///     - [Ultimate ironman armour](https://oldschool.runescape.wiki/w/Ultimate_ironman_armour)
+/// - [New Crystal Equipment](https://oldschool.runescape.wiki/w/Crystal_bow_(i))
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Ice arrows".to_string());
 
     set.insert("Lunar staff - pt1".to_string());
     set.insert("Lunar staff - pt2".to_string());
     set.insert("Lunar staff - pt3".to_string());
+
+    set.insert("New crystal bow (i)".to_string());
+    set.insert("New crystal shield (i)".to_string());
+    set.insert("New crystal halberd full (i)".to_string());
 
     add_plateskirts(set);
     add_ironman(set);
