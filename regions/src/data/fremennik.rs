@@ -106,7 +106,6 @@ fn add_quests(map: &mut ExprMap) {
 
     // https://oldschool.runescape.wiki/w/Lunar_equipment
     map.insert("Lunar boots".to_string(), expr());
-    map.insert("Lunar cape".to_string(), expr());
     map.insert("Lunar gloves".to_string(), expr());
     map.insert("Lunar helm".to_string(), expr());
     map.insert("Lunar legs".to_string(), expr());

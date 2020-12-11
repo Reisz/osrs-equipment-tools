@@ -10,12 +10,12 @@ use lazy_static::lazy_static;
 use crate::osrsbox::ItemProperties;
 
 pub mod broodoo;
+pub mod capes;
 pub mod damaged_book;
 pub mod god_armour;
 pub mod god_dhide;
 pub mod halo;
 pub mod hunter_gear;
-pub mod team_capes;
 pub mod vestment;
 
 /// Add wiki names of items to filter.
@@ -26,7 +26,7 @@ pub fn add_filter_names(set: &mut HashSet<String>) {
     god_dhide::add_filter_names(set);
     halo::add_filter_names(set);
     hunter_gear::add_filter_names(set);
-    team_capes::add_filter_names(set);
+    capes::add_filter_names(set);
     vestment::add_filter_names(set);
 }
 
@@ -48,7 +48,7 @@ lazy_static! {
         god_dhide::add_aggregators(&mut map);
         halo::add_aggregators(&mut map);
         hunter_gear::add_aggregators(&mut map);
-        team_capes::add_aggregators(&mut map);
+        capes::add_aggregators(&mut map);
         vestment::add_aggregators(&mut map);
 
         map
