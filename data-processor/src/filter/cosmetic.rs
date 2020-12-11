@@ -82,13 +82,15 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Cape of skulls".to_string());
     set.insert("Rain bow".to_string());
 
-    set.insert("Black slayer helmet".to_string());
-    set.insert("Green slayer helmet".to_string());
-    set.insert("Red slayer helmet".to_string());
-    set.insert("Purple slayer helmet".to_string());
-    set.insert("Turquoise slayer helmet".to_string());
-    set.insert("Hydra slayer helmet".to_string());
-    set.insert("Twisted slayer helmet".to_string());
+    for i in &["", " (i)"] {
+        set.insert(format!("Black slayer helmet{}", i));
+        set.insert(format!("Green slayer helmet{}", i));
+        set.insert(format!("Red slayer helmet{}", i));
+        set.insert(format!("Purple slayer helmet{}", i));
+        set.insert(format!("Turquoise slayer helmet{}", i));
+        set.insert(format!("Hydra slayer helmet{}", i));
+        set.insert(format!("Twisted slayer helmet{}", i));
+    }
 
     set.insert("Dragonstone boots".to_string());
     set.insert("Dragonstone full helm".to_string());
