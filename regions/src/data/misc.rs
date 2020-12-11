@@ -37,7 +37,6 @@ macro_rules! or {
 /// - [Xerician robes](https://oldschool.runescape.wiki/w/Xerician_robes)
 /// - [Shayzien armour](https://oldschool.runescape.wiki/w/Shayzien_armour)
 /// - [Rada's blessing](https://oldschool.runescape.wiki/w/Rada's_blessing)
-/// - [Diary and Quest cape](https://oldschool.runescape.wiki/w/Trailblazer_League/Guide#Notable_unobtainable_items)
 pub fn add_items(map: &mut ExprMap) {
     map.insert(
         "Dragon chainbody".to_string(),
@@ -72,18 +71,6 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Rada's blessing 2".to_string(), BoolExpr::new_false());
     map.insert("Rada's blessing 3".to_string(), BoolExpr::new_false());
     map.insert("Rada's blessing 4".to_string(), BoolExpr::new_false());
-
-    map.insert(
-        "Achievement diary cape (Untrimmed)".to_string(),
-        BoolExpr::new_false(),
-    );
-    map.insert(
-        "Quest point cape (Untrimmed)".to_string(),
-        BoolExpr::new_false(),
-    );
-
-    map.insert("Music cape (Untrimmed)".to_string(), BoolExpr::new_false());
-    map.insert("Music cape (Trimmed)".to_string(), BoolExpr::new_false());
 
     add_cox(map);
     add_karuulm(map);

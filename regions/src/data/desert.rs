@@ -11,13 +11,9 @@ fn expr() -> BoolExpr<Region> {
 /// - [Pharaoh's sceptre](https://oldschool.runescape.wiki/w/Pharaoh%27s_sceptre#(8))
 /// - [Keris](https://oldschool.runescape.wiki/w/Keris)
 /// - [Mage training arena](https://oldschool.runescape.wiki/w/Mage_Training_Arena#Main)
-/// - [Hitpoints Cape](https://oldschool.runescape.wiki/w/Firemaking_cape)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Pharaoh's sceptre (8)".to_string(), expr());
     map.insert("Keris (Poison++)".to_string(), expr());
-
-    map.insert("Hitpoints cape (Untrimmed)".to_string(), expr());
-    map.insert("Hitpoints cape (Trimmed)".to_string(), expr());
 
     add_mta(map);
 }
