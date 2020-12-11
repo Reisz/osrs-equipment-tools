@@ -10,6 +10,7 @@ use lazy_static::lazy_static;
 use crate::osrsbox::ItemProperties;
 
 pub mod broodoo;
+pub mod damaged_book;
 pub mod god_armour;
 pub mod god_dhide;
 pub mod halo;
@@ -20,6 +21,7 @@ pub mod vestment;
 /// Add wiki names of items to filter.
 pub fn add_filter_names(set: &mut HashSet<String>) {
     broodoo::add_filter_names(set);
+    damaged_book::add_filter_names(set);
     god_armour::add_filter_names(set);
     god_dhide::add_filter_names(set);
     halo::add_filter_names(set);
@@ -41,6 +43,7 @@ lazy_static! {
         let mut map = HashMap::new();
 
         broodoo::add_aggregators(&mut map);
+        damaged_book::add_aggregators(&mut map);
         god_armour::add_aggregators(&mut map);
         god_dhide::add_aggregators(&mut map);
         halo::add_aggregators(&mut map);
