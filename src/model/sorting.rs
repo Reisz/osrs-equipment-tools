@@ -85,22 +85,22 @@ pub enum SortingPreset {
 const MELEE_PRESET: &[SortingFragment] = &[
     SortingFragment::MeleeStrength,
     SortingFragment::MeleeAttackAvg,
-    SortingFragment::Prayer,
     SortingFragment::DefenceMedian,
+    SortingFragment::Prayer,
 ];
 
 const MAGIC_PRESET: &[SortingFragment] = &[
     SortingFragment::MagicDamage,
     SortingFragment::MagicAttack,
-    SortingFragment::Prayer,
     SortingFragment::DefenceMedian,
+    SortingFragment::Prayer,
 ];
 
 const RANGED_PRESET: &[SortingFragment] = &[
     SortingFragment::RangedStrength,
     SortingFragment::RangedAttack,
-    SortingFragment::Prayer,
     SortingFragment::DefenceMedian,
+    SortingFragment::Prayer,
 ];
 
 const PRAYER_PRESET: &[SortingFragment] =
