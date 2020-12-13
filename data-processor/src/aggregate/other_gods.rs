@@ -21,8 +21,6 @@ pub fn add_filter_names(set: &mut HashSet<String>) {
     set.insert("Honourable blessing".to_string());
     set.insert("War blessing".to_string());
     set.insert("Ancient blessing".to_string());
-
-    set.insert("Zamorak banner".to_string());
 }
 
 struct Agg {
@@ -51,14 +49,6 @@ pub fn add_aggregators(map: &mut AggregationMap) {
         Box::new(Agg {
             name: "Blessing",
             wiki_url: "https://oldschool.runescape.wiki/w/Blessing",
-        }),
-    );
-
-    map.insert(
-        "Saradomin banner".to_string(),
-        Box::new(Agg {
-            name: "Castlewars banner",
-            wiki_url: "https://oldschool.runescape.wiki/w/Saradomin_banner",
         }),
     );
 }

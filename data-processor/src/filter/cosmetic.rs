@@ -158,6 +158,4 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
         set.insert(format!("Decorative shield ({}){}", color, trouver));
         set.insert(format!("Decorative sword ({}){}", color, trouver));
     }
-
-    set.insert("Castlewars hood (Zamorak)".to_string());
 }
