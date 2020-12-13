@@ -138,6 +138,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// Filters out the following cosmetic variants:
 /// - [Ward upgrade kit upgrades](https://oldschool.runescape.wiki/w/Ward_upgrade_kit)
 /// - [Decorative armour](https://oldschool.runescape.wiki/w/Decorative_armour)
+/// - [Dark bow variants](https://oldschool.runescape.wiki/w/Dark_bow)
 pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Malediction ward (or)".to_string());
     set.insert("Odium ward (or)".to_string());
@@ -161,4 +162,9 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
         set.insert(format!("Decorative shield ({}){}", color, trouver));
         set.insert(format!("Decorative sword ({}){}", color, trouver));
     }
+
+    set.insert("Dark bow (Green)".to_string());
+    set.insert("Dark bow (Blue)".to_string());
+    set.insert("Dark bow (Yellow)".to_string());
+    set.insert("Dark bow (White)".to_string());
 }
