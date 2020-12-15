@@ -24,6 +24,7 @@ use std::collections::HashSet;
 /// - [Amulet of glory (t)](https://oldschool.runescape.wiki/w/Amulet_of_glory_(t)#Uncharged)
 /// - [Spiked boots](https://oldschool.runescape.wiki/w/Spiked_boots )
 /// - [Blacksmith's helm](https://oldschool.runescape.wiki/w/Blacksmith's_helm)
+/// - [Smouldering stone upgrades](https://oldschool.runescape.wiki/w/Smouldering_stone)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Twisted ancestral hat".to_string());
     set.insert("Twisted ancestral robe bottom".to_string());
@@ -133,6 +134,10 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Spiked boots".to_string());
 
     set.insert("Blacksmith's helm".to_string());
+
+    set.insert("Infernal axe".to_string());
+    set.insert("Infernal harpoon".to_string());
+    set.insert("Infernal pickaxe".to_string());
 }
 
 /// Filters out the following cosmetic variants:
