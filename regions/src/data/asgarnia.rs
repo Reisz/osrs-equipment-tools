@@ -16,6 +16,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Defenders](https://oldschool.runescape.wiki/w/Defender)
 /// - [Initiate armour](https://oldschool.runescape.wiki/w/Initiate_armour)
 /// - [Void](https://oldschool.runescape.wiki/w/Void_Knight_equipment)
+/// - [Rogue equipment](https://oldschool.runescape.wiki/w/Rogue_equipment)
 /// - [Falador shield](https://oldschool.runescape.wiki/w/Falador_shield)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Falador shield 1".to_string(), expr());
@@ -28,6 +29,7 @@ pub fn add_items(map: &mut ExprMap) {
     add_defenders(map);
     add_initiate(map);
     add_void(map);
+    add_rogue(map);
 }
 
 fn add_cerb(map: &mut ExprMap) {
@@ -104,4 +106,12 @@ fn add_void(map: &mut ExprMap) {
 
     map.insert("Elite void robe (Normal)".to_string(), expr.clone());
     map.insert("Elite void top (Normal)".to_string(), expr);
+}
+
+fn add_rogue(map: &mut ExprMap) {
+    map.insert("Rogue boots".to_string(), expr());
+    map.insert("Rogue gloves".to_string(), expr());
+    map.insert("Rogue mask".to_string(), expr());
+    map.insert("Rogue top".to_string(), expr());
+    map.insert("Rogue trousers".to_string(), expr());
 }
