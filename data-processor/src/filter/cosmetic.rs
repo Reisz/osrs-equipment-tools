@@ -24,7 +24,6 @@ use std::collections::HashSet;
 /// - [Spiked boots](https://oldschool.runescape.wiki/w/Spiked_boots )
 /// - [Blacksmith's helm](https://oldschool.runescape.wiki/w/Blacksmith's_helm)
 /// - [Smouldering stone upgrades](https://oldschool.runescape.wiki/w/Smouldering_stone)
-/// - [Iron sickle](https://oldschool.runescape.wiki/w/Iron_sickle)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Twisted ancestral hat".to_string());
     set.insert("Twisted ancestral robe bottom".to_string());
@@ -134,8 +133,6 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Infernal axe".to_string());
     set.insert("Infernal harpoon".to_string());
     set.insert("Infernal pickaxe".to_string());
-
-    set.insert("Iron sickle".to_string());
 }
 
 /// Filters out the following cosmetic variants:
