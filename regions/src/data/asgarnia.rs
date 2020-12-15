@@ -15,6 +15,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [God Wars Dungeon](https://oldschool.runescape.wiki/w/God_Wars_Dungeon)
 /// - [Defenders](https://oldschool.runescape.wiki/w/Defender)
 /// - [Initiate armour](https://oldschool.runescape.wiki/w/Initiate_armour)
+/// - [Void](https://oldschool.runescape.wiki/w/Void_Knight_equipment)
 /// - [Falador shield](https://oldschool.runescape.wiki/w/Falador_shield)
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Falador shield 1".to_string(), expr());
@@ -26,6 +27,7 @@ pub fn add_items(map: &mut ExprMap) {
     add_gwd(map);
     add_defenders(map);
     add_initiate(map);
+    add_void(map);
 }
 
 fn add_cerb(map: &mut ExprMap) {
@@ -78,4 +80,28 @@ fn add_initiate(map: &mut ExprMap) {
     map.insert("Initiate sallet".to_string(), expr());
     map.insert("Initiate hauberk".to_string(), expr());
     map.insert("Initiate cuisse".to_string(), expr());
+}
+
+fn add_void(map: &mut ExprMap) {
+    map.insert("Void melee helm (Normal)".to_string(), expr());
+    map.insert("Void mage helm (Normal)".to_string(), expr());
+    map.insert("Void ranger helm (Normal)".to_string(), expr());
+
+    map.insert("Void knight gloves (Normal)".to_string(), expr());
+    map.insert("Void knight robe (Normal)".to_string(), expr());
+    map.insert("Void knight top (Normal)".to_string(), expr());
+
+    map.insert("Void knight mace (Normal)".to_string(), expr());
+    map.insert("Void seal (8)".to_string(), expr());
+
+    let mut expr = BoolExprBuilder::new();
+    expr.var(Region::Asgarnia);
+    expr.var(Region::Kandarin);
+    expr.var(Region::Tirannwn);
+    expr.and();
+    expr.and();
+    let expr = expr.finalize().unwrap();
+
+    map.insert("Elite void robe (Normal)".to_string(), expr.clone());
+    map.insert("Elite void top (Normal)".to_string(), expr);
 }
