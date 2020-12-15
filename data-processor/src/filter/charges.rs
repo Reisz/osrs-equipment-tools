@@ -51,6 +51,10 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// Removes charged variants of:
 /// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
 /// - [Rat pole](https://oldschool.runescape.wiki/w/Rat_pole)
+///
+/// Removes variants with upgraded charges of:
+/// - [Trident of the seas](https://oldschool.runescape.wiki/w/Trident_of_the_seas_(e))
+/// - [Trident of the swamp](https://oldschool.runescape.wiki/w/Trident_of_the_swamp_(e))
 pub fn add_wiki_names(set: &mut HashSet<String>) {
     for color in &["blue", "orange", "green"] {
         set.extend((1..=10).map(|i| format!("Broodoo shield ({}) ({})", color, i)));
@@ -66,4 +70,7 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Rat pole (Four rats)".to_string());
     set.insert("Rat pole (Five rats)".to_string());
     set.insert("Rat pole (Six rats)".to_string());
+
+    set.insert("Trident of the seas (e) (Charged)".to_string());
+    set.insert("Trident of the swamp (e) (Charged)".to_string());
 }
