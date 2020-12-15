@@ -11,6 +11,7 @@ use std::collections::HashSet;
 ///     - [Hardcore ironman armour](https://oldschool.runescape.wiki/w/Hardcore_ironman_armour)
 ///     - [Ultimate ironman armour](https://oldschool.runescape.wiki/w/Ultimate_ironman_armour)
 /// - [New Crystal Equipment](https://oldschool.runescape.wiki/w/Crystal_bow_(i))
+/// - [Soul's Bane Weapons](https://oldschool.runescape.wiki/w/A_Soul%27s_Bane#Rage)
 pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Ice arrows".to_string());
 
@@ -21,6 +22,11 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("New crystal bow (i)".to_string());
     set.insert("New crystal shield (i)".to_string());
     set.insert("New crystal halberd full (i)".to_string());
+
+    set.insert("Anger sword".to_string());
+    set.insert("Anger spear".to_string());
+    set.insert("Anger mace".to_string());
+    set.insert("Anger battleaxe".to_string());
 
     add_plateskirts(set);
     add_ironman(set);
