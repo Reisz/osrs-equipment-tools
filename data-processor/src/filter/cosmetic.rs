@@ -139,6 +139,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// - [Ward upgrade kit upgrades](https://oldschool.runescape.wiki/w/Ward_upgrade_kit)
 /// - [Decorative armour](https://oldschool.runescape.wiki/w/Decorative_armour)
 /// - [Dark bow variants](https://oldschool.runescape.wiki/w/Dark_bow)
+/// - [Rune scimitar ornaments](https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit)
 pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Malediction ward (or)".to_string());
     set.insert("Odium ward (or)".to_string());
@@ -167,4 +168,8 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Dark bow (Blue)".to_string());
     set.insert("Dark bow (Yellow)".to_string());
     set.insert("Dark bow (White)".to_string());
+
+    set.insert("Rune scimitar (saradomin)".to_string());
+    set.insert("Rune scimitar (zamorak)".to_string());
+    set.insert("Rune scimitar (guthix)".to_string());
 }
