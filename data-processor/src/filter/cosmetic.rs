@@ -16,7 +16,6 @@ use std::collections::HashSet;
 /// - [Slayer helmet](https://oldschool.runescape.wiki/w/Slayer_helmet#Upgrading)
 /// - [Dragonstone armour](https://oldschool.runescape.wiki/w/Dragonstone_armour)
 ///     - Except gauntlets which offer unique stats and different requirements
-/// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
 /// - [Ardougne knight armour](https://oldschool.runescape.wiki/w/Ardougne_knight_armour)
 /// - [Corrupted armour](https://oldschool.runescape.wiki/w/Corrupted_armour)
 /// - [Clue hunter outfit](https://oldschool.runescape.wiki/w/Clue_hunter_outfit)
@@ -102,10 +101,6 @@ pub fn add_names(set: &mut HashSet<String>) {
     set.insert("Dragonstone platebody".to_string());
     set.insert("Dragonstone platelegs".to_string());
 
-    set.insert("Trailblazer axe".to_string());
-    set.insert("Trailblazer harpoon".to_string());
-    set.insert("Trailblazer pickaxe".to_string());
-
     set.insert("Ardougne knight helm".to_string());
     set.insert("Ardougne knight platebody".to_string());
     set.insert("Ardougne knight platelegs".to_string());
@@ -146,6 +141,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// Filters out the following cosmetic variants:
 /// - [Ward upgrade kit upgrades](https://oldschool.runescape.wiki/w/Ward_upgrade_kit)
 /// - [Decorative armour](https://oldschool.runescape.wiki/w/Decorative_armour)
+/// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
 /// - [Dark bow variants](https://oldschool.runescape.wiki/w/Dark_bow)
 /// - [Rune scimitar ornaments](https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit)
 pub fn add_wiki_names(set: &mut HashSet<String>) {
@@ -171,6 +167,13 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
         set.insert(format!("Decorative shield ({}){}", color, trouver));
         set.insert(format!("Decorative sword ({}){}", color, trouver));
     }
+
+    set.insert("Trailblazer axe".to_string());
+    set.insert("Trailblazer axe (or)".to_string());
+    set.insert("Trailblazer harpoon".to_string());
+    set.insert("Trailblazer harpoon (or)".to_string());
+    set.insert("Trailblazer pickaxe".to_string());
+    set.insert("Trailblazer pickaxe (or)".to_string());
 
     set.insert("Dark bow (Green)".to_string());
     set.insert("Dark bow (Blue)".to_string());
