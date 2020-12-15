@@ -17,6 +17,7 @@ fn expr() -> BoolExpr<Region> {
 /// - [Beacon ring](https://oldschool.runescape.wiki/w/Beacon_ring)
 /// - [God capes](https://oldschool.runescape.wiki/w/God_capes)
 /// - [Wildeness sword](https://oldschool.runescape.wiki/w/Wilderness_sword)
+/// - [Magic shortbow (i)](https://oldschool.runescape.wiki/w/Magic_shortbow_(i))
 pub fn add_items(map: &mut ExprMap) {
     map.insert("Dragon pickaxe".to_string(), expr());
 
@@ -41,6 +42,8 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Wilderness sword 2".to_string(), expr());
     map.insert("Wilderness sword 3".to_string(), expr());
     map.insert("Wilderness sword 4".to_string(), expr());
+
+    map.insert("Magic shortbow (i)".to_string(), expr());
 
     add_corp(map);
     add_god_capes(map);
