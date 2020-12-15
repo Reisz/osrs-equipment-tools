@@ -144,6 +144,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
 /// - [Dark bow variants](https://oldschool.runescape.wiki/w/Dark_bow)
 /// - [Rune scimitar ornaments](https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit)
+/// - [Upgraded dragon pickaxe](https://oldschool.runescape.wiki/w/Dragon_pickaxe_(upgraded))
 pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Malediction ward (or)".to_string());
     set.insert("Odium ward (or)".to_string());
@@ -183,4 +184,6 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Rune scimitar (saradomin)".to_string());
     set.insert("Rune scimitar (zamorak)".to_string());
     set.insert("Rune scimitar (guthix)".to_string());
+
+    set.insert("Dragon pickaxe (upgraded)".to_string());
 }
