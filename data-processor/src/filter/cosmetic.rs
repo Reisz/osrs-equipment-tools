@@ -142,6 +142,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// - [Ward upgrade kit upgrades](https://oldschool.runescape.wiki/w/Ward_upgrade_kit)
 /// - [Decorative armour](https://oldschool.runescape.wiki/w/Decorative_armour)
 /// - [Trailblazer tools](https://oldschool.runescape.wiki/w/Trailblazer_tool_ornament_kit)
+/// - [Crystal tools](https://oldschool.runescape.wiki/w/Crystal_tool)
 /// - [Dark bow variants](https://oldschool.runescape.wiki/w/Dark_bow)
 /// - [Rune scimitar ornaments](https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit)
 /// - [Upgraded dragon pickaxe](https://oldschool.runescape.wiki/w/Dragon_pickaxe_(upgraded))
@@ -169,12 +170,17 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
         set.insert(format!("Decorative sword ({}){}", color, trouver));
     }
 
-    set.insert("Trailblazer axe".to_string());
-    set.insert("Trailblazer axe (or)".to_string());
-    set.insert("Trailblazer harpoon".to_string());
-    set.insert("Trailblazer harpoon (or)".to_string());
-    set.insert("Trailblazer pickaxe".to_string());
-    set.insert("Trailblazer pickaxe (or)".to_string());
+    for or in &["", " (or)"] {
+        set.insert(format!("Trailblazer axe{}", or));
+        set.insert(format!("Trailblazer harpoon{}", or));
+        set.insert(format!("Trailblazer pickaxe{}", or));
+    }
+
+    for active in &["Active", "Inactive"] {
+        set.insert(format!("Crystal axe ({})", active));
+        set.insert(format!("Crystal harpoon ({})", active));
+        set.insert(format!("Crystal pickaxe ({})", active));
+    }
 
     set.insert("Dark bow (Green)".to_string());
     set.insert("Dark bow (Blue)".to_string());

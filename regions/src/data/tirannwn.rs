@@ -20,13 +20,11 @@ fn expr_and(region: Region) -> BoolExpr<Region> {
 
 /// Add requirements for the following items:
 /// - [Gauntlet rewards](https://oldschool.runescape.wiki/w/The_Gauntlet#Unique_Rewards_(Normal_Mode))
-/// - [Zalcano drops](https://oldschool.runescape.wiki/w/Zalcano)
 /// - [Zulrah drops](https://oldschool.runescape.wiki/w/Zulrah)
 /// - [Dark bow](https://oldschool.runescape.wiki/w/Dark_bow)
 /// - [Dragonstone gauntlets](https://oldschool.runescape.wiki/w/Dragonstone_gauntlets)
 pub fn add_items(map: &mut ExprMap) {
     add_gauntlet(map);
-    add_zalcano(map);
     add_zulrah(map);
 
     map.insert("Dark bow (Regular)".to_string(), expr());
@@ -43,21 +41,6 @@ fn add_gauntlet(map: &mut ExprMap) {
     map.insert("Crystal shield".to_string(), expr());
 
     map.insert("Blade of saeldor (Charged)".to_string(), expr());
-}
-
-fn add_zalcano(map: &mut ExprMap) {
-    map.insert(
-        "Crystal axe (Active)".to_string(),
-        expr_and(Region::Fremennik),
-    );
-    map.insert(
-        "Crystal harpoon (Active)".to_string(),
-        BoolExpr::new_false(),
-    );
-    map.insert(
-        "Crystal pickaxe (Active)".to_string(),
-        expr_and(Region::Wilderness),
-    );
 }
 
 fn add_zulrah(map: &mut ExprMap) {
