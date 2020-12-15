@@ -50,6 +50,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 ///
 /// Removes charged variants of:
 /// - [Broodoo shield](https://oldschool.runescape.wiki/w/Broodoo_shield)
+/// - [Rat pole](https://oldschool.runescape.wiki/w/Rat_pole)
 pub fn add_wiki_names(set: &mut HashSet<String>) {
     for color in &["blue", "orange", "green"] {
         set.extend((1..=10).map(|i| format!("Broodoo shield ({}) ({})", color, i)));
@@ -58,4 +59,11 @@ pub fn add_wiki_names(set: &mut HashSet<String>) {
     set.insert("Dragonfire ward (Uncharged)".to_string());
     set.insert("Dragonfire shield (Uncharged)".to_string());
     set.insert("Ancient wyvern shield (Uncharged)".to_string());
+
+    set.insert("Rat pole (One rat)".to_string());
+    set.insert("Rat pole (Two rats)".to_string());
+    set.insert("Rat pole (Three rats)".to_string());
+    set.insert("Rat pole (Four rats)".to_string());
+    set.insert("Rat pole (Five rats)".to_string());
+    set.insert("Rat pole (Six rats)".to_string());
 }
