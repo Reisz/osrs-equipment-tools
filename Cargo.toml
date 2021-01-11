@@ -29,7 +29,7 @@ regions = { path = "regions", optional = true }
 web-sys = "0.3"
 
 [features]
-default = ["trailblazer"]
+default = []
 trailblazer = ["regions", "data/trailblazer"]
 
 [profile.release]

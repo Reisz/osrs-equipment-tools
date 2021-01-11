@@ -17,5 +17,5 @@ regions = { path = "../regions", optional = true }
 xz2 = "0.1"
 
 [features]
-default = ["trailblazer"]
+default = []
 trailblazer = ["regions", "data/trailblazer"]

@@ -3,9 +3,11 @@
 mod clues;
 mod third_age;
 
+#[cfg(feature = "trailblazer")]
 use std::sync::Mutex;
 
 use data::Item;
+#[cfg(feature = "trailblazer")]
 use lazy_static::lazy_static;
 
 use crate::aggregate;
