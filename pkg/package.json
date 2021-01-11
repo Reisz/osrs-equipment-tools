@@ -1,0 +1,21 @@
+{
+  "name": "osrs-equipment-tools",
+  "collaborators": [
+    "Reisz <Reisz@users.noreply.github.com>"
+  ],
+  "description": "Static web app for everything concerning equipment in Old School RuneScape",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN ./LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seed-rs/seed-quickstart"
+  },
+  "files": [
+    "package_bg.wasm",
+    "package.js",
+    "package.d.ts"
+  ],
+  "module": "package.js",
+  "types": "package.d.ts",
+  "sideEffects": false
+}

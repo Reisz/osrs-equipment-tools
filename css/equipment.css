@@ -1,0 +1,34 @@
+.equipment-view {
+	background-image: url(https://oldschool.runescape.wiki/images/a/a7/Worn_equipment_tab_%28no_buttons%29.png);
+    width: 204px;
+	height: 222px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    position: relative;
+    display: flex;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.equipment {
+	position: absolute;
+	justify-content: center;
+	align-items: center;
+    display: flex;
+}
+
+.equipment-blank {
+	background-image: url(https://oldschool.runescape.wiki/images/c/cf/Blank_slot.png);
+	width: 36px;
+	height: 36px;
+}
+
+.equipment-plinkp {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	left: 0px;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+}
