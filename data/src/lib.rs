@@ -108,9 +108,7 @@ pub struct Stats {
     /// Ranged strength bonus.
     pub ranged_strength: i16,
     /// Magic damage bonus in percent.
-    ///
-    /// Currently no equipment combination can exceed [`u8::MAX`].
-    pub magic_damage: u8,
+    pub magic_damage: i16,
     /// Prayer bonus.
     pub prayer: i16,
 }

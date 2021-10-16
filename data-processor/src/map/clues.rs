@@ -101,6 +101,6 @@ pub fn apply_value(item: &mut Item) {
 /// Print leftover names in the item list (probably typos).
 pub fn check() {
     for (name, _) in ITEM_NAMES.lock().unwrap().iter() {
-        println!("Missed clue data: {}", name);
+        println!("Error: Missed clue data: {}", name);
     }
 }

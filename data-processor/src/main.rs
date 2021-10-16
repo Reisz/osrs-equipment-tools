@@ -22,6 +22,7 @@ pub mod osrsbox;
 
 use std::{
     collections::HashMap,
+    env,
     fs::File,
     io::{self, Read, Write},
     time::Instant,
@@ -33,6 +34,7 @@ use xz2::write::XzEncoder;
 use osrsbox::ItemProperties;
 
 const DATA_URL: &str = "https://www.osrsbox.com/osrsbox-db/items-complete.json";
+const CACHE_FILE: &str = "data/items-complete.json";
 
 /// Print command name, time command execution and print timing.
 pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
@@ -54,7 +56,7 @@ pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
 /// Get the data from `items-complete.json`. Will look for `data/items-complete.json`, before
 /// downloading from [OSRSBox](https://www.osrsbox.com/).
 pub fn get_data() -> HashMap<String, ItemProperties> {
-    if let Ok(mut input_file) = File::open("data/items-complete.json") {
+    if let Ok(mut input_file) = File::open(CACHE_FILE) {
         measure("Parsing file", || {
             // Using serde_json::from_reader is slower than this
             // (see https://github.com/serde-rs/json/issues/160)
@@ -70,27 +72,40 @@ pub fn get_data() -> HashMap<String, ItemProperties> {
     }
 }
 
+/// Save a local copy of the item data to reduce downloads during development
+pub fn cache_data() {
+    let response = reqwest::blocking::get(DATA_URL).unwrap();
+    let mut file = File::create(CACHE_FILE).unwrap();
+    io::copy(&mut response.bytes().unwrap().as_ref(), &mut file).unwrap();
+}
+
 #[doc(hidden)]
 fn main() {
-    let data = get_data();
+    if env::args().any(|arg| arg == "--cache") {
+        return cache_data();
+    }
 
+    let data = get_data();
     println!("{:10} Items", data.len());
 
+    let mut errors = Vec::new();
     let items: ItemDatabase = measure("Filtering & converting", || {
         data.into_iter()
             .filter_map(|i| {
-                let id = i.1.id;
+                let name = i.1.name.clone();
                 if filter::keep(&i.1) {
-                    map::map(i.1).map_err(|e| println!("{}: {}", id, e)).ok()
+                    map::map(i.1)
+                        .map_err(|e| errors.push(format!("{}: {}", name, e)))
+                        .ok()
                 } else {
                     None
                 }
             })
             .collect()
     });
-
     println!("{:10} Items", items.len());
 
+    errors.iter().for_each(|e| println!("Error: {}", e));
     filter::check();
     map::check();
 

@@ -86,10 +86,10 @@ pub fn keep(item: &ItemProperties) -> bool {
 /// Print leftover names in the item filter (probably typos).
 pub fn check() {
     for name in NAME_SET.lock().unwrap().iter() {
-        println!("Missed name filter: {}", name);
+        println!("Error: Missed name filter: {}", name);
     }
 
     for name in WIKI_NAME_SET.lock().unwrap().iter() {
-        println!("Missed wiki name filter: {}", name);
+        println!("Error: Missed wiki name filter: {}", name);
     }
 }

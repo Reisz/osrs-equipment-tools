@@ -62,6 +62,6 @@ pub fn apply_aggregation(item: &mut ItemProperties) {
 /// Print leftover names in the item list (probably typos).
 pub fn check() {
     for (name, _) in WIKI_NAMES.lock().unwrap().iter() {
-        println!("Missed aggregation: {}", name);
+        println!("Error: Missed aggregation: {}", name);
     }
 }
