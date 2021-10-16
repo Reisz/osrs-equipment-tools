@@ -49,7 +49,7 @@ impl SortingFragment {
             }
             Self::MeleeStrength => i.melee_strength,
             Self::RangedStrength => i.ranged_strength,
-            Self::MagicDamage => i.magic_damage.into(),
+            Self::MagicDamage => i.magic_damage,
             Self::Prayer => i.prayer,
         }
     }

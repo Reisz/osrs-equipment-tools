@@ -1,6 +1,6 @@
 //! Data format used by the [OSRSBox](https://www.osrsbox.com/) API.
 
-use std::{collections::HashMap, convert::TryInto};
+use std::collections::HashMap;
 
 use data::{BaseStats, Item, Requirement, Slot, Stats, WeaponData};
 use image::{codecs::bmp::BmpEncoder, DynamicImage, GenericImageView, ImageFormat};
@@ -225,10 +225,7 @@ impl ItemEquipment {
             },
             melee_strength: self.melee_strength,
             ranged_strength: self.ranged_strength,
-            magic_damage: self
-                .magic_damage
-                .try_into()
-                .map_err(|e| format!("Magic damage: {}", e))?,
+            magic_damage: self.magic_damage,
             prayer: self.prayer,
         })
     }
