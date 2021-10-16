@@ -95,7 +95,7 @@ fn main() {
     map::check();
 
     measure("Saving", || {
-        let output_file = File::create("data/items.bin.xz").unwrap();
+        let output_file = File::create("dist/items.bin.xz").unwrap();
         bincode::serialize_into(XzEncoder::new(output_file, 9), &items).unwrap();
     });
 }

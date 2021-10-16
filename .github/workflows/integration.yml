@@ -2,67 +2,37 @@ name: Integration
 
 on: [push, pull_request]
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  clippy:
-    name: Run Clippy Lints
+  checks:
+    name: Run Checks
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        features: ["", "--no-default-features"]
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
 
-      - name: Install stable toolchain
+      - name: Install rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          override: true
-          components: clippy
+          profile: minimal
+          components: clippy, rustfmt
 
-      - name: Run cargo clippy
+      - name: Run linter
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --workspace ${{ matrix.features }} -- -D warnings
+          args: --workspace -- -D warnings
 
-  test:
-    name: Run Test Suite
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
-
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-
-      - name: Run cargo test
+      - name: Run tests
         uses: actions-rs/cargo@v1
         with:
           command: test
           args: --workspace
 
-  fmt:
-    name: Check Formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
-
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          components: rustfmt
-
-      - name: Run cargo fmt
+      - name: Check formatting
         uses: actions-rs/cargo@v1
         with:
           command: fmt

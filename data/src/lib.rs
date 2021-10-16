@@ -46,8 +46,8 @@ pub struct Item {
 /// Equipment slot.
 ///
 /// Serde renames are for the [OSRSBox](https://www.osrsbox.com/) API format.
-#[serde(rename_all = "lowercase")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, IntoEnumIterator)]
+#[serde(rename_all = "lowercase")]
 pub enum Slot {
     /// Head slot
     Head,

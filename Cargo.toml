@@ -19,7 +19,7 @@ anyhow = "1.0"
 base64 = "0.13"
 bincode = "1.3"
 data = { path = "data" }
-enum-iterator = "0.6"
+enum-iterator = "0.7"
 # TODO change back to crates.io once a version including
 # https://github.com/gendx/lzma-rs/pull/61 is available
 lzma-rs = { git = "https://github.com/gendx/lzma-rs" }

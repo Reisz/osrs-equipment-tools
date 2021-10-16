@@ -107,7 +107,7 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
 }
 
 async fn load_data() -> ItemDatabase {
-    let request = Request::new("data/items.bin.xz").cache(RequestCache::NoCache);
+    let request = Request::new("items.bin.xz").cache(RequestCache::NoCache);
     let response = request.fetch().await.unwrap();
     let bytes = response.bytes().await.unwrap();
 
