@@ -20,9 +20,7 @@ base64 = "0.13"
 bincode = "1.3"
 data = { path = "data" }
 enum-iterator = "0.7"
-# TODO change back to crates.io once a version including
-# https://github.com/gendx/lzma-rs/pull/61 is available
-lzma-rs = { git = "https://github.com/gendx/lzma-rs" }
+lzma-rs = "0.2"
 seed = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 regions = { path = "regions", optional = true }
