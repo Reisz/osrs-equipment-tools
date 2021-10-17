@@ -23,7 +23,7 @@ pub mod osrsbox;
 use std::{
     collections::HashMap,
     env,
-    fs::File,
+    fs::{self, File},
     io::{self, Read, Write},
     time::Instant,
 };
@@ -35,6 +35,7 @@ use osrsbox::ItemProperties;
 
 const DATA_URL: &str = "https://www.osrsbox.com/osrsbox-db/items-complete.json";
 const CACHE_FILE: &str = "data/items-complete.json";
+const OUTPUT_FILE: &str = "dist/items.bin.xz";
 
 /// Print command name, time command execution and print timing.
 pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
@@ -72,17 +73,44 @@ pub fn get_data() -> HashMap<String, ItemProperties> {
     }
 }
 
-/// Save a local copy of the item data to reduce downloads during development
+/// Save a local copy of the item data to reduce downloads during development.
 pub fn cache_data() {
     let response = reqwest::blocking::get(DATA_URL).unwrap();
     let mut file = File::create(CACHE_FILE).unwrap();
     io::copy(&mut response.bytes().unwrap().as_ref(), &mut file).unwrap();
 }
 
+/// Check whether the output file has to be regenerated based on file modification dates.
+pub fn out_of_date() -> io::Result<bool> {
+    let output_date = fs::metadata(OUTPUT_FILE)?.modified()?;
+    let input_date = fs::metadata(CACHE_FILE)?.modified()?;
+
+    if input_date > output_date {
+        return Ok(true);
+    }
+
+    let exec = env::args()
+        .next()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::Other, ""))?;
+    let exec_date = fs::metadata(exec)?.modified()?;
+
+    if exec_date > output_date {
+        return Ok(true);
+    }
+
+    Ok(false)
+}
+
 #[doc(hidden)]
 fn main() {
     if env::args().any(|arg| arg == "--cache") {
-        return cache_data();
+        measure("Downloading", cache_data);
+        return;
+    }
+
+    if let Ok(false) = out_of_date() {
+        println!("Nothing to do...");
+        return;
     }
 
     let data = get_data();
@@ -110,7 +138,7 @@ fn main() {
     map::check();
 
     measure("Saving", || {
-        let output_file = File::create("dist/items.bin.xz").unwrap();
+        let output_file = File::create(OUTPUT_FILE).unwrap();
         bincode::serialize_into(XzEncoder::new(output_file, 9), &items).unwrap();
     });
 }
