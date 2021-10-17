@@ -92,7 +92,7 @@ fn main() {
     let items: ItemDatabase = measure("Filtering & converting", || {
         data.into_iter()
             .filter_map(|i| {
-                let name = i.1.name.clone();
+                let name = i.1.wiki_name.clone().unwrap_or_else(|| i.1.name.clone());
                 if filter::keep(&i.1) {
                     map::map(i.1)
                         .map_err(|e| errors.push(format!("{}: {}", name, e)))

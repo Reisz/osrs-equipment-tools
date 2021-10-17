@@ -42,6 +42,17 @@ lazy_static! {
 
         set
     };
+
+    static ref WIKI_SUFFIXES: HashSet<String> = {
+        let mut set = HashSet::new();
+
+        set.insert("(Last Man Standing)".to_string());
+        set.insert("(Soul Wars)".to_string());
+
+        set.insert("(historical)".to_string());
+
+        set
+    };
 }
 
 /// Checks the [suffix] (after the last space) of the name. The following will be removed:
@@ -56,6 +67,18 @@ lazy_static! {
 pub fn has_filtered_suffix(name: &str) -> bool {
     if let Some(idx) = name.rfind(' ') {
         SUFFIXES.contains(&name[(idx + 1)..])
+    } else {
+        false
+    }
+}
+
+/// Checks the suffix of the wiki name of an item. The following will be removed:
+/// - `(Last Man Standing)`
+/// - `(Soul Wars)`
+/// - `(historical)`: [Crystal shield](https://oldschool.runescape.wiki/w/Crystal_shield_(historical))
+pub fn has_filtered_wiki_suffix(wiki_name: &str) -> bool {
+    if let Some(idx) = wiki_name.rfind(" (") {
+        WIKI_SUFFIXES.contains(&wiki_name[(idx + 1)..])
     } else {
         false
     }

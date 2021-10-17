@@ -73,6 +73,10 @@ pub fn keep(item: &ItemProperties) -> bool {
         if WIKI_NAME_SET.lock().unwrap().remove(wiki_name) {
             return false;
         }
+
+        if suffixes::has_filtered_wiki_suffix(wiki_name) {
+            return false;
+        }
     }
 
     // Remove items with filtered suffix
