@@ -102,7 +102,7 @@ impl Model {
 
 /// Initialize the model and start item data loading process.
 pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
-    orders.perform_cmd(async { Msg::DataLoaded(load_data().await) });
+    orders.perform_cmd(async { Msg::DataLoaded(load_data().await.into()) });
     Model::new()
 }
 
@@ -119,7 +119,7 @@ async fn load_data() -> ItemDatabase {
 /// Possible events.
 pub enum Msg {
     /// Item database has finished downloading.
-    DataLoaded(ItemDatabase),
+    DataLoaded(Box<ItemDatabase>),
     /// Change the current slot of the list view.
     ChangeList(Slot),
     /// Message to change region-based filtering.
@@ -136,7 +136,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
         Msg::DataLoaded(data) => {
             debug_assert!(model.data.is_none());
-            model.data = Some(data);
+            model.data = Some(*data);
             model.sort();
         }
         Msg::ChangeList(slot) => model.list = Some(slot),
