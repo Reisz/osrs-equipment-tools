@@ -22,18 +22,6 @@ impl Filter {
         LocalStorage::get(STORAGE_KEY).unwrap_or_default()
     }
 
-    /// Returns `true` if 3rd age items are included in results.
-    #[must_use]
-    pub fn keeps_third_age(&self) -> bool {
-        !self.third_age
-    }
-
-    /// Returns `true` if members items are included in results.
-    #[must_use]
-    pub fn keeps_members(&self) -> bool {
-        !self.members
-    }
-
     /// Returns `false` if the item is excluded by the current filter settings.
     #[must_use]
     pub fn keep(&self, item: &Item) -> bool {

@@ -65,20 +65,6 @@ impl Model {
         self.iter(slot).nth(idx)
     }
 
-    /// Returns a reference to the sorting settings.
-    #[must_use]
-    pub fn sorting(&self) -> &Sorting {
-        &self.sorting
-    }
-
-    /// Get the amount of items in `slot`.
-    ///
-    /// Can be slow, as the filters will be applied every time.
-    #[must_use]
-    pub fn slot_len(&self, slot: Slot) -> usize {
-        self.iter(slot).count()
-    }
-
     /// Get an iterator for the items in `slot`.
     ///
     /// # Panics

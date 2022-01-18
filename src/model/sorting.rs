@@ -98,7 +98,7 @@ const PRAYER_PRESET: &[Fragment] = &[Fragment::Prayer, Fragment::DefenceMedian];
 
 impl Preset {
     /// Apply this preset to `sorting`.
-    pub fn apply_to(&self, sorting: &mut Sorting) {
+    pub fn apply_to(self, sorting: &mut Sorting) {
         sorting.0.clear();
         let list = match self {
             Self::Melee => MELEE_PRESET,

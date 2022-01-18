@@ -8,9 +8,6 @@ readme = "./README.md"
 repository = "https://github.com/seed-rs/seed-quickstart"
 license-file = "./LICENSE"
 
-[lib]
-crate-type = ["cdylib"]
-
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
 
@@ -29,14 +26,6 @@ web-sys = "0.3"
 [features]
 default = []
 trailblazer = ["regions", "data/trailblazer"]
-
-[profile.release]
-lto = true
-opt-level = 'z'
-codegen-units = 1
-
-[package.metadata.wasm-pack.profile.release]
-wasm-opt = ['-Os']
 
 [workspace]
 members = ["data", "data-processor", "regions"]
