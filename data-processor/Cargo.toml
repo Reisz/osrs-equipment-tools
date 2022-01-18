@@ -2,7 +2,7 @@
 name = "data-processor"
 version = "0.1.0"
 authors = ["Daniel <Reisz@users.noreply.github.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 base64 = "0.13"
