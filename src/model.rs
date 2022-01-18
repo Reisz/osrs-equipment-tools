@@ -5,7 +5,7 @@ pub mod filter;
 pub mod region_filter;
 pub mod sorting;
 
-use data::{Item, ItemDatabase, Slot};
+use data::{Database, Item, Slot};
 use lzma_rs::xz_decompress;
 use seed::prelude::*;
 use web_sys::RequestCache;
@@ -13,12 +13,12 @@ use web_sys::RequestCache;
 use filter::Filter;
 #[cfg(feature = "trailblazer")]
 use region_filter::{RegionFilter, TrailblazerMsg};
-use sorting::{Sorting, SortingMsg};
+use sorting::{Msg as SortingMsg, Sorting};
 
 /// The application state.
 #[derive(Default)]
 pub struct Model {
-    data: Option<ItemDatabase>,
+    data: Option<Database>,
     sorting: Sorting,
     /// Slot currently shown by list view.
     pub list: Option<Slot>,
@@ -52,6 +52,7 @@ impl Model {
     }
 
     /// Returns `true` when no data is present in the model.
+    #[must_use]
     pub fn is_loading(&self) -> bool {
         self.data.is_none()
     }
@@ -59,11 +60,13 @@ impl Model {
     /// Get item at `index` in `slot`. Filters and sorting will be applied.
     ///
     /// Panics if [`is_loading()`] returns `true`.
+    #[must_use]
     pub fn get_item(&self, slot: Slot, idx: usize) -> Option<&Item> {
         self.iter(slot).nth(idx)
     }
 
     /// Returns a reference to the sorting settings.
+    #[must_use]
     pub fn sorting(&self) -> &Sorting {
         &self.sorting
     }
@@ -71,11 +74,16 @@ impl Model {
     /// Get the amount of items in `slot`.
     ///
     /// Can be slow, as the filters will be applied every time.
+    #[must_use]
     pub fn slot_len(&self, slot: Slot) -> usize {
         self.iter(slot).count()
     }
 
     /// Get an iterator for the items in `slot`.
+    ///
+    /// # Panics
+    ///
+    /// When the data is not available.
     pub fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
         self.data.as_ref().unwrap()[slot]
             .iter()
@@ -106,7 +114,7 @@ pub fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
     Model::new()
 }
 
-async fn load_data() -> ItemDatabase {
+async fn load_data() -> Database {
     let request = Request::new("items.bin.xz").cache(RequestCache::NoCache);
     let response = request.fetch().await.unwrap();
     let bytes = response.bytes().await.unwrap();
@@ -119,7 +127,7 @@ async fn load_data() -> ItemDatabase {
 /// Possible events.
 pub enum Msg {
     /// Item database has finished downloading.
-    DataLoaded(Box<ItemDatabase>),
+    DataLoaded(Box<Database>),
     /// Change the current slot of the list view.
     ChangeList(Slot),
     /// Message to change region-based filtering.
@@ -143,7 +151,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         #[cfg(feature = "trailblazer")]
         Msg::Trailblazer(msg) => region_filter::update(msg, &mut model.trailblazer, orders),
         Msg::Sorting(msg) => {
-            sorting::update(msg, &mut model.sorting, orders);
+            sorting::update(&msg, &mut model.sorting, orders);
             model.sort();
         }
     }

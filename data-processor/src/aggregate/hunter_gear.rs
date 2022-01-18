@@ -1,12 +1,12 @@
 //! Consolidate [Hunter gear](https://oldschool.runescape.wiki/w/Hunter_gear)
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 use super::{AggregationMap, Aggregator};
 use crate::osrsbox::ItemProperties;
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     for area in &["Polar", "Wood", "Jungle", "Desert"] {
         set.insert(format!("{} camo top", area));
         set.insert(format!("{} camo legs", area));

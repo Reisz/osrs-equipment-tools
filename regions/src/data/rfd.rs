@@ -4,7 +4,7 @@ use enum_iterator::IntoEnumIterator;
 
 use super::ExprMap;
 use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
+    bool_expr::{BoolExpr, Builder},
     vars::{Region, RegionCombination},
 };
 
@@ -58,7 +58,7 @@ impl RfdCompletionLevels {
     pub fn new() -> Self {
         let mut result = Self(Default::default());
 
-        for level in result.0.iter_mut() {
+        for level in &mut result.0 {
             *level = Some(Vec::new());
         }
 
@@ -89,7 +89,7 @@ fn filter_supersets(mut levels: RfdCompletionLevels) -> RfdCompletionLevels {
 
     for (level, result) in levels.0.iter_mut().zip(results.0.iter_mut()) {
         let result = result.as_mut().unwrap();
-        for combo in level.take().unwrap().into_iter() {
+        for combo in level.take().unwrap() {
             // Combinations are created using incrementing binary numbers, meaning possible subsets
             // always come before all of their supersets
             if !result.iter().rev().any(|other| combo.is_superset_of(other)) {
@@ -102,7 +102,7 @@ fn filter_supersets(mut levels: RfdCompletionLevels) -> RfdCompletionLevels {
 }
 
 fn create_expression(level: Vec<RegionCombination>) -> BoolExpr<Region> {
-    let mut builder = BoolExprBuilder::new();
+    let mut builder = Builder::new();
 
     // TODO try to simplify here
     // NOTE build AST and apply transformation rules then convert AST to RPN
@@ -119,13 +119,13 @@ fn create_expression(level: Vec<RegionCombination>) -> BoolExpr<Region> {
         }
 
         for _ in 1..and_count {
-            builder.and()
+            builder.and();
         }
 
         or_count += 1;
     }
     for _ in 1..or_count {
-        builder.or()
+        builder.or();
     }
 
     builder.finalize().unwrap()
@@ -140,6 +140,10 @@ fn create_expressions(mut levels: RfdCompletionLevels) -> Vec<BoolExpr<Region>> 
 }
 
 /// Generate and add expressions for the RDF gloves.
+///
+/// # Panics
+///
+/// If any of the internal expressions fail.
 pub fn add_items(map: &mut ExprMap) {
     let mut expressions = create_expressions(filter_supersets(get_completions()));
 
@@ -153,7 +157,7 @@ pub fn add_items(map: &mut ExprMap) {
     map.insert("Iron gloves".to_string(), expressions.pop().unwrap());
     map.insert("Bronze gloves".to_string(), expressions.pop().unwrap());
 
-    let mut builder = BoolExprBuilder::new();
+    let mut builder = Builder::new();
     builder.var(Region::Kandarin);
     builder.var(Region::Morytania);
     builder.or();

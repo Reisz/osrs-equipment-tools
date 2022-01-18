@@ -1,6 +1,6 @@
 //! Consolidate God-based equipment
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 use super::{AggregationMap, Aggregator};
 use crate::osrsbox::ItemProperties;
@@ -8,7 +8,7 @@ use crate::osrsbox::ItemProperties;
 const FILTERED_GODS: &[&str] = &["Guthix", "Zamorak", "Armadyl", "Bandos", "Ancient"];
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     for god in FILTERED_GODS {
         set.insert(format!("{} full helm", god));
         set.insert(format!("{} kiteshield", god));
@@ -47,6 +47,7 @@ impl Aggregator for Agg {
 const URL: &str = "https://oldschool.runescape.wiki/w/Rune_god_armour";
 
 /// Add aggregation instructions to the map.
+#[allow(clippy::too_many_lines)]
 pub fn add_aggregators(map: &mut AggregationMap) {
     map.insert(
         "Saradomin full helm".to_string(),

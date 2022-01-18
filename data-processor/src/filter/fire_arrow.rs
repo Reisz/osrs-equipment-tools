@@ -1,10 +1,10 @@
 //! Filter out DMM-only items.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// [Fire arrows](https://oldschool.runescape.wiki/w/Fire_arrows) and their `(lit)` variants from
 /// Underground Pass.
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     add_variants("Bronze", set);
     add_variants("Iron", set);
     add_variants("Steel", set);
@@ -16,7 +16,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 }
 
 /// Regular and lit variants.
-fn add_variants(name: &str, set: &mut HashSet<String>) {
+fn add_variants<S: BuildHasher>(name: &str, set: &mut HashSet<String, S>) {
     set.insert(format!("{} fire arrow", name));
     set.insert(format!("{} fire arrow (lit)", name));
 }

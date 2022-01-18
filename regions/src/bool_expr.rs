@@ -106,7 +106,14 @@ impl<T> BoolExpr<T> {
         Self(vec![BoolExprElement::Value(var)])
     }
 
+    /// Create a new expression using a builder instance.
+    #[must_use]
+    pub fn builder() -> Builder<T> {
+        Builder::new()
+    }
+
     /// Create a new expression evaluating to false.
+    #[must_use]
     pub fn new_false() -> Self {
         Self(vec![BoolExprElement::Const(false)])
     }
@@ -135,6 +142,11 @@ impl<T> BoolExpr<T> {
     /// Evaluate a boolean expression.
     ///
     /// The parameter `vars` must be a function mapping variable ids to values.
+    ///
+    /// # Panics
+    ///
+    /// This function panics when an operation can not pop the required number of operands from the
+    /// stack.
     ///
     /// # Example
     /// ```
@@ -203,10 +215,11 @@ impl<'a, T: TryFrom<&'a str, Error = String>> TryFrom<&'a str> for BoolExpr<T> {
 
 /// Builder
 #[derive(Debug)]
-pub struct BoolExprBuilder<T>(BoolExpr<T>);
+pub struct Builder<T>(BoolExpr<T>);
 
-impl<T> BoolExprBuilder<T> {
+impl<T> Builder<T> {
     /// Create a new, empty [`BoolExprBuilder`].
+    #[must_use]
     pub fn new() -> Self {
         Self::default()
     }
@@ -237,13 +250,17 @@ impl<T> BoolExprBuilder<T> {
     }
 
     /// Validate the expression and return the result.
+    ///
+    /// # Errors
+    ///
+    /// If the resulting expression would be invalid.
     pub fn finalize(self) -> Result<BoolExpr<T>, String> {
         self.0.validate()
     }
 }
 
 // Manual impl to remove `T: Default` restriction.
-impl<T> Default for BoolExprBuilder<T> {
+impl<T> Default for Builder<T> {
     fn default() -> Self {
         Self(BoolExpr::default())
     }

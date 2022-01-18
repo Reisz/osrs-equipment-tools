@@ -1,10 +1,7 @@
 //! Items mainly locked by Asgarnia.
 
 use super::ExprMap;
-use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
-    vars::Region,
-};
+use crate::{bool_expr::BoolExpr, vars::Region};
 
 fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Asgarnia)
@@ -36,7 +33,7 @@ fn add_cerb(map: &mut ExprMap) {
     map.insert("Primordial boots".to_string(), expr());
     map.insert("Pegasian boots".to_string(), expr());
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Desert);
     expr.var(Region::Asgarnia);
     expr.and();
@@ -96,7 +93,7 @@ fn add_void(map: &mut ExprMap) {
     map.insert("Void knight mace (Normal)".to_string(), expr());
     map.insert("Void seal (8)".to_string(), expr());
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Asgarnia);
     expr.var(Region::Kandarin);
     expr.var(Region::Tirannwn);

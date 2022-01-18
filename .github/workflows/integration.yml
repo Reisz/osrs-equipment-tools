@@ -24,7 +24,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --workspace -- -D warnings
+          args: --workspace -- -W clippy::pedantic -A clippy::copy-iterator -D warnings
 
       - name: Run tests
         uses: actions-rs/cargo@v1

@@ -1,6 +1,6 @@
 //! Filtered items which do not fit into anther category.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// Adds the following items:
 /// - [Ice arrows](https://oldschool.runescape.wiki/w/Ice_arrows)
@@ -14,7 +14,7 @@ use std::collections::HashSet;
 /// - [Soul's Bane Weapons](https://oldschool.runescape.wiki/w/A_Soul%27s_Bane#Rage)
 /// - [Iron sickle](https://oldschool.runescape.wiki/w/Iron_sickle)
 /// - [Blessed axe](https://oldschool.runescape.wiki/w/Blessed_axe)
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Ice arrows".to_string());
 
     set.insert("Lunar staff - pt1".to_string());
@@ -38,7 +38,7 @@ pub fn add_names(set: &mut HashSet<String>) {
     add_ironman(set);
 }
 
-fn add_plateskirts(set: &mut HashSet<String>) {
+fn add_plateskirts<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Bronze plateskirt".to_string());
     set.insert("Iron plateskirt".to_string());
     set.insert("Steel plateskirt".to_string());
@@ -59,7 +59,7 @@ fn add_plateskirts(set: &mut HashSet<String>) {
     set.insert("Proselyte tasset".to_string());
 }
 
-fn add_ironman(set: &mut HashSet<String>) {
+fn add_ironman<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Ironman helm".to_string());
     set.insert("Ironman platebody".to_string());
     set.insert("Ironman platelegs".to_string());

@@ -1,12 +1,12 @@
 //! Consolidate [Broodoo shields](https://oldschool.runescape.wiki/w/Broodoo_shield)
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 use super::{AggregationMap, Aggregator};
 use crate::osrsbox::ItemProperties;
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Broodoo shield (orange) (Uncharged)".to_string());
     set.insert("Broodoo shield (green) (Uncharged)".to_string());
 }

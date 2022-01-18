@@ -1,10 +1,7 @@
 //! Items mainly locked by Fremennik.
 
 use super::ExprMap;
-use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
-    vars::Region,
-};
+use crate::{bool_expr::BoolExpr, vars::Region};
 
 fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Fremennik)
@@ -33,7 +30,7 @@ fn add_ds2(map: &mut ExprMap) {
     map.insert("Dragon crossbow".to_string(), expr());
     map.insert("Dragon kiteshield".to_string(), expr());
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Desert);
     expr.var(Region::Kandarin);
     expr.or();
@@ -42,7 +39,7 @@ fn add_ds2(map: &mut ExprMap) {
     let expr = expr.finalize().unwrap();
     map.insert("Dragon platebody".to_string(), expr);
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Kandarin);
     expr.var(Region::Fremennik);
     expr.and();

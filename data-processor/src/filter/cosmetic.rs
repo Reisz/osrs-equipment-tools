@@ -1,6 +1,6 @@
 //! Filter out [cosmetic](https://oldschool.runescape.wiki/w/Ornament_kit) variants.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// Filters out the following cosmetic variants:
 /// - [Twisted ancestral](https://oldschool.runescape.wiki/w/Twisted_ancestral_colour_kit)
@@ -24,7 +24,7 @@ use std::collections::HashSet;
 /// - [Spiked boots](https://oldschool.runescape.wiki/w/Spiked_boots )
 /// - [Blacksmith's helm](https://oldschool.runescape.wiki/w/Blacksmith's_helm)
 /// - [Smouldering stone upgrades](https://oldschool.runescape.wiki/w/Smouldering_stone)
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Twisted ancestral hat".to_string());
     set.insert("Twisted ancestral robe bottom".to_string());
     set.insert("Twisted ancestral robe top".to_string());
@@ -144,7 +144,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// - [Rune scimitar ornaments](https://oldschool.runescape.wiki/w/Rune_scimitar_ornament_kit)
 /// - [Upgraded dragon pickaxe](https://oldschool.runescape.wiki/w/Dragon_pickaxe_(upgraded))
 /// - [Steam/Lava staff upgrades](https://oldschool.runescape.wiki/w/Steam_staff_upgrade_kit)
-pub fn add_wiki_names(set: &mut HashSet<String>) {
+pub fn add_wiki_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Malediction ward (or)".to_string());
     set.insert("Odium ward (or)".to_string());
 

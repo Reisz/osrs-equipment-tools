@@ -1,6 +1,6 @@
 //! Consolidate all capes with equivalent stats to [Black cape](https://oldschool.runescape.wiki/w/Black_cape)
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 use super::{AggregationMap, Aggregator};
 use crate::osrsbox::ItemProperties;
@@ -11,7 +11,7 @@ const FREMMY_COLORS: &[&str] = &[
 ];
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     for i in 1..=50 {
         set.insert(format!("Team-{} cape", i));
     }

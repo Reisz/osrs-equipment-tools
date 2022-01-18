@@ -3,7 +3,7 @@
 use data::{Slot, Stats};
 use enum_iterator::IntoEnumIterator;
 use seed::prelude::*;
-use seed::*;
+use seed::{div, h3, table, td, tr};
 
 use crate::model::{Model, Msg};
 

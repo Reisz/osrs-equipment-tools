@@ -1,10 +1,7 @@
 //! Items mainly locked by Morytania.
 
 use super::ExprMap;
-use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
-    vars::Region,
-};
+use crate::{bool_expr::BoolExpr, vars::Region};
 
 fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Morytania)
@@ -72,7 +69,7 @@ fn add_guardians(map: &mut ExprMap) {
     map.insert("Granite ring".to_string(), expr());
     map.insert("Granite hammer".to_string(), expr());
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Morytania);
     expr.var(Region::Asgarnia);
     expr.and();
@@ -89,7 +86,7 @@ fn add_tob(map: &mut ExprMap) {
     map.insert("Justiciar chestguard".to_string(), expr());
     map.insert("Justiciar legguards".to_string(), expr());
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Morytania);
     expr.var(Region::Asgarnia);
     expr.and();

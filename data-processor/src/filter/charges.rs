@@ -1,7 +1,7 @@
 //! Filter out items wich change based on [degradation](https://oldschool.runescape.wiki/w/Degradation)
 //! or [numerical suffix](https://oldschool.runescape.wiki/w/(numerical)).
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// Removes variants with low charges of:
 /// - [Dragonstone jewellery](https://oldschool.runescape.wiki/w/Dragonstone#Magic)
@@ -15,7 +15,7 @@ use std::collections::HashSet;
 ///
 /// Additionally removes:
 /// - [Eternal glory](https://oldschool.runescape.wiki/w/Amulet_of_eternal_glory)
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Combat bracelet".to_string());
     set.extend((1..6).map(|i| format!("Combat bracelet({})", i)));
 
@@ -55,7 +55,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 /// Removes variants with upgraded charges of:
 /// - [Trident of the seas](https://oldschool.runescape.wiki/w/Trident_of_the_seas_(e))
 /// - [Trident of the swamp](https://oldschool.runescape.wiki/w/Trident_of_the_swamp_(e))
-pub fn add_wiki_names(set: &mut HashSet<String>) {
+pub fn add_wiki_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     for color in &["blue", "orange", "green"] {
         set.extend((1..=10).map(|i| format!("Broodoo shield ({}) ({})", color, i)));
     }

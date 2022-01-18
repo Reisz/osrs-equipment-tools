@@ -2,6 +2,7 @@
 
 use std::{
     collections::{HashMap, HashSet},
+    hash::BuildHasher,
     sync::Mutex,
 };
 
@@ -17,7 +18,7 @@ pub mod other_gods;
 pub mod skill_capes;
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     broodoo::add_filter_names(set);
     gods::add_filter_names(set);
     hunter_gear::add_filter_names(set);
@@ -49,6 +50,10 @@ lazy_static! {
     });
 }
 /// Process the items which are kept.
+///
+/// # Panics
+///
+/// When unable to acquire the global locks.
 pub fn apply_aggregation(item: &mut ItemProperties) {
     if let Some(agg) = WIKI_NAMES
         .lock()
@@ -60,6 +65,10 @@ pub fn apply_aggregation(item: &mut ItemProperties) {
 }
 
 /// Print leftover names in the item list (probably typos).
+///
+/// # Panics
+///
+/// When unable to acquire the global locks.
 pub fn check() {
     for (name, _) in WIKI_NAMES.lock().unwrap().iter() {
         println!("Error: Missed aggregation: {}", name);

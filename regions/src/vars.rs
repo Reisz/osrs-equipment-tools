@@ -68,6 +68,7 @@ pub struct RegionCombination([bool; Region::VARIANT_COUNT]);
 
 impl RegionCombination {
     /// Returns true if `self` is a superset of `other`.
+    #[must_use]
     pub fn is_superset_of(&self, other: &Self) -> bool {
         for (a, b) in self.0.iter().zip(&other.0) {
             if !a && *b {

@@ -7,6 +7,7 @@ use image::{codecs::bmp::BmpEncoder, DynamicImage, GenericImageView, ImageFormat
 use serde::Deserialize;
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemProperties`](https://www.osrsbox.com/projects/osrsbox-db/#item-properties).
+#[allow(clippy::struct_excessive_bools)]
 #[derive(Deserialize)]
 pub struct ItemProperties {
     /// Unique OSRS item ID number.
@@ -77,6 +78,14 @@ pub struct ItemProperties {
 
 impl ItemProperties {
     /// Project the data to the osrs-equipment-tools [`Item`] type.
+    ///
+    /// # Errors
+    ///
+    /// Never.
+    ///
+    /// # Panics
+    ///
+    /// If this item is a duplicate.
     pub fn project(self) -> Result<Item, String> {
         assert!(!self.duplicate);
 
@@ -103,7 +112,7 @@ impl ItemProperties {
             stats: equipment.project()?,
             slot,
             requirements,
-            weapon: self.weapon.map(|w| w.project()),
+            weapon: self.weapon.map(ItemWeapon::project),
             clue: None,
             third_age: false,
         });
@@ -207,6 +216,10 @@ pub struct ItemEquipment {
 
 impl ItemEquipment {
     /// Project the data to the osrs-equipment-tools [`Stats`] type.
+    ///
+    /// # Errors
+    ///
+    /// Never.
     pub fn project(self) -> Result<Stats, String> {
         Ok(Stats {
             attack: BaseStats {
@@ -231,6 +244,7 @@ impl ItemEquipment {
     }
 
     /// Returns true if at least one stat value is greater than zero.
+    #[must_use]
     pub fn has_positive(&self) -> bool {
         self.attack_stab > 0
             || self.attack_slash > 0
@@ -262,6 +276,7 @@ pub struct ItemWeapon {
 
 impl ItemWeapon {
     /// Project the data to the osrs-equipment-tools [`WeaponData`] type.
+    #[must_use]
     pub fn project(self) -> WeaponData {
         WeaponData {
             attack_delay: self.attack_speed,

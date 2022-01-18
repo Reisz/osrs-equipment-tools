@@ -1,6 +1,6 @@
 //! Filters for painted [heraldic](https://oldschool.runescape.wiki/w/Heraldic_armour) equipment.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 const CRESTS: &[&str] = &[
     "Arrav",
@@ -24,7 +24,7 @@ const CRESTS: &[&str] = &[
 /// Adds filters for:
 /// - [Heraldic helmet](https://oldschool.runescape.wiki/w/Heraldic_helmet_(Construction))
 /// - [Heraldic kiteshield](https://oldschool.runescape.wiki/w/Heraldic_kiteshield_(Construction))
-pub fn add_wiki_names(set: &mut HashSet<String>) {
+pub fn add_wiki_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.extend(
         CRESTS
             .iter()

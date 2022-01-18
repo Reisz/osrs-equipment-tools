@@ -17,21 +17,25 @@ pub struct Filter {
 
 impl Filter {
     /// Create a new instance loaded from web storage or created with default values as fallback.
+    #[must_use]
     pub fn new() -> Self {
         LocalStorage::get(STORAGE_KEY).unwrap_or_default()
     }
 
     /// Returns `true` if 3rd age items are included in results.
+    #[must_use]
     pub fn keeps_third_age(&self) -> bool {
         !self.third_age
     }
 
     /// Returns `true` if members items are included in results.
+    #[must_use]
     pub fn keeps_members(&self) -> bool {
         !self.members
     }
 
     /// Returns `false` if the item is excluded by the current filter settings.
+    #[must_use]
     pub fn keep(&self, item: &Item) -> bool {
         !(self.third_age && item.third_age || self.members && item.members)
     }

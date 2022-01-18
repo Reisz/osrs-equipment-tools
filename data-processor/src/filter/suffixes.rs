@@ -64,6 +64,7 @@ lazy_static! {
 /// - `(nz)`: [Nightmare Zone](https://oldschool.runescape.wiki/w/(nz))
 ///
 /// [suffix]: https://oldschool.runescape.wiki/w/Suffixes
+#[must_use]
 pub fn has_filtered_suffix(name: &str) -> bool {
     if let Some(idx) = name.rfind(' ') {
         SUFFIXES.contains(&name[(idx + 1)..])
@@ -76,6 +77,7 @@ pub fn has_filtered_suffix(name: &str) -> bool {
 /// - `(Last Man Standing)`
 /// - `(Soul Wars)`
 /// - `(historical)`: [Crystal shield](https://oldschool.runescape.wiki/w/Crystal_shield_(historical))
+#[must_use]
 pub fn has_filtered_wiki_suffix(wiki_name: &str) -> bool {
     if let Some(idx) = wiki_name.rfind(" (") {
         WIKI_SUFFIXES.contains(&wiki_name[(idx + 1)..])

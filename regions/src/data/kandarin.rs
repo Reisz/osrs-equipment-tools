@@ -1,17 +1,14 @@
 //! Items mainly locked by Kandarin.
 
 use super::ExprMap;
-use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
-    vars::Region,
-};
+use crate::{bool_expr::BoolExpr, vars::Region};
 
 fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Kandarin)
 }
 
 fn expr_and(region: Region) -> BoolExpr<Region> {
-    let mut builder = BoolExprBuilder::new();
+    let mut builder = BoolExpr::builder();
     builder.var(Region::Kandarin);
     builder.var(region);
     builder.and();
@@ -66,7 +63,7 @@ fn add_imbues(map: &mut ExprMap) {
     );
     map.insert("Granite ring (i)".to_string(), expr_and(Region::Morytania));
 
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = BoolExpr::builder();
     expr.var(Region::Wilderness);
     expr.var(Region::Kandarin);
     expr.var(Region::Morytania);

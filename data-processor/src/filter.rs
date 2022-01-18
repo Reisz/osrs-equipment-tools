@@ -48,6 +48,11 @@ lazy_static! {
 }
 
 /// Return true if no filter applies for the item.
+///
+/// # Panics
+///
+/// When unable to acquire the global locks.
+#[must_use]
 pub fn keep(item: &ItemProperties) -> bool {
     // Remove duplicates
     if item.duplicate {
@@ -88,6 +93,10 @@ pub fn keep(item: &ItemProperties) -> bool {
 }
 
 /// Print leftover names in the item filter (probably typos).
+///
+/// # Panics
+///
+/// When unable to acquire the global locks.
 pub fn check() {
     for name in NAME_SET.lock().unwrap().iter() {
         println!("Error: Missed name filter: {}", name);

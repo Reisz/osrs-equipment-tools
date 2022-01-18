@@ -2,7 +2,7 @@
 
 use data::Item;
 use seed::prelude::*;
-use seed::*;
+use seed::{a, attrs, img, table, td, tr};
 
 use crate::model::{Model, Msg};
 

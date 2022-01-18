@@ -21,6 +21,10 @@ lazy_static! {
 }
 
 /// Apply all transformation methods.
+///
+/// # Errors
+///
+/// Never.
 pub fn map(mut item: ItemProperties) -> Result<Item, String> {
     #[cfg(feature = "trailblazer")]
     let trailblazer = TRAILBLAZER_MAP

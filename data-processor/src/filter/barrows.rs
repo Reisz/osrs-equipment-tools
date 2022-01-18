@@ -1,11 +1,11 @@
 //! Filter out damaged variants of barrows pieces.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// Filter out the 5 damage variants for each piece of [Barrows equipment].
 ///
 ///[Barrows equipment]: https://oldschool.runescape.wiki/w/Barrows_equipment
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     add_variants("Ahrim's hood", set);
     add_variants("Ahrim's robeskirt", set);
     add_variants("Ahrim's robetop", set);
@@ -38,7 +38,7 @@ pub fn add_names(set: &mut HashSet<String>) {
 }
 
 /// Variants `100`, `75`, `50`, `25` (`0` not equippable).
-fn add_variants(name: &str, set: &mut HashSet<String>) {
+fn add_variants<S: BuildHasher>(name: &str, set: &mut HashSet<String, S>) {
     set.insert(format!("{} 100", name));
     set.insert(format!("{} 75", name));
     set.insert(format!("{} 50", name));

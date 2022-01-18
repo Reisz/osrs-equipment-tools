@@ -1,12 +1,12 @@
 //! Filter out DMM-only items.
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 /// Removes the following DMM-only item sets:
 /// - [Deadman armour](https://oldschool.runescape.wiki/w/Deadman_armour)
 /// - [Ancient Warriors' equipment](https://oldschool.runescape.wiki/w/Ancient_Warriors%27_equipment)
 /// - [Deadman starter pack](https://oldschool.runescape.wiki/w/Deadman_starter_pack)
-pub fn add_names(set: &mut HashSet<String>) {
+pub fn add_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.insert("Deadman's chest".to_string());
     set.insert("Deadman's legs".to_string());
     set.insert("Deadman's cape".to_string());

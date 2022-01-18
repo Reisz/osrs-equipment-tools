@@ -13,6 +13,7 @@ use crate::model::{Model, Msg};
 
 /// Create the DOM according to the [`Model`].
 #[cfg(not(feature = "trailblazer"))]
+#[must_use]
 pub fn view(model: &Model) -> Node<Msg> {
     if model.is_loading() {
         div!["Loading..."]

@@ -1,17 +1,14 @@
 //! Items mainly locked by Tirannwn.
 
 use super::ExprMap;
-use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
-    vars::Region,
-};
+use crate::{bool_expr::BoolExpr, vars::Region};
 
 fn expr() -> BoolExpr<Region> {
     BoolExpr::new(Region::Tirannwn)
 }
 
 fn expr_and(region: Region) -> BoolExpr<Region> {
-    let mut builder = BoolExprBuilder::new();
+    let mut builder = BoolExpr::builder();
     builder.var(Region::Tirannwn);
     builder.var(region);
     builder.and();

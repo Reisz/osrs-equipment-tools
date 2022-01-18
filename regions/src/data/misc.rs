@@ -2,14 +2,14 @@
 
 use super::ExprMap;
 use crate::{
-    bool_expr::{BoolExpr, BoolExprBuilder},
+    bool_expr::{BoolExpr, Builder},
     vars::Region,
 };
 
 macro_rules! or {
     ($r1:expr, $($r:expr),*) => {
         {
-            let mut builder = BoolExprBuilder::new();
+            let mut builder = BoolExpr::builder();
             builder.var($r1);
             $(
                 builder.var($r);
@@ -116,7 +116,7 @@ fn add_cox(map: &mut ExprMap) {
 }
 
 fn add_avas(map: &mut ExprMap) {
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = Builder::new();
     expr.var(Region::Asgarnia);
     expr.var(Region::Morytania);
     expr.and();
@@ -237,7 +237,7 @@ fn add_slayer(map: &mut ExprMap) {
 }
 
 fn add_ghostly(map: &mut ExprMap) {
-    let mut expr = BoolExprBuilder::new();
+    let mut expr = Builder::new();
     expr.var(Region::Desert);
     expr.var(Region::Asgarnia);
     expr.var(Region::Kandarin);

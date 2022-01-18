@@ -7,13 +7,13 @@ use enum_iterator::IntoEnumIterator;
 use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
 
-use super::Msg;
+use super::Msg as SuperMsg;
 
 const STORAGE_KEY: &str = "sorting";
 
 /// Fragments for building a sorting method.
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
-pub enum SortingFragment {
+pub enum Fragment {
     /// Average of melee attack bonuses
     MeleeAttackAvg,
     /// Magic attack bonus
@@ -32,8 +32,8 @@ pub enum SortingFragment {
     Prayer,
 }
 
-impl SortingFragment {
-    fn get(&self, i: &Stats) -> i16 {
+impl Fragment {
+    fn get(self, i: &Stats) -> i16 {
         match self {
             Self::MeleeAttackAvg => {
                 let a = &i.attack;
@@ -54,24 +54,15 @@ impl SortingFragment {
         }
     }
 
-    fn is_descending(&self) -> bool {
-        true
-    }
-
-    fn ordering(&self, a: &Stats, b: &Stats) -> Ordering {
+    fn ordering(self, a: &Stats, b: &Stats) -> Ordering {
         let ord = self.get(a).cmp(&self.get(b));
-
-        if self.is_descending() {
-            ord.reverse()
-        } else {
-            ord
-        }
+        ord.reverse()
     }
 }
 
 /// Presets for sorting
 #[derive(Debug, Clone, Copy, IntoEnumIterator)]
-pub enum SortingPreset {
+pub enum Preset {
     /// Prioritize strength bonus -> attack avg -> prayer -> defence median
     Melee,
     /// Prioritize damage bonus -> attack -> prayer -> defence median
@@ -82,31 +73,30 @@ pub enum SortingPreset {
     Prayer,
 }
 
-const MELEE_PRESET: &[SortingFragment] = &[
-    SortingFragment::MeleeStrength,
-    SortingFragment::MeleeAttackAvg,
-    SortingFragment::DefenceMedian,
-    SortingFragment::Prayer,
+const MELEE_PRESET: &[Fragment] = &[
+    Fragment::MeleeStrength,
+    Fragment::MeleeAttackAvg,
+    Fragment::DefenceMedian,
+    Fragment::Prayer,
 ];
 
-const MAGIC_PRESET: &[SortingFragment] = &[
-    SortingFragment::MagicDamage,
-    SortingFragment::MagicAttack,
-    SortingFragment::DefenceMedian,
-    SortingFragment::Prayer,
+const MAGIC_PRESET: &[Fragment] = &[
+    Fragment::MagicDamage,
+    Fragment::MagicAttack,
+    Fragment::DefenceMedian,
+    Fragment::Prayer,
 ];
 
-const RANGED_PRESET: &[SortingFragment] = &[
-    SortingFragment::RangedStrength,
-    SortingFragment::RangedAttack,
-    SortingFragment::DefenceMedian,
-    SortingFragment::Prayer,
+const RANGED_PRESET: &[Fragment] = &[
+    Fragment::RangedStrength,
+    Fragment::RangedAttack,
+    Fragment::DefenceMedian,
+    Fragment::Prayer,
 ];
 
-const PRAYER_PRESET: &[SortingFragment] =
-    &[SortingFragment::Prayer, SortingFragment::DefenceMedian];
+const PRAYER_PRESET: &[Fragment] = &[Fragment::Prayer, Fragment::DefenceMedian];
 
-impl SortingPreset {
+impl Preset {
     /// Apply this preset to `sorting`.
     pub fn apply_to(&self, sorting: &mut Sorting) {
         sorting.0.clear();
@@ -122,10 +112,11 @@ impl SortingPreset {
 
 /// Stores current settings for item sorting.
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Sorting(Vec<SortingFragment>);
+pub struct Sorting(Vec<Fragment>);
 
 impl Sorting {
     /// Create a new instance loaded from web storage or created with default values as fallback.
+    #[must_use]
     pub fn new() -> Self {
         LocalStorage::get(STORAGE_KEY).unwrap_or_default()
     }
@@ -137,6 +128,7 @@ impl Sorting {
     /// Get an ordering between items `a` and `b` based on current settings.
     ///
     /// This method will always impose alphabetical ordering as a last step.
+    #[must_use]
     pub fn ordering(&self, a: &Item, b: &Item) -> Ordering {
         let mut ordering = Ordering::Equal;
 
@@ -150,6 +142,7 @@ impl Sorting {
 
     /// Returns `true` if the item is better than an item with neutral stats under the
     /// current sorting order.
+    #[must_use]
     pub fn above_neutral(&self, i: &Item) -> bool {
         let mut ordering = Ordering::Equal;
 
@@ -165,21 +158,21 @@ impl Sorting {
 impl Default for Sorting {
     fn default() -> Self {
         let mut result = Self(Vec::new());
-        SortingPreset::Melee.apply_to(&mut result);
+        Preset::Melee.apply_to(&mut result);
         result
     }
 }
 
 /// Messages to manipulate sorting order
-pub enum SortingMsg {
+pub enum Msg {
     /// Apply a preset to the sorting order.
-    ApplyPreset(SortingPreset),
+    ApplyPreset(Preset),
 }
 
 /// Change sorting based on [`SortingMsg`].
-pub fn update(msg: SortingMsg, sorting: &mut Sorting, _orders: &mut impl Orders<Msg>) {
+pub fn update(msg: &Msg, sorting: &mut Sorting, _orders: &mut impl Orders<SuperMsg>) {
     match msg {
-        SortingMsg::ApplyPreset(preset) => preset.apply_to(sorting),
+        Msg::ApplyPreset(preset) => preset.apply_to(sorting),
     }
     sorting.updated();
 }

@@ -28,7 +28,7 @@ use std::{
     time::Instant,
 };
 
-use data::ItemDatabase;
+use data::Database;
 use xz2::write::XzEncoder;
 
 use osrsbox::ItemProperties;
@@ -38,6 +38,10 @@ const CACHE_FILE: &str = "data/items-complete.json";
 const OUTPUT_FILE: &str = "dist/items.bin.xz";
 
 /// Print command name, time command execution and print timing.
+///
+/// # Panics
+///
+/// If printing to stdout fails.
 pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
     print!("{:30}", format!("{}...", name));
     io::stdout().flush().unwrap();
@@ -56,6 +60,11 @@ pub fn measure<T>(name: &str, f: impl FnOnce() -> T) -> T {
 
 /// Get the data from `items-complete.json`. Will look for `data/items-complete.json`, before
 /// downloading from [OSRSBox](https://www.osrsbox.com/).
+///
+/// # Panics
+///
+/// When one of the required operations fails.
+#[must_use]
 pub fn get_data() -> HashMap<String, ItemProperties> {
     if let Ok(mut input_file) = File::open(CACHE_FILE) {
         measure("Parsing file", || {
@@ -74,6 +83,10 @@ pub fn get_data() -> HashMap<String, ItemProperties> {
 }
 
 /// Save a local copy of the item data to reduce downloads during development.
+///
+/// # Panics
+///
+/// If one of the required operations fails.
 pub fn cache_data() {
     let response = reqwest::blocking::get(DATA_URL).unwrap();
     let mut file = File::create(CACHE_FILE).unwrap();
@@ -81,6 +94,10 @@ pub fn cache_data() {
 }
 
 /// Check whether the output file has to be regenerated based on file modification dates.
+///
+/// # Errors
+///
+/// IO errors from reading file metadata.
 pub fn out_of_date() -> io::Result<bool> {
     let output_date = fs::metadata(OUTPUT_FILE)?.modified()?;
     let input_date = fs::metadata(CACHE_FILE)?.modified()?;
@@ -117,7 +134,7 @@ fn main() {
     println!("{:10} Items", data.len());
 
     let mut errors = Vec::new();
-    let items: ItemDatabase = measure("Filtering & converting", || {
+    let items: Database = measure("Filtering & converting", || {
         data.into_iter()
             .filter_map(|i| {
                 let name = i.1.wiki_name.clone().unwrap_or_else(|| i.1.name.clone());
@@ -133,7 +150,9 @@ fn main() {
     });
     println!("{:10} Items", items.len());
 
-    errors.iter().for_each(|e| println!("Error: {}", e));
+    for e in errors {
+        println!("Error: {}", e);
+    }
     filter::check();
     map::check();
 

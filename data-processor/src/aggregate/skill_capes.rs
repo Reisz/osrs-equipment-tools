@@ -1,6 +1,6 @@
 //! Consolidate [Skill capes](https://oldschool.runescape.wiki/w/Cape_of_Accomplishment)
 
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::BuildHasher};
 
 use super::{AggregationMap, Aggregator};
 use crate::osrsbox::ItemProperties;
@@ -49,7 +49,7 @@ const MAX_CAPES: &[(&str, &str)] = &[
 ];
 
 /// Add wiki names of items to filter.
-pub fn add_filter_names(set: &mut HashSet<String>) {
+pub fn add_filter_names<S: BuildHasher>(set: &mut HashSet<String, S>) {
     set.extend(SKILLS.iter().map(|s| format!("{} cape (Untrimmed)", s)));
     set.extend(SKILLS.iter().map(|s| format!("{} cape (Trimmed)", s)));
 

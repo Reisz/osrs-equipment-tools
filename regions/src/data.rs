@@ -18,6 +18,7 @@ use crate::{bool_expr::BoolExpr, vars::Region};
 pub type ExprMap = HashMap<String, BoolExpr<Region>>;
 
 /// Get a hash map conaining the region expression by item name.
+#[must_use]
 pub fn create_map() -> ExprMap {
     let mut map = HashMap::new();
 
