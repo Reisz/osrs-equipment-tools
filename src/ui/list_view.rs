@@ -1,6 +1,7 @@
 //! View a sorted list of the available items for one slot.
 
-use data::Item;
+use data::{DamageType, Item};
+use enum_iterator::IntoEnumIterator;
 use seed::prelude::*;
 use seed::{a, attrs, img, table, td, tr};
 
@@ -27,19 +28,13 @@ fn view_item(item: &Item) -> Node<Msg> {
             attrs![At::Href => item.wiki_url, At::Title => item.name],
             &item.name,
         ],],
-        td![item.stats.attack.stab.to_string()],
-        td![item.stats.attack.slash.to_string()],
-        td![item.stats.attack.crush.to_string()],
-        td![item.stats.attack.magic.to_string()],
-        td![item.stats.attack.ranged.to_string()],
-        td![item.stats.defence.stab.to_string()],
-        td![item.stats.defence.slash.to_string()],
-        td![item.stats.defence.crush.to_string()],
-        td![item.stats.defence.magic.to_string()],
-        td![item.stats.defence.ranged.to_string()],
-        td![item.stats.melee_strength.to_string()],
-        td![item.stats.ranged_strength.to_string()],
-        td![format!("{}%", item.stats.magic_damage)],
-        td![item.stats.prayer.to_string()],
+        DamageType::into_enum_iter()
+            .map(|damage_type| td![item.combat_stats.attack[damage_type].to_string()]),
+        DamageType::into_enum_iter()
+            .map(|damage_type| td![item.combat_stats.defence[damage_type].to_string()]),
+        td![item.combat_stats.melee_strength.to_string()],
+        td![item.combat_stats.ranged_strength.to_string()],
+        td![format!("{}%", item.combat_stats.magic_damage)],
+        td![item.combat_stats.prayer.to_string()],
     ]
 }

@@ -9,9 +9,8 @@ const STORAGE_KEY: &str = "filter";
 /// Stores current settings for general filtering.
 ///
 /// Uses individual named fields to allow manual inspection / editing of local storage.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Default, Deserialize, Serialize)]
 pub struct Filter {
-    third_age: bool,
     members: bool,
 }
 
@@ -25,15 +24,6 @@ impl Filter {
     /// Returns `false` if the item is excluded by the current filter settings.
     #[must_use]
     pub fn keep(&self, item: &Item) -> bool {
-        !(self.third_age && item.third_age || self.members && item.members)
-    }
-}
-
-impl Default for Filter {
-    fn default() -> Self {
-        Self {
-            third_age: true,
-            members: false,
-        }
+        !(self.members && item.members)
     }
 }

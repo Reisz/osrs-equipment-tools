@@ -1,6 +1,6 @@
 //! View the currently selected equipment set with a similar layout to the in-game equipment panel.
 
-use data::Slot;
+use data::EquipSlot;
 use enum_iterator::IntoEnumIterator;
 use seed::prelude::*;
 use seed::{attrs, div, img, style, C};
@@ -11,11 +11,11 @@ use crate::model::{Model, Msg};
 pub fn view(model: &Model) -> Node<Msg> {
     div![
         C!["equipment-view"],
-        Slot::into_enum_iter().map(|s| view_slot(model, s))
+        EquipSlot::into_enum_iter().map(|s| view_slot(model, s))
     ]
 }
 
-fn view_slot(model: &Model, slot: Slot) -> Node<Msg> {
+fn view_slot(model: &Model, slot: EquipSlot) -> Node<Msg> {
     let (left, top) = get_offsets(slot);
 
     let left = format!("{}px", left);
@@ -35,19 +35,19 @@ fn view_slot(model: &Model, slot: Slot) -> Node<Msg> {
     }
 }
 
-fn get_offsets(slot: Slot) -> (u8, u8) {
+fn get_offsets(slot: EquipSlot) -> (u8, u8) {
     match slot {
-        Slot::Head => (84, 11),
-        Slot::Cape => (43, 50),
-        Slot::Neck => (84, 50),
-        Slot::Ammunition => (125, 50),
-        Slot::TwoHanded => (43, 129),
-        Slot::Weapon => (28, 89),
-        Slot::Body => (84, 89),
-        Slot::Shield => (140, 89),
-        Slot::Legs => (84, 129),
-        Slot::Hands => (28, 169),
-        Slot::Feet => (84, 169),
-        Slot::Ring => (140, 169),
+        EquipSlot::Head => (84, 11),
+        EquipSlot::Cape => (43, 50),
+        EquipSlot::Neck => (84, 50),
+        EquipSlot::Ammunition => (125, 50),
+        EquipSlot::TwoHanded => (43, 129),
+        EquipSlot::Weapon => (28, 89),
+        EquipSlot::Body => (84, 89),
+        EquipSlot::Shield => (140, 89),
+        EquipSlot::Legs => (84, 129),
+        EquipSlot::Hands => (28, 169),
+        EquipSlot::Feet => (84, 169),
+        EquipSlot::Ring => (140, 169),
     }
 }

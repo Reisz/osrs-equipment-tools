@@ -1,7 +1,6 @@
 //! Adjust item data and apply projection.
 
 mod clues;
-mod third_age;
 
 #[cfg(feature = "trailblazer")]
 use std::sync::Mutex;
@@ -37,7 +36,6 @@ pub fn map(mut item: ItemProperties) -> Result<Item, String> {
     let mut item = item.project()?;
 
     clues::apply_value(&mut item);
-    third_age::apply_value(&mut item);
 
     #[cfg(feature = "trailblazer")]
     {
@@ -51,7 +49,6 @@ pub fn map(mut item: ItemProperties) -> Result<Item, String> {
 pub fn check() {
     aggregate::check();
     clues::check();
-    third_age::check();
 
     #[cfg(feature = "trailblazer")]
     for (name, _) in TRAILBLAZER_MAP.lock().unwrap().iter() {

@@ -28,7 +28,7 @@ lazy_static! {
         map.insert("Crozier".to_string(), Clue::Medium);
 
         // Hard
-        map.insert("Robin hood hat".to_string(), Clue::Hard);
+        map.insert("Robin hood hat".to_string(), Clue::Hard{mega_rare: false});
 
         // Some region combinations do not have access to mystic hat or top
         #[cfg(feature = "trailblazer")]
@@ -37,57 +37,57 @@ lazy_static! {
             map.insert("Enchanted top".to_string(), Clue::Hard);
         }
 
-        map.insert("God full helm".to_string(), Clue::Hard);
-        map.insert("God kiteshield".to_string(), Clue::Hard);
-        map.insert("God platebody".to_string(), Clue::Hard);
-        map.insert("God platelegs".to_string(), Clue::Hard);
+        map.insert("God full helm".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("God kiteshield".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("God platebody".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("God platelegs".to_string(), Clue::Hard{mega_rare: false});
 
-        map.insert("Blessed bracers".to_string(), Clue::Hard);
-        map.insert("Blessed chaps".to_string(), Clue::Hard);
-        map.insert("Blessed coif".to_string(), Clue::Hard);
-        map.insert("Blessed d'hide body".to_string(), Clue::Hard);
-        map.insert("Blessed d'hide boots".to_string(), Clue::Hard);
-        map.insert("Blessed d'hide shield".to_string(), Clue::Hard);
+        map.insert("Blessed bracers".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("Blessed chaps".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("Blessed coif".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("Blessed d'hide body".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("Blessed d'hide boots".to_string(), Clue::Hard{mega_rare: false});
+        map.insert("Blessed d'hide shield".to_string(), Clue::Hard{mega_rare: false});
 
-        map.insert("3rd age full helmet".to_string(), Clue::Hard);
-        map.insert("3rd age platebody".to_string(), Clue::Hard);
-        map.insert("3rd age platelegs".to_string(), Clue::Hard);
-        map.insert("3rd age plateskirt".to_string(), Clue::Hard);
-        map.insert("3rd age kiteshield".to_string(), Clue::Hard);
-        map.insert("3rd age range coif".to_string(), Clue::Hard);
-        map.insert("3rd age range top".to_string(), Clue::Hard);
-        map.insert("3rd age range legs".to_string(), Clue::Hard);
-        map.insert("3rd age vambraces".to_string(), Clue::Hard);
-        map.insert("3rd age mage hat".to_string(), Clue::Hard);
-        map.insert("3rd age robe top".to_string(), Clue::Hard);
-        map.insert("3rd age robe".to_string(), Clue::Hard);
-        map.insert("3rd age amulet".to_string(), Clue::Hard);
+        map.insert("3rd age full helmet".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age platebody".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age platelegs".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age plateskirt".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age kiteshield".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age range coif".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age range top".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age range legs".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age vambraces".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age mage hat".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age robe top".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age robe".to_string(), Clue::Hard{mega_rare: true});
+        map.insert("3rd age amulet".to_string(), Clue::Hard{mega_rare: true});
 
         // Elite
-        map.insert("Rangers' tunic".to_string(), Clue::Elite);
-        map.insert("Rangers' tights".to_string(), Clue::Elite);
-        map.insert("Ranger gloves".to_string(), Clue::Elite);
-        map.insert("Holy wraps".to_string(), Clue::Elite);
-        map.insert("Fremennik kilt".to_string(), Clue::Elite);
+        map.insert("Rangers' tunic".to_string(), Clue::Elite{mega_rare: false});
+        map.insert("Rangers' tights".to_string(), Clue::Elite{mega_rare: false});
+        map.insert("Ranger gloves".to_string(), Clue::Elite{mega_rare: false});
+        map.insert("Holy wraps".to_string(), Clue::Elite{mega_rare: false});
+        map.insert("Fremennik kilt".to_string(), Clue::Elite{mega_rare: false});
 
-        map.insert("3rd age longsword".to_string(), Clue::Elite);
-        map.insert("3rd age wand".to_string(), Clue::Elite);
-        map.insert("3rd age cloak".to_string(), Clue::Elite);
-        map.insert("3rd age bow".to_string(), Clue::Elite);
+        map.insert("3rd age longsword".to_string(), Clue::Elite{mega_rare: true});
+        map.insert("3rd age wand".to_string(), Clue::Elite{mega_rare: true});
+        map.insert("3rd age cloak".to_string(), Clue::Elite{mega_rare: true});
+        map.insert("3rd age bow".to_string(), Clue::Elite{mega_rare: true});
 
         // Master
-        map.insert("Samurai boots".to_string(), Clue::Master);
-        map.insert("Samurai gloves".to_string(), Clue::Master);
-        map.insert("Samurai greaves".to_string(), Clue::Master);
-        map.insert("Samurai kasa".to_string(), Clue::Master);
-        map.insert("Samurai shirt".to_string(), Clue::Master);
+        map.insert("Samurai boots".to_string(), Clue::Master{mega_rare: false});
+        map.insert("Samurai gloves".to_string(), Clue::Master{mega_rare: false});
+        map.insert("Samurai greaves".to_string(), Clue::Master{mega_rare: false});
+        map.insert("Samurai kasa".to_string(), Clue::Master{mega_rare: false});
+        map.insert("Samurai shirt".to_string(), Clue::Master{mega_rare: false});
 
-        map.insert("3rd age druidic robe top".to_string(), Clue::Master);
-        map.insert("3rd age druidic robe bottoms".to_string(), Clue::Master);
-        map.insert("3rd age druidic cloak".to_string(), Clue::Master);
-        map.insert("3rd age druidic staff".to_string(), Clue::Master);
-        map.insert("3rd age pickaxe".to_string(), Clue::Master);
-        map.insert("3rd age axe".to_string(), Clue::Master);
+        map.insert("3rd age druidic robe top".to_string(), Clue::Master{mega_rare: true});
+        map.insert("3rd age druidic robe bottoms".to_string(), Clue::Master{mega_rare: true});
+        map.insert("3rd age druidic cloak".to_string(), Clue::Master{mega_rare: true});
+        map.insert("3rd age druidic staff".to_string(), Clue::Master{mega_rare: true});
+        map.insert("3rd age pickaxe".to_string(), Clue::Master{mega_rare: true});
+        map.insert("3rd age axe".to_string(), Clue::Master{mega_rare: true});
 
         map
     });
@@ -95,7 +95,7 @@ lazy_static! {
 
 /// Applies `item.clue = <level>` for clue uniques.
 pub fn apply_value(item: &mut Item) {
-    item.clue = ITEM_NAMES.lock().unwrap().remove(&item.name);
+    item.attainability.clue = ITEM_NAMES.lock().unwrap().remove(&item.name);
 }
 
 /// Print leftover names in the item list (probably typos).

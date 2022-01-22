@@ -5,7 +5,7 @@ pub mod filter;
 pub mod region_filter;
 pub mod sorting;
 
-use data::{Database, Item, Slot};
+use data::{Database, EquipSlot, Item};
 use lzma_rs::xz_decompress;
 use seed::prelude::*;
 use web_sys::RequestCache;
@@ -21,7 +21,7 @@ pub struct Model {
     data: Option<Database>,
     sorting: Sorting,
     /// Slot currently shown by list view.
-    pub list: Option<Slot>,
+    pub list: Option<EquipSlot>,
     /// Miscellanious filtering
     pub filter: Filter,
     /// Item filtering based on trailblazer regions
@@ -61,7 +61,7 @@ impl Model {
     ///
     /// Panics if [`is_loading()`] returns `true`.
     #[must_use]
-    pub fn get_item(&self, slot: Slot, idx: usize) -> Option<&Item> {
+    pub fn get_item(&self, slot: EquipSlot, idx: usize) -> Option<&Item> {
         self.iter(slot).nth(idx)
     }
 
@@ -70,7 +70,7 @@ impl Model {
     /// # Panics
     ///
     /// When the data is not available.
-    pub fn iter(&self, slot: Slot) -> impl Iterator<Item = &Item> {
+    pub fn iter(&self, slot: EquipSlot) -> impl Iterator<Item = &Item> {
         self.data.as_ref().unwrap()[slot]
             .iter()
             .filter(move |i| self.filter(i))
@@ -115,7 +115,7 @@ pub enum Msg {
     /// Item database has finished downloading.
     DataLoaded(Box<Database>),
     /// Change the current slot of the list view.
-    ChangeList(Slot),
+    ChangeList(EquipSlot),
     /// Message to change region-based filtering.
     #[cfg(feature = "trailblazer")]
     Trailblazer(TrailblazerMsg),

@@ -1,6 +1,6 @@
 //! View the currently selected equipment set with a similar layout to the in-game equipment panel.
 
-use data::{Slot, Stats};
+use data::{CombatStats, DamageType, EquipSlot};
 use enum_iterator::IntoEnumIterator;
 use seed::prelude::*;
 use seed::{div, h3, table, td, tr};
@@ -9,28 +9,22 @@ use crate::model::{Model, Msg};
 
 /// Create the DOM according to the [`Model`].
 pub fn view(model: &Model) -> Node<Msg> {
-    let mut stats = Stats::default();
-    for slot in Slot::into_enum_iter() {
-        stats += &model.get_item(slot, 0).unwrap().stats;
+    let mut stats = CombatStats::default();
+    for slot in EquipSlot::into_enum_iter() {
+        stats += &model.get_item(slot, 0).unwrap().combat_stats;
     }
 
     div![
         h3!["Attack Bonuses"],
-        table![
-            tr![td!["Stab"], td![stats.attack.stab.to_string()]],
-            tr![td!["Slash"], td![stats.attack.slash.to_string()]],
-            tr![td!["Stab"], td![stats.attack.stab.to_string()]],
-            tr![td!["Magic"], td![stats.attack.magic.to_string()]],
-            tr![td!["Ranged"], td![stats.attack.ranged.to_string()]],
-        ],
+        table![DamageType::into_enum_iter().map(|damage_type| tr![
+            td![format!("{damage_type}")],
+            td![stats.attack[damage_type].to_string()]
+        ])],
         h3!["Defence Bonuses"],
-        table![
-            tr![td!["Stab"], td![stats.defence.stab.to_string()]],
-            tr![td!["Slash"], td![stats.defence.slash.to_string()]],
-            tr![td!["Stab"], td![stats.defence.stab.to_string()]],
-            tr![td!["Magic"], td![stats.defence.magic.to_string()]],
-            tr![td!["Ranged"], td![stats.defence.ranged.to_string()]],
-        ],
+        table![DamageType::into_enum_iter().map(|damage_type| tr![
+            td![format!("{damage_type}")],
+            td![stats.defence[damage_type].to_string()]
+        ])],
         h3!["Other Bonuses"],
         table![
             tr![td!["Melee Strength"], td![stats.melee_strength.to_string()]],

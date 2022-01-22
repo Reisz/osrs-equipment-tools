@@ -7,14 +7,14 @@ use std::{
 use enum_iterator::IntoEnumIterator;
 use serde::{Deserialize, Serialize};
 
-use super::{Item, Slot};
+use crate::{EquipSlot, Item};
 
-/// Contains a database of all equipment items seperated by eqip slots.
+/// Contains a database of all equipment items separated by equip slots.
 ///
-/// Use [`Index<Slot>`](#impl-Index<Slot>) and [`IndexMut<Slot>`](#impl-IndexMut<Slot>) implementations to
-/// access individual slots.
-#[derive(Debug, Default, Serialize, Deserialize)]
-pub struct Database([Vec<Item>; Slot::VARIANT_COUNT]);
+/// Use [`Index<EquipSlot>`](#impl-Index<EquipSlot>) and [`IndexMut<EquipSlot>`](#impl-IndexMut<EquipSlot>)
+/// implementations to access individual slots.
+#[derive(Debug, Default, Deserialize, Serialize)]
+pub struct Database([Vec<Item>; EquipSlot::VARIANT_COUNT]);
 
 impl Database {
     /// Sort each database slot individually.
@@ -42,23 +42,23 @@ impl FromIterator<Item> for Database {
         let mut result = Self::default();
 
         for item in iter {
-            result[item.slot].push(item);
+            result[item.equip_slot].push(item);
         }
 
         result
     }
 }
 
-impl Index<Slot> for Database {
+impl Index<EquipSlot> for Database {
     type Output = Vec<Item>;
 
-    fn index(&self, slot: Slot) -> &Self::Output {
+    fn index(&self, slot: EquipSlot) -> &Self::Output {
         &self.0[slot as usize]
     }
 }
 
-impl IndexMut<Slot> for Database {
-    fn index_mut(&mut self, slot: Slot) -> &mut Self::Output {
+impl IndexMut<EquipSlot> for Database {
+    fn index_mut(&mut self, slot: EquipSlot) -> &mut Self::Output {
         &mut self.0[slot as usize]
     }
 }

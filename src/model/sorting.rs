@@ -2,7 +2,7 @@
 
 use std::cmp::Ordering;
 
-use data::{Item, Stats};
+use data::{CombatStats, DamageType, Item};
 use enum_iterator::IntoEnumIterator;
 use seed::prelude::{LocalStorage, Orders, WebStorage};
 use serde::{Deserialize, Serialize};
@@ -33,19 +33,21 @@ pub enum Fragment {
 }
 
 impl Fragment {
-    fn get(self, i: &Stats) -> i16 {
+    fn get(self, i: &CombatStats) -> i16 {
         match self {
             Self::MeleeAttackAvg => {
                 let a = &i.attack;
-                (a.stab + a.slash + a.crush) / 3
+                (a[DamageType::Stab] + a[DamageType::Slash] + a[DamageType::Crush]) / 3
             }
-            Self::MagicAttack => i.attack.magic,
-            Self::RangedAttack => i.attack.ranged,
+            Self::MagicAttack => i.attack[DamageType::Magic],
+            Self::RangedAttack => i.attack[DamageType::Ranged],
             Self::DefenceMedian => {
                 let d = &i.defence;
-                let mut stats = [d.stab, d.slash, d.crush, d.magic, d.ranged];
+                let mut stats: Vec<_> = DamageType::into_enum_iter()
+                    .map(|damage_type| d[damage_type])
+                    .collect();
                 stats.sort_unstable();
-                stats[2]
+                stats[DamageType::VARIANT_COUNT / 2]
             }
             Self::MeleeStrength => i.melee_strength,
             Self::RangedStrength => i.ranged_strength,
@@ -54,7 +56,7 @@ impl Fragment {
         }
     }
 
-    fn ordering(self, a: &Stats, b: &Stats) -> Ordering {
+    fn ordering(self, a: &CombatStats, b: &CombatStats) -> Ordering {
         let ord = self.get(a).cmp(&self.get(b));
         ord.reverse()
     }
@@ -133,10 +135,10 @@ impl Sorting {
         let mut ordering = Ordering::Equal;
 
         for frag in &self.0 {
-            ordering = ordering.then_with(|| frag.ordering(&a.stats, &b.stats));
+            ordering = ordering.then_with(|| frag.ordering(&a.combat_stats, &b.combat_stats));
         }
 
-        let ordering = ordering.then_with(|| a.clue.cmp(&b.clue));
+        let ordering = ordering.then_with(|| a.attainability.clue.cmp(&b.attainability.clue));
         ordering.then_with(|| a.name.cmp(&b.name))
     }
 
@@ -146,9 +148,9 @@ impl Sorting {
     pub fn above_neutral(&self, i: &Item) -> bool {
         let mut ordering = Ordering::Equal;
 
-        let default = Stats::default();
+        let default = CombatStats::default();
         for frag in &self.0 {
-            ordering = ordering.then_with(|| frag.ordering(&i.stats, &default));
+            ordering = ordering.then_with(|| frag.ordering(&i.combat_stats, &default));
         }
 
         ordering == Ordering::Less
