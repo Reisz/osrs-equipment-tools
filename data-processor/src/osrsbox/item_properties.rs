@@ -1,4 +1,4 @@
-use data::{Attainability, Item, Requirement};
+use data::{Attainability, Item};
 use image::{bmp::BmpEncoder, DynamicImage, GenericImageView, ImageFormat};
 use serde::Deserialize;
 
@@ -76,44 +76,26 @@ pub struct ItemProperties {
     pub weapon: Option<ItemWeapon>,
 }
 
-impl ItemProperties {
-    /// Project the data to the osrs-equipment-tools [`Item`] type.
-    ///
-    /// # Errors
-    ///
-    /// Never.
-    ///
-    /// # Panics
-    ///
-    /// If this item is a duplicate.
-    pub fn project(self) -> Result<Item, String> {
-        assert!(!self.duplicate);
+impl From<ItemProperties> for Item {
+    fn from(item: ItemProperties) -> Self {
+        assert!(!item.duplicate);
 
-        let mut equipment = self.equipment.ok_or("Missing equipment stats.")?;
+        let equipment = item.equipment.expect("Missing equipment stats.");
         let equip_slot = equipment.slot;
-        let requirements = equipment
-            .requirements
-            .take()
-            .map(|requirements| {
-                requirements
-                    .into_iter()
-                    .map(|(skill, level)| Requirement { skill, level })
-                    .collect()
-            })
-            .unwrap_or_default();
+        let requirements = equipment.requirements();
 
-        Ok(Item {
-            name: self.name,
-            members: self.members,
-            weight: self.weight.ok_or("Missing weight.")?,
-            wiki_url: self.wiki_url.ok_or("Missing wiki URL.")?,
-            icon_data: trim_icon(&self.icon)?,
+        Self {
+            name: item.name,
+            members: item.members,
+            weight: item.weight.expect("Missing weight."),
+            wiki_url: item.wiki_url.expect("Missing wiki url."),
+            icon_data: trim_icon(&item.icon).unwrap(),
             combat_stats: equipment.into(),
-            weapon_data: self.weapon.map(Into::into),
+            weapon_data: item.weapon.map(Into::into),
             equip_slot,
             requirements,
-            attainability: Attainability::new(self.tradeable),
-        })
+            attainability: Attainability::new(item.tradeable),
+        }
     }
 }
 

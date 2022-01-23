@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Enumeration of all skills in Old-school RuneScape.
-#[derive(Debug, Clone, Copy, Hash, PartialEq, Eq, Deserialize, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Skill {
     /// The Attack skill.
@@ -52,11 +52,20 @@ pub enum Skill {
     Hunter,
 }
 
+/// Requirement in skill or combat level.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+pub enum Type {
+    /// A skill requirement.
+    Skill(Skill),
+    /// A combat level requirement.
+    CombatLevel,
+}
+
 /// A level requirement on a single skill.
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
 pub struct Requirement {
-    /// Skill the level is required in.
-    pub skill: Skill,
-    /// Required level in the skill.
+    /// The type of requirement.
+    pub requirement: Type,
+    /// Required level.
     pub level: u8,
 }

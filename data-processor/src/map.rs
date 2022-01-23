@@ -33,7 +33,7 @@ pub fn map(mut item: ItemProperties) -> Result<Item, String> {
 
     aggregate::apply_aggregation(&mut item);
 
-    let mut item = item.project()?;
+    let mut item = item.into();
 
     clues::apply_value(&mut item);
 

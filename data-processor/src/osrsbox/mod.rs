@@ -2,15 +2,17 @@
 
 pub use item_equipment::*;
 pub use item_properties::*;
+pub use item_requirement::*;
 pub use item_weapon::*;
 
 mod item_equipment;
 mod item_properties;
+mod item_requirement;
 mod item_weapon;
 
 #[cfg(test)]
 mod tests {
-    use data::{DamageType, EquipSlot, Skill};
+    use data::{DamageType, EquipSlot, Item, RequirementType, Skill};
     use enum_iterator::IntoEnumIterator;
 
     use super::*;
@@ -83,14 +85,17 @@ mod tests {
         assert_eq!(e.slot, EquipSlot::Head);
         assert_eq!(e.requirements.as_ref().unwrap().len(), 1);
         assert_eq!(
-            e.requirements.as_ref().unwrap().get(&Skill::Defence),
+            e.requirements
+                .as_ref()
+                .unwrap()
+                .get(&ItemRequirement::Skill(Skill::Defence)),
             Some(&55)
         );
 
         assert!(i.weapon.is_none());
 
         // Projection
-        let i = i.project().unwrap();
+        let i = Item::from(i);
 
         assert_eq!(i.name, "Helm of neitiznot");
         assert_eq!(i.members, true);
@@ -116,7 +121,7 @@ mod tests {
 
         assert_eq!(i.requirements.len(), 1);
         let r = &i.requirements[0];
-        assert_eq!(r.skill, Skill::Defence);
+        assert_eq!(r.requirement, RequirementType::Skill(Skill::Defence));
         assert_eq!(r.level, 55);
 
         assert!(i.weapon_data.is_none());
@@ -187,7 +192,10 @@ mod tests {
         assert_eq!(e.slot, EquipSlot::Weapon);
         assert_eq!(e.requirements.as_ref().unwrap().len(), 1);
         assert_eq!(
-            e.requirements.as_ref().unwrap().get(&Skill::Attack),
+            e.requirements
+                .as_ref()
+                .unwrap()
+                .get(&ItemRequirement::Skill(Skill::Attack)),
             Some(&70)
         );
 
@@ -200,27 +208,27 @@ mod tests {
 
         let s = &w.stances[0];
         assert_eq!(s.combat_style, "flick");
-        assert_eq!(s.attack_type, Some(OsrsboxAttackType::Slash));
-        assert_eq!(s.attack_style, Some(OsrsboxAttackStyle::Accurate));
+        assert_eq!(s.attack_type, Some(ItemAttackType::Slash));
+        assert_eq!(s.attack_style, Some(ItemAttackStyle::Accurate));
         assert_eq!(s.experience.as_ref().unwrap(), "attack");
         assert!(s.boosts.is_none());
 
         let s = &w.stances[1];
         assert_eq!(s.combat_style, "lash");
-        assert_eq!(s.attack_type, Some(OsrsboxAttackType::Slash));
-        assert_eq!(s.attack_style, Some(OsrsboxAttackStyle::Controlled));
+        assert_eq!(s.attack_type, Some(ItemAttackType::Slash));
+        assert_eq!(s.attack_style, Some(ItemAttackStyle::Controlled));
         assert_eq!(s.experience.as_ref().unwrap(), "shared");
         assert!(s.boosts.is_none());
 
         let s = &w.stances[2];
         assert_eq!(s.combat_style, "deflect");
-        assert_eq!(s.attack_type, Some(OsrsboxAttackType::Slash));
-        assert_eq!(s.attack_style, Some(OsrsboxAttackStyle::Defensive));
+        assert_eq!(s.attack_type, Some(ItemAttackType::Slash));
+        assert_eq!(s.attack_style, Some(ItemAttackStyle::Defensive));
         assert_eq!(s.experience.as_ref().unwrap(), "defence");
         assert!(s.boosts.is_none());
 
         // Projection
-        let i = i.project().unwrap();
+        let i = Item::from(i);
 
         assert_eq!(i.name, "Abyssal whip");
         assert_eq!(i.members, true);
@@ -246,7 +254,7 @@ mod tests {
 
         assert_eq!(i.requirements.len(), 1);
         let r = &i.requirements[0];
-        assert_eq!(r.skill, Skill::Attack);
+        assert_eq!(r.requirement, RequirementType::Skill(Skill::Attack));
         assert_eq!(r.level, 70);
 
         assert_eq!(i.weapon_data.unwrap().attack_delay, 4);

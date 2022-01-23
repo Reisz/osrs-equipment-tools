@@ -1,7 +1,9 @@
 use std::collections::HashMap;
 
-use data::{CombatStats, DamageTypeStats, EquipSlot, Skill};
+use data::{CombatStats, DamageTypeStats, EquipSlot, Requirement};
 use serde::Deserialize;
+
+use super::ItemRequirement;
 
 /// [OSRSBox](https://www.osrsbox.com/) [`ItemEquipment`](https://www.osrsbox.com/projects/osrsbox-db/#item-equipment).
 #[derive(Deserialize)]
@@ -37,7 +39,26 @@ pub struct ItemEquipment {
     /// The equipment slot associated with the item (e.g., head).
     pub slot: EquipSlot,
     /// An object of requirements {skill: level}.
-    pub requirements: Option<HashMap<Skill, u8>>,
+    pub requirements: Option<HashMap<ItemRequirement, u8>>,
+}
+
+impl ItemEquipment {
+    /// Get the requirements for this equipment piece.
+    #[must_use]
+    pub fn requirements(&self) -> Vec<Requirement> {
+        self.requirements
+            .as_ref()
+            .map(|requirements| {
+                requirements
+                    .iter()
+                    .map(|(&requirement, &level)| Requirement {
+                        requirement: requirement.into(),
+                        level,
+                    })
+                    .collect()
+            })
+            .unwrap_or_default()
+    }
 }
 
 impl From<ItemEquipment> for CombatStats {

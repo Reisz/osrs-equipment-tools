@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 pub use attainability::*;
 pub use combat_stats::*;
 pub use equip_slot::*;
-pub use requirement::*;
+pub use requirement::{Type as RequirementType, *};
 pub use weapon_data::*;
 
 mod attainability;
