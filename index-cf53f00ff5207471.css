@@ -1,0 +1,55 @@
+.button {
+    background-color: #d0bd97;
+    display: inline-block;
+    white-space: nowrap;
+    border: 1px solid #94866d;
+    border-radius: 10px;
+    width: 160px;
+    padding: 0.5em 0.5em;
+}
+
+.button.checked {
+    background: repeating-linear-gradient(-45deg, #bfffbd 0 20px, #4cf172 20px 30px);
+    border-color: #012100;
+}
+
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+.equipment-view {
+    background-image: url(https://oldschool.runescape.wiki/images/a/a7/Worn_equipment_tab_%28no_buttons%29.png);
+    width: 204px;
+    height: 222px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    position: relative;
+    display: flex;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.equipment {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.equipment-blank {
+    background-image: url(https://oldschool.runescape.wiki/images/c/cf/Blank_slot.png);
+    width: 36px;
+    height: 36px;
+}
+
+.equipment-plinkp {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
